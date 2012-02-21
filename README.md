@@ -22,7 +22,7 @@ exsample on GHUnit
 
 - (void)testHttpRequest {
     [[[server next] andStatusCode:200] andResponse:[NLTResponse jsonResponseWithData:[NSData data]]];
-    [[[server next] andStatusCode200] andResponse:[NLTResponse jsonResponseWithData[NSData data]]];
+    [[[server next] andStatusCode:200] andResponse:[NLTResponse jsonResponseWithData:[NSData data]]];
     [self prepare];
     // throw 2 httprequests and parsers
     NLFooClient *client = [NLFooClient client];
