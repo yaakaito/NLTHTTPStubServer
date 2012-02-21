@@ -26,6 +26,8 @@ exsample on GHUnit
     [self prepare];
     // throw 2 httprequests and parsers
     NLFooClient *client = [NLFooClient client];
+    client.firstRequest.url = [NSURL URLWithString:@"http://localhost:12345/first?k=v"];
+    client.secondRequest.url = [NSURL URLWithString:@"http://localhost:12345/second?k=v"];
     [client startRequestWithComplete:^{
         [self notify:kGHUnitWaitStatusSuccess];
     }];
