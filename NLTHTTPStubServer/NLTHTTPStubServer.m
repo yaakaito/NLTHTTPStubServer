@@ -16,7 +16,7 @@
 {
     self = [super init];
     if (self) {
-        // Initialization code here.
+        self.stubResponses = [NSMutableArray array];
     }
     
     return self;
@@ -49,6 +49,17 @@
 
 + (NLTHGlobalSettings*)globalSettings {
     return [NLTHGlobalSettings globalSettings];
+}
+
+- (NLTHTTPStubResponse<HTTPResponse>*)responseForPath:(NSString*)path {
+    for (NSUInteger i = 0; i < [self.stubResponses count]; i++) {
+        NLTHTTPStubResponse *response = [self.stubResponses objectAtIndex:i];
+        if([response.path isEqualToString:path]){
+            [self.stubResponses removeObject:response];
+            return (NLTHTTPStubResponse<HTTPResponse>*)response;
+        }
+    }
+    return nil;
 }
 
 @end

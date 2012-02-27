@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "HTTPConnection.h"
+#import "NLTHTTPStubResponse.h"
 
 @class NLTHTTPStubServer;
 
 @interface NLTHTTPStubConnection : HTTPConnection {
     NLTHTTPStubServer *_parend;
 }
+
 @end

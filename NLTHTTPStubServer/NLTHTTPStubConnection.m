@@ -7,9 +7,17 @@
 //
 
 #import "NLTHTTPStubConnection.h"
+#import "NLTHTTPStubServer.h"
 
 @implementation NLTHTTPStubConnection
 - (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
     
+    NLTHTTPStubResponse<HTTPResponse> *response = [[NLTHTTPStubServer currentStubServer] responseForPath:path];
+    if(!response){
+        [NSException raise:NSInternalInconsistencyException
+                    format:@"unstubed request invoked (path=%@)", path];
+    }
+    
+    return response;
 }
 @end

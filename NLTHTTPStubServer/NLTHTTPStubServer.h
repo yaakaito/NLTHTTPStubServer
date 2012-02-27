@@ -33,6 +33,8 @@
 
 - (void)addStubResponse:(NLTHTTPStubResponse*)stubResponse;
 - (BOOL)isStubEmpty;
+
+- (NLTHTTPStubResponse<HTTPResponse>*)responseForPath:(NSString*)path;
 @end
 
 @interface NLTHCurrentStubGetter : NLTHTTPStubServer
