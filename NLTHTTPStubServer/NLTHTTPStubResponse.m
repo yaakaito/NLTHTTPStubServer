@@ -20,6 +20,8 @@
     response.path = path;
     response.statusCode = statusCode;
     response.data = data;
+    
+    return [response autorelease];
 }
 
 - (void)dealloc {
@@ -43,7 +45,7 @@
 
 - (void)setOffset:(UInt64)offsetParam
 {	
-	offset = (NSUInteger)offsetParam;
+	_offset = (NSUInteger)offsetParam;
 }
 
 - (NSData *)readDataOfLength:(NSUInteger)lengthParameter
