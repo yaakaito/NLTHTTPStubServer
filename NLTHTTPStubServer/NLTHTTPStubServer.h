@@ -20,7 +20,8 @@
     NSMutableArray *_stubResponses;
 }
 
-@property(nonatomic,readonly) NSArray *stubResponses;
+@property(nonatomic,retain) NSMutableArray *stubResponses;
+
 + (NLTHTTPStubServer*)currentStubServer;
 + (void)setCurrentStubServer:(NLTHTTPStubServer*)stubServer;
 + (NLTHTTPStubServer*)__currentStubServer:(NLTHTTPStubServer*)stubServer;
