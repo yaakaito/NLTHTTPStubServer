@@ -1,0 +1,231 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B93943EE14FA1E57008A8D8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B93943ED14FA1E57008A8D8C /* Foundation.framework */; };
+		B93943F414FA1E57008A8D8C /* NLTHTTPStubServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B93943F314FA1E57008A8D8C /* NLTHTTPStubServer.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B93943EA14FA1E57008A8D8C /* libNLTHTTPStubServer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNLTHTTPStubServer.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B93943ED14FA1E57008A8D8C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B93943F114FA1E57008A8D8C /* NLTHTTPStubServer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NLTHTTPStubServer-Prefix.pch"; sourceTree = "<group>"; };
+		B93943F214FA1E57008A8D8C /* NLTHTTPStubServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NLTHTTPStubServer.h; sourceTree = "<group>"; };
+		B93943F314FA1E57008A8D8C /* NLTHTTPStubServer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPStubServer.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B93943E714FA1E57008A8D8C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B93943EE14FA1E57008A8D8C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B93943DF14FA1E57008A8D8C = {
+			isa = PBXGroup;
+			children = (
+				B93943EF14FA1E57008A8D8C /* NLTHTTPStubServer */,
+				B93943EC14FA1E57008A8D8C /* Frameworks */,
+				B93943EB14FA1E57008A8D8C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B93943EB14FA1E57008A8D8C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B93943EA14FA1E57008A8D8C /* libNLTHTTPStubServer.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B93943EC14FA1E57008A8D8C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B93943ED14FA1E57008A8D8C /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B93943EF14FA1E57008A8D8C /* NLTHTTPStubServer */ = {
+			isa = PBXGroup;
+			children = (
+				B93943F214FA1E57008A8D8C /* NLTHTTPStubServer.h */,
+				B93943F314FA1E57008A8D8C /* NLTHTTPStubServer.m */,
+				B93943F014FA1E57008A8D8C /* Supporting Files */,
+			);
+			path = NLTHTTPStubServer;
+			sourceTree = "<group>";
+		};
+		B93943F014FA1E57008A8D8C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B93943F114FA1E57008A8D8C /* NLTHTTPStubServer-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		B93943E814FA1E57008A8D8C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		B93943E914FA1E57008A8D8C /* NLTHTTPStubServer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B93943F714FA1E57008A8D8C /* Build configuration list for PBXNativeTarget "NLTHTTPStubServer" */;
+			buildPhases = (
+				B93943E614FA1E57008A8D8C /* Sources */,
+				B93943E714FA1E57008A8D8C /* Frameworks */,
+				B93943E814FA1E57008A8D8C /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NLTHTTPStubServer;
+			productName = NLTHTTPStubServer;
+			productReference = B93943EA14FA1E57008A8D8C /* libNLTHTTPStubServer.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B93943E114FA1E57008A8D8C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = B93943E414FA1E57008A8D8C /* Build configuration list for PBXProject "NLTHTTPStubServer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B93943DF14FA1E57008A8D8C;
+			productRefGroup = B93943EB14FA1E57008A8D8C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B93943E914FA1E57008A8D8C /* NLTHTTPStubServer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B93943E614FA1E57008A8D8C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B93943F414FA1E57008A8D8C /* NLTHTTPStubServer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B93943F514FA1E57008A8D8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		B93943F614FA1E57008A8D8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B93943F814FA1E57008A8D8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/NLTHTTPStubServer.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NLTHTTPStubServer/NLTHTTPStubServer-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		B93943F914FA1E57008A8D8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/NLTHTTPStubServer.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NLTHTTPStubServer/NLTHTTPStubServer-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B93943E414FA1E57008A8D8C /* Build configuration list for PBXProject "NLTHTTPStubServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B93943F514FA1E57008A8D8C /* Debug */,
+				B93943F614FA1E57008A8D8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B93943F714FA1E57008A8D8C /* Build configuration list for PBXNativeTarget "NLTHTTPStubServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B93943F814FA1E57008A8D8C /* Debug */,
+				B93943F914FA1E57008A8D8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B93943E114FA1E57008A8D8C /* Project object */;
+}
