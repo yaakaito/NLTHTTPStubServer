@@ -23,7 +23,7 @@
 }
 
 + (NLTHTTPStubServer *)currentStubServer {
-    return [[self class] __currentStubServer:nil];
+    return [[self class] __currentStubServer:[[self class] __stubGetter]];
 }
 
 + (void)setCurrentStubServer:(NLTHTTPStubServer *)stubServer {
@@ -32,10 +32,15 @@
 
 + (NLTHTTPStubServer *)__currentStubServer:(NLTHTTPStubServer *)stubServer {
     __strong static id _sharedObject = nil;
-    if(stubServer){
-        _sharedObject = stubServer; 
+    if(![stubServer isKindOfClass:[NLTHCurrentStubGetter class]]){
+        [_sharedObject release];
+        _sharedObject = [stubServer retain]; 
     }
     return _sharedObject;
+}
+
++ (NLTHCurrentStubGetter*)__stubGetter {
+    return [[[NLTHCurrentStubGetter alloc] init] autorelease];
 }
 
 + (NLTHTTPStubServer *)stubServer {
@@ -46,4 +51,8 @@
     return [NLTHGlobalSettings globalSettings];
 }
 
+@end
+
+
+@implementation NLTHCurrentStubGetter
 @end

@@ -13,16 +13,26 @@
 #import "NLTHGlobalSettings.h"
 
 
+@class NLTHCurrentStubGetter;
+
 @interface NLTHTTPStubServer : NSObject {
     HTTPServer *_httpServer;
     NSMutableArray *_stubResponses;
 }
+
 @property(nonatomic,readonly) NSArray *stubResponses;
 + (NLTHTTPStubServer*)currentStubServer;
 + (void)setCurrentStubServer:(NLTHTTPStubServer*)stubServer;
 + (NLTHTTPStubServer*)__currentStubServer:(NLTHTTPStubServer*)stubServer;
++ (NLTHCurrentStubGetter*)__stubGetter;
+
 + (NLTHTTPStubServer*)stubServer;
+
 + (NLTHGlobalSettings*)globalSettings;
+
 - (void)addStubResponse:(NLTHTTPStubResponse*)stubResponse;
 - (BOOL)isStubEmpty;
+@end
+
+@interface NLTHCurrentStubGetter : NLTHTTPStubServer
 @end
