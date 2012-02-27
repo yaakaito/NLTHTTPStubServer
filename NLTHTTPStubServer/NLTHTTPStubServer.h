@@ -7,7 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HTTPServer.h"
 
-@interface NLTHTTPStubServer : NSObject
+#import "NLTHTTPStubResponse.h"
+#import "NLTHGlobalSettings.h"
 
+
+@interface NLTHTTPStubServer : NSObject {
+    HTTPServer *_httpServer;
+    NSMutableArray *_stubResponses;
+}
+@property(nonatomic,readonly) NSArray *stubResponses;
++ (NLTHTTPStubServer*)currentStubServer;
++ (void)setCurrentStubServer:(NLTHTTPStubServer*)stubServer;
++ (NLTHTTPStubServer*)__currentStubServer:(NLTHTTPStubServer*)stubServer;
++ (NLTHTTPStubServer*)stubServer;
++ (NLTHGlobalSettings*)globalSettings;
+- (void)addStubResponse:(NLTHTTPStubResponse*)stubResponse;
+- (BOOL)isStubEmpty;
 @end

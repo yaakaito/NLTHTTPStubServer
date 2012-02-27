@@ -74,6 +74,15 @@
 		210F562014FC16AB00E90D38 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 210F561F14FC16AA00E90D38 /* GHUnitIOS.framework */; };
 		210F562214FC177300E90D38 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 210F562114FC177300E90D38 /* CFNetwork.framework */; };
 		210F562314FC177800E90D38 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 210F562114FC177300E90D38 /* CFNetwork.framework */; };
+		210F562614FC1A9D00E90D38 /* NLTHTTPStubResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 210F562414FC1A9D00E90D38 /* NLTHTTPStubResponse.h */; };
+		210F562714FC1A9D00E90D38 /* NLTHTTPStubResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F562514FC1A9D00E90D38 /* NLTHTTPStubResponse.m */; };
+		210F562814FC1A9D00E90D38 /* NLTHTTPStubResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F562514FC1A9D00E90D38 /* NLTHTTPStubResponse.m */; };
+		210F563414FC1C3600E90D38 /* NLTHGlobalSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 210F563214FC1C3600E90D38 /* NLTHGlobalSettings.h */; };
+		210F563514FC1C3600E90D38 /* NLTHGlobalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F563314FC1C3600E90D38 /* NLTHGlobalSettings.m */; };
+		210F563614FC1C3600E90D38 /* NLTHGlobalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F563314FC1C3600E90D38 /* NLTHGlobalSettings.m */; };
+		210F563914FC1F5300E90D38 /* NLTHTTPStubConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 210F563714FC1F5300E90D38 /* NLTHTTPStubConnection.h */; };
+		210F563A14FC1F5300E90D38 /* NLTHTTPStubConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F563814FC1F5300E90D38 /* NLTHTTPStubConnection.m */; };
+		210F563B14FC1F5300E90D38 /* NLTHTTPStubConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F563814FC1F5300E90D38 /* NLTHTTPStubConnection.m */; };
 		B93943EE14FA1E57008A8D8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B93943ED14FA1E57008A8D8C /* Foundation.framework */; };
 		B93943F414FA1E57008A8D8C /* NLTHTTPStubServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B93943F314FA1E57008A8D8C /* NLTHTTPStubServer.m */; };
 /* End PBXBuildFile section */
@@ -130,6 +139,12 @@
 		210F55FC14FC164D00E90D38 /* NLTHTTPStubServerTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NLTHTTPStubServerTests-Prefix.pch"; sourceTree = "<group>"; };
 		210F561F14FC16AA00E90D38 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = Frameworks/GHUnitIOS.framework; sourceTree = "<group>"; };
 		210F562114FC177300E90D38 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		210F562414FC1A9D00E90D38 /* NLTHTTPStubResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTHTTPStubResponse.h; sourceTree = "<group>"; };
+		210F562514FC1A9D00E90D38 /* NLTHTTPStubResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPStubResponse.m; sourceTree = "<group>"; };
+		210F563214FC1C3600E90D38 /* NLTHGlobalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTHGlobalSettings.h; sourceTree = "<group>"; };
+		210F563314FC1C3600E90D38 /* NLTHGlobalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHGlobalSettings.m; sourceTree = "<group>"; };
+		210F563714FC1F5300E90D38 /* NLTHTTPStubConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTHTTPStubConnection.h; sourceTree = "<group>"; };
+		210F563814FC1F5300E90D38 /* NLTHTTPStubConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPStubConnection.m; sourceTree = "<group>"; };
 		B93943EA14FA1E57008A8D8C /* libNLTHTTPStubServer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNLTHTTPStubServer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B93943ED14FA1E57008A8D8C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B93943F114FA1E57008A8D8C /* NLTHTTPStubServer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NLTHTTPStubServer-Prefix.pch"; sourceTree = "<group>"; };
@@ -285,11 +300,11 @@
 		B93943EC14FA1E57008A8D8C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				210F562114FC177300E90D38 /* CFNetwork.framework */,
-				210F561F14FC16AA00E90D38 /* GHUnitIOS.framework */,
 				210F559114FC152A00E90D38 /* CocoaAsyncSocket */,
 				210F559514FC152A00E90D38 /* CocoaHTTPServer */,
 				210F55B414FC152A00E90D38 /* CocoaLumberjack */,
+				210F562114FC177300E90D38 /* CFNetwork.framework */,
+				210F561F14FC16AA00E90D38 /* GHUnitIOS.framework */,
 				B93943ED14FA1E57008A8D8C /* Foundation.framework */,
 				210F55EF14FC164D00E90D38 /* UIKit.framework */,
 				210F55F214FC164D00E90D38 /* CoreGraphics.framework */,
@@ -303,6 +318,12 @@
 				B93943F214FA1E57008A8D8C /* NLTHTTPStubServer.h */,
 				B93943F314FA1E57008A8D8C /* NLTHTTPStubServer.m */,
 				B93943F014FA1E57008A8D8C /* Supporting Files */,
+				210F562414FC1A9D00E90D38 /* NLTHTTPStubResponse.h */,
+				210F562514FC1A9D00E90D38 /* NLTHTTPStubResponse.m */,
+				210F563214FC1C3600E90D38 /* NLTHGlobalSettings.h */,
+				210F563314FC1C3600E90D38 /* NLTHGlobalSettings.m */,
+				210F563714FC1F5300E90D38 /* NLTHTTPStubConnection.h */,
+				210F563814FC1F5300E90D38 /* NLTHTTPStubConnection.m */,
 			);
 			path = NLTHTTPStubServer;
 			sourceTree = "<group>";
@@ -343,6 +364,9 @@
 				210F55E214FC152A00E90D38 /* DDFileLogger.h in Headers */,
 				210F55E414FC152A00E90D38 /* DDLog.h in Headers */,
 				210F55E614FC152A00E90D38 /* DDTTYLogger.h in Headers */,
+				210F562614FC1A9D00E90D38 /* NLTHTTPStubResponse.h in Headers */,
+				210F563414FC1C3600E90D38 /* NLTHGlobalSettings.h in Headers */,
+				210F563914FC1F5300E90D38 /* NLTHTTPStubConnection.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +469,9 @@
 				210F561C14FC168E00E90D38 /* DDNumber.m in Sources */,
 				210F561D14FC169100E90D38 /* DDRange.m in Sources */,
 				210F561E14FC169500E90D38 /* GCDAsyncSocket.m in Sources */,
+				210F562814FC1A9D00E90D38 /* NLTHTTPStubResponse.m in Sources */,
+				210F563614FC1C3600E90D38 /* NLTHGlobalSettings.m in Sources */,
+				210F563B14FC1F5300E90D38 /* NLTHTTPStubConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +499,9 @@
 				210F55E314FC152A00E90D38 /* DDFileLogger.m in Sources */,
 				210F55E514FC152A00E90D38 /* DDLog.m in Sources */,
 				210F55E714FC152A00E90D38 /* DDTTYLogger.m in Sources */,
+				210F562714FC1A9D00E90D38 /* NLTHTTPStubResponse.m in Sources */,
+				210F563514FC1C3600E90D38 /* NLTHGlobalSettings.m in Sources */,
+				210F563A14FC1F5300E90D38 /* NLTHTTPStubConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
