@@ -85,6 +85,9 @@
 		210F563B14FC1F5300E90D38 /* NLTHTTPStubConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F563814FC1F5300E90D38 /* NLTHTTPStubConnection.m */; };
 		210F563E14FC22E000E90D38 /* NLTHTTPStubServerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F563D14FC22E000E90D38 /* NLTHTTPStubServerTest.m */; };
 		210F563F14FC270000E90D38 /* NLTHTTPStubServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B93943F314FA1E57008A8D8C /* NLTHTTPStubServer.m */; };
+		210F564514FC37A400E90D38 /* NLTHTTPStubResponseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F564414FC37A400E90D38 /* NLTHTTPStubResponseTest.m */; };
+		210F564A14FC3E3D00E90D38 /* NLTHTTPStubConnetionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F564914FC3E3C00E90D38 /* NLTHTTPStubConnetionTest.m */; };
+		210F566114FC40D600E90D38 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 210F566014FC40D600E90D38 /* libOCMock.a */; };
 		B93943EE14FA1E57008A8D8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B93943ED14FA1E57008A8D8C /* Foundation.framework */; };
 		B93943F414FA1E57008A8D8C /* NLTHTTPStubServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B93943F314FA1E57008A8D8C /* NLTHTTPStubServer.m */; };
 /* End PBXBuildFile section */
@@ -149,6 +152,17 @@
 		210F563814FC1F5300E90D38 /* NLTHTTPStubConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPStubConnection.m; sourceTree = "<group>"; };
 		210F563C14FC22E000E90D38 /* NLTHTTPStubServerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTHTTPStubServerTest.h; sourceTree = "<group>"; };
 		210F563D14FC22E000E90D38 /* NLTHTTPStubServerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPStubServerTest.m; sourceTree = "<group>"; };
+		210F564314FC37A400E90D38 /* NLTHTTPStubResponseTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTHTTPStubResponseTest.h; sourceTree = "<group>"; };
+		210F564414FC37A400E90D38 /* NLTHTTPStubResponseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPStubResponseTest.m; sourceTree = "<group>"; };
+		210F564814FC3E3C00E90D38 /* NLTHTTPStubConnetionTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTHTTPStubConnetionTest.h; sourceTree = "<group>"; };
+		210F564914FC3E3C00E90D38 /* NLTHTTPStubConnetionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPStubConnetionTest.m; sourceTree = "<group>"; };
+		210F565A14FC40D600E90D38 /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
+		210F565B14FC40D600E90D38 /* OCMArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMArg.h; sourceTree = "<group>"; };
+		210F565C14FC40D600E90D38 /* OCMConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMConstraint.h; sourceTree = "<group>"; };
+		210F565D14FC40D600E90D38 /* OCMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMock.h; sourceTree = "<group>"; };
+		210F565E14FC40D600E90D38 /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
+		210F565F14FC40D600E90D38 /* OCMockRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockRecorder.h; sourceTree = "<group>"; };
+		210F566014FC40D600E90D38 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOCMock.a; sourceTree = "<group>"; };
 		B93943EA14FA1E57008A8D8C /* libNLTHTTPStubServer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNLTHTTPStubServer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B93943ED14FA1E57008A8D8C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B93943F114FA1E57008A8D8C /* NLTHTTPStubServer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NLTHTTPStubServer-Prefix.pch"; sourceTree = "<group>"; };
@@ -166,6 +180,7 @@
 				210F55F314FC164D00E90D38 /* CoreGraphics.framework in Frameworks */,
 				210F562014FC16AB00E90D38 /* GHUnitIOS.framework in Frameworks */,
 				210F562314FC177800E90D38 /* CFNetwork.framework in Frameworks */,
+				210F566114FC40D600E90D38 /* libOCMock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +284,10 @@
 				210F563C14FC22E000E90D38 /* NLTHTTPStubServerTest.h */,
 				210F563D14FC22E000E90D38 /* NLTHTTPStubServerTest.m */,
 				210F55F514FC164D00E90D38 /* Supporting Files */,
+				210F564314FC37A400E90D38 /* NLTHTTPStubResponseTest.h */,
+				210F564414FC37A400E90D38 /* NLTHTTPStubResponseTest.m */,
+				210F564814FC3E3C00E90D38 /* NLTHTTPStubConnetionTest.h */,
+				210F564914FC3E3C00E90D38 /* NLTHTTPStubConnetionTest.m */,
 			);
 			path = NLTHTTPStubServerTests;
 			sourceTree = "<group>";
@@ -282,6 +301,45 @@
 				210F55FC14FC164D00E90D38 /* NLTHTTPStubServerTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		210F565614FC40D400E90D38 /* OCMock */ = {
+			isa = PBXGroup;
+			children = (
+				210F565714FC40D600E90D38 /* Library */,
+			);
+			name = OCMock;
+			path = Frameworks/OCMock;
+			sourceTree = "<group>";
+		};
+		210F565714FC40D600E90D38 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				210F565814FC40D600E90D38 /* Headers */,
+				210F566014FC40D600E90D38 /* libOCMock.a */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		210F565814FC40D600E90D38 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				210F565914FC40D600E90D38 /* OCMock */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		210F565914FC40D600E90D38 /* OCMock */ = {
+			isa = PBXGroup;
+			children = (
+				210F565A14FC40D600E90D38 /* NSNotificationCenter+OCMAdditions.h */,
+				210F565B14FC40D600E90D38 /* OCMArg.h */,
+				210F565C14FC40D600E90D38 /* OCMConstraint.h */,
+				210F565D14FC40D600E90D38 /* OCMock.h */,
+				210F565E14FC40D600E90D38 /* OCMockObject.h */,
+				210F565F14FC40D600E90D38 /* OCMockRecorder.h */,
+			);
+			path = OCMock;
 			sourceTree = "<group>";
 		};
 		B93943DF14FA1E57008A8D8C = {
@@ -306,6 +364,7 @@
 		B93943EC14FA1E57008A8D8C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				210F565614FC40D400E90D38 /* OCMock */,
 				210F559114FC152A00E90D38 /* CocoaAsyncSocket */,
 				210F559514FC152A00E90D38 /* CocoaHTTPServer */,
 				210F55B414FC152A00E90D38 /* CocoaLumberjack */,
@@ -480,6 +539,8 @@
 				210F563B14FC1F5300E90D38 /* NLTHTTPStubConnection.m in Sources */,
 				210F563E14FC22E000E90D38 /* NLTHTTPStubServerTest.m in Sources */,
 				210F563F14FC270000E90D38 /* NLTHTTPStubServer.m in Sources */,
+				210F564514FC37A400E90D38 /* NLTHTTPStubResponseTest.m in Sources */,
+				210F564A14FC3E3D00E90D38 /* NLTHTTPStubConnetionTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,7 +598,13 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NLTHTTPStubServerTests/NLTHTTPStubServerTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/OCMock/Library/Headers";
 				INFOPLIST_FILE = "NLTHTTPStubServerTests/NLTHTTPStubServerTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks/OCMock\"",
+					"\"$(SRCROOT)/Frameworks/OCMock/Library\"",
+				);
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -558,7 +625,13 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NLTHTTPStubServerTests/NLTHTTPStubServerTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/OCMock/Library/Headers";
 				INFOPLIST_FILE = "NLTHTTPStubServerTests/NLTHTTPStubServerTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks/OCMock\"",
+					"\"$(SRCROOT)/Frameworks/OCMock/Library\"",
+				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-all_load",

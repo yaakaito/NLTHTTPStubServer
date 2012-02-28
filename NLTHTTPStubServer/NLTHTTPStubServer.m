@@ -17,9 +17,28 @@
     self = [super init];
     if (self) {
         self.stubResponses = [NSMutableArray array];
+        _httpServer = [HTTPServer new];
+        _httpServer.type = @"_http._tcp.";
+        _httpServer.connectionClass = [NLTHTTPStubConnection class];
+        
+        if([NLTHGlobalSettings globalSettings].autoStart){
+            [self startServer];
+        }
+        
+        [[self class] setCurrentStubServer:self];
     }
     
     return self;
+}
+
+- (void)dealloc {
+    
+    self.stubResponses = nil;
+    
+    [self stopServer];
+    [_httpServer release];
+    
+    [super dealloc];
 }
 
 + (NLTHTTPStubServer *)currentStubServer {
@@ -60,6 +79,31 @@
         }
     }
     return nil;
+}
+
+- (void)addStubResponse:(NLTHTTPStubResponse *)stubResponse {
+    [self.stubResponses addObject:stubResponse];
+}
+
+- (BOOL)isStubEmpty {
+    return [self.stubResponses count] == 0;
+}
+
+- (void)clear {
+    [self.stubResponses removeAllObjects];
+}
+
+- (void)startServer {
+    NSError *error;
+    if(![_httpServer start:&error])
+    {
+        [NSException raise:NSInternalInconsistencyException
+                    format:@"error starting stub server"];
+    }
+}
+
+- (void)stopServer {
+    [_httpServer stop];
 }
 
 @end

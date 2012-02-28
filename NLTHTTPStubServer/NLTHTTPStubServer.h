@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "HTTPServer.h"
 
-#import "NLTHTTPStubResponse.h"
 #import "NLTHGlobalSettings.h"
-
+#import "NLTHTTPStubConnection.h"
+#import "NLTHTTPStubResponse.h"
 
 @class NLTHCurrentStubGetter;
 
@@ -33,6 +33,10 @@
 
 - (void)addStubResponse:(NLTHTTPStubResponse*)stubResponse;
 - (BOOL)isStubEmpty;
+- (void)clear;
+
+- (void)startServer;
+- (void)stopServer;
 
 - (NLTHTTPStubResponse<HTTPResponse>*)responseForPath:(NSString*)path;
 @end
