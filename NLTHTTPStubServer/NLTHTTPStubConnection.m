@@ -10,9 +10,15 @@
 #import "NLTHTTPStubServer.h"
 
 @implementation NLTHTTPStubConnection
+@synthesize stubServer;
 - (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
     
-    NLTHTTPStubResponse<HTTPResponse> *response = [[NLTHTTPStubServer currentStubServer] responseForPath:path];
+    NSString *relativePath = [[NSURL URLWithString:path] relativePath];
+
+    if(!self.stubServer){
+        self.stubServer = [NLTHTTPStubServer currentStubServer];
+    }
+    NLTHTTPStubResponse<HTTPResponse> *response = [self.stubServer responseForPath:relativePath];
     if(!response){
         [NSException raise:NSInternalInconsistencyException
                     format:@"unstubed request invoked (path=%@)", path];

@@ -12,8 +12,6 @@
 
 @class NLTHTTPStubServer;
 
-@interface NLTHTTPStubConnection : HTTPConnection {
-    NLTHTTPStubServer *_parend;
-}
-
+@interface NLTHTTPStubConnection : HTTPConnection
+@property(nonatomic,assign) NLTHTTPStubServer *stubServer; 
 @end
