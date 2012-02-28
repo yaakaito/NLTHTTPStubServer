@@ -330,9 +330,9 @@
 				210F564414FC37A400E90D38 /* NLTHTTPStubResponseTest.m */,
 				210F564814FC3E3C00E90D38 /* NLTHTTPStubConnetionTest.h */,
 				210F564914FC3E3C00E90D38 /* NLTHTTPStubConnetionTest.m */,
-				210F55F514FC164D00E90D38 /* Supporting Files */,
 				210F568814FC5D1F00E90D38 /* NLTHTTPStubServerWithASIHTTPRequestTest.h */,
 				210F568914FC5D1F00E90D38 /* NLTHTTPStubServerWithASIHTTPRequestTest.m */,
+				210F55F514FC164D00E90D38 /* Supporting Files */,
 			);
 			path = NLTHTTPStubServerTests;
 			sourceTree = "<group>";

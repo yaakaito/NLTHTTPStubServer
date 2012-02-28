@@ -2,9 +2,10 @@
 //  NLTHTTPStubServer.m
 //  NLTHTTPStubServer
 //
-//  Created by KAZUMA Ukyo on 12/02/26.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Created by KAZUMA Ukyo.
+//  Copyright (c) 2012 yaakaito.org All rights reserved.
 //
+
 
 #import "NLTHTTPStubServer.h"
 
