@@ -1,14 +1,24 @@
 # NLTHTTPStubServer
-* なんとか既存のコードでHTTPリクエスト投げてパースして〜系のテストを少しの変更でできるようにしたい
-
+* localhostにサーバーを立ててくれます
+* レスポンスをコードで書いて登録します
+* localhostへアクセスします
+* レスポンスが帰ってきます
+* apachecとか使ってやったりするアレです
 ## Feature
 exsample on GHUnit
 
 ```objective-c
 - (void)setUpClass {
     [NLTHTTPStubServer globalSettings].port = 12345;
-    [NLTHTTPStubServer globalSettings].shouldAutoStart = YES;
-    server =  [NLTHTTPStubServer stubServer];
+    
+    server = [[NLTHTTPStubServer stubServer] retain];
+    [server startServer];
+}
+
+- (void)tearDownClass {
+
+    [server stopServer];
+    [server release];
 }
 
 - (void)setUp {
@@ -16,22 +26,52 @@ exsample on GHUnit
 }
 
 - (void)tearDown {
-    if(![server isEmpty]){
-        GHFail(@"dont call %f stubs", [server.stubs count]);
+    if(![server isStubEmpty]) {
+        GHFail(@"stubs not empty");
     }
 }
 
-- (void)testHttpRequest {
-    [[[server next] andStatusCode:200] andResponse:[NLTResponse jsonResponseWithData:[NSData data]]];
-    [[[server next] andStatusCode:200] andResponse:[NLTResponse jsonResponseWithData:[NSData data]]];
+- (void)testText {
+    
+    NSData *helloWorld = [@"Hello World" dataUsingEncoding:NSUTF8StringEncoding];
+    [server addStubResponse:[NLTHTTPStubResponse stubResponseWithPath:@"/index"
+                                                           statusCode:200
+                                                                 data:helloWorld]];
+     
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
     [self prepare];
-    // throw 2 httprequests and parsers
-    NLFooClient *client = [NLFooClient client];
-    client.firstRequest.url = [NSURL URLWithString:@"http://localhost:12345/first?k=v"];
-    client.secondRequest.url = [NSURL URLWithString:@"http://localhost:12345/second?k=v"];
-    [client startRequestWithComplete:^{
+    [request setCompletionBlock:^{
         [self notify:kGHUnitWaitStatusSuccess];
     }];
-    [self waitForTimeout:kGHUnitWaitStatusSuccess];
+    [request startAsynchronous];
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
+
+    
+    GHAssertEquals(200, [request responseStatusCode], @"ステータスコードが違う");
+    GHAssertEqualStrings(@"Hello World", [request responseString], @"レスポンス内容が違う");
+}
+
+
+- (void)testJSON {
+    NSData *jsonData = [@"{\"status\":\"ok\"}" dataUsingEncoding:NSUTF8StringEncoding];
+    [server addStubResponse:[NLTHTTPStubResponse stubResponseWithPath:@"/index"
+                                                           statusCode:200
+                                                                 data:jsonData]];
+    
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
+    [self prepare];
+    [request setCompletionBlock:^{
+        [self notify:kGHUnitWaitStatusSuccess];
+    }];
+    [request startAsynchronous];
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
+    
+    GHAssertEquals(200, [request responseStatusCode], @"ステータスコードが違う");
+    
+    NSError *error=nil;
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:NSJSONReadingAllowFragments error:&error];   
+    GHTestLog(@"%@", json.description);
+    GHAssertEqualStrings(@"ok", [json objectForKey:@"status"], @"status=okじゃない");
+
 }
 ```
