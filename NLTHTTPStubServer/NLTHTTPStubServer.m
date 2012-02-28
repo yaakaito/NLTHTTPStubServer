@@ -20,10 +20,7 @@
         _httpServer = [HTTPServer new];
         _httpServer.type = @"_http._tcp.";
         _httpServer.connectionClass = [NLTHTTPStubConnection class];
-        
-        if([NLTHGlobalSettings globalSettings].autoStart){
-            [self startServer];
-        }
+        _httpServer.port = [NLTHGlobalSettings globalSettings].port;
         
         [[self class] setCurrentStubServer:self];
     }

@@ -17,6 +17,8 @@
     __strong static id _sharedObject = nil;
     dispatch_once(&pred, ^{
         _sharedObject = [[self alloc] init];
+        ((NLTHGlobalSettings*)_sharedObject).port = 12345;
+        ((NLTHGlobalSettings*)_sharedObject).autoStart = NO;
     });
     return _sharedObject;
 }
