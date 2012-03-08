@@ -225,6 +225,7 @@
 		212C89421508F53800F2FDBD /* NLTHTTPFileStubResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTHTTPFileStubResponse.h; sourceTree = "<group>"; };
 		212C89431508F53800F2FDBD /* NLTHTTPFileStubResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPFileStubResponse.m; sourceTree = "<group>"; };
 		212C8948150903C400F2FDBD /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test.txt; path = Resources/test.txt; sourceTree = "<group>"; };
+		212C894A150916C200F2FDBD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		219025101508BED700F3DD6A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		219025111508BED700F3DD6A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		219025121508BED700F3DD6A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -478,6 +479,7 @@
 				210F55F414FC164D00E90D38 /* NLTHTTPStubServerTests */,
 				B93943EC14FA1E57008A8D8C /* Frameworks */,
 				B93943EB14FA1E57008A8D8C /* Products */,
+				212C894A150916C200F2FDBD /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
