@@ -22,5 +22,13 @@
     GHAssertNotNil(response.data, @"レスポンス用のデータが存在しない");
 }
 
+- (void)testURICheckBlock {
+    NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
+    [response URICheckWithBlock:^BOOL(NSURL *URI) {
+        return YES;
+    }];
+    GHAssertTrue([response uriCheckBlock](nil), @"YESにならないのは変");
+}
+
 
 @end
