@@ -55,7 +55,7 @@ on GHUnit and ASIHTTPRequest
     GHAssertEquals(200, [request responseStatusCode], @"status code");
     GHAssertEqualStrings(@"Hello World", [request responseString], @"response");
 }
-'''
+```
 
 ### JSON(NSData)
 ```objective-c
