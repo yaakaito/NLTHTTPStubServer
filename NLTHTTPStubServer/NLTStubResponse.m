@@ -9,6 +9,7 @@
 #import "NLTStubResponse.h"
 #import "NLTHTTPStubResponse.h"
 #import "NLTHTTPDataStubResponse.h"
+#import "NLTHTTPFileStubResponse.h"
 
 @implementation NLTStubResponse
 + (id)httpDataResponse {
@@ -18,7 +19,7 @@
 
 + (id)httpFileResponse {
     
-    return [NLTHTTPStubResponse stubResponse];
+    return [NLTHTTPFileStubResponse fileStubResponse];
 }
 
 @end
