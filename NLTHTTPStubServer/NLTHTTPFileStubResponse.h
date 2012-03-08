@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NLTHTTPStubResponse.h"
 
-@interface NLTHTTPFileStubResponse : NSObject
+@interface NLTHTTPFileStubResponse : NLTHTTPStubResponse <HTTPResponse>
 
 @end
