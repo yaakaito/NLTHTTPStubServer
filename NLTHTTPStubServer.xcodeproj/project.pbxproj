@@ -101,6 +101,14 @@
 		210F568514FC5BFD00E90D38 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 210F568414FC5BFC00E90D38 /* SystemConfiguration.framework */; };
 		210F568714FC5CD500E90D38 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 210F568614FC5CD400E90D38 /* libz.dylib */; };
 		210F568A14FC5D2000E90D38 /* NLTHTTPStubServerWithASIHTTPRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F568914FC5D1F00E90D38 /* NLTHTTPStubServerWithASIHTTPRequestTest.m */; };
+		212C89391508F0E200F2FDBD /* NLTHTTPDataStubResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 212C89371508F0E200F2FDBD /* NLTHTTPDataStubResponse.h */; };
+		212C893A1508F0E200F2FDBD /* NLTHTTPDataStubResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 212C89381508F0E200F2FDBD /* NLTHTTPDataStubResponse.m */; };
+		212C893B1508F0E200F2FDBD /* NLTHTTPDataStubResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 212C89381508F0E200F2FDBD /* NLTHTTPDataStubResponse.m */; };
+		212C893E1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 212C893D1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.m */; };
+		212C89411508F4E600F2FDBD /* NLTHTTPFileStubResponseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 212C89401508F4E600F2FDBD /* NLTHTTPFileStubResponseTest.m */; };
+		212C89441508F53800F2FDBD /* NLTHTTPFileStubResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 212C89421508F53800F2FDBD /* NLTHTTPFileStubResponse.h */; };
+		212C89451508F53800F2FDBD /* NLTHTTPFileStubResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 212C89431508F53800F2FDBD /* NLTHTTPFileStubResponse.m */; };
+		212C89461508F53800F2FDBD /* NLTHTTPFileStubResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 212C89431508F53800F2FDBD /* NLTHTTPFileStubResponse.m */; };
 		2190252B1508C72100F3DD6A /* NLTStubResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 219025291508C71B00F3DD6A /* NLTStubResponse.h */; };
 		2190252C1508C72100F3DD6A /* NLTStubResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2190252A1508C71D00F3DD6A /* NLTStubResponse.m */; };
 		2190252D1508C72100F3DD6A /* NLTStubResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2190252A1508C71D00F3DD6A /* NLTStubResponse.m */; };
@@ -207,6 +215,14 @@
 		210F568614FC5CD400E90D38 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		210F568814FC5D1F00E90D38 /* NLTHTTPStubServerWithASIHTTPRequestTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTHTTPStubServerWithASIHTTPRequestTest.h; sourceTree = "<group>"; };
 		210F568914FC5D1F00E90D38 /* NLTHTTPStubServerWithASIHTTPRequestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPStubServerWithASIHTTPRequestTest.m; sourceTree = "<group>"; };
+		212C89371508F0E200F2FDBD /* NLTHTTPDataStubResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTHTTPDataStubResponse.h; sourceTree = "<group>"; };
+		212C89381508F0E200F2FDBD /* NLTHTTPDataStubResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPDataStubResponse.m; sourceTree = "<group>"; };
+		212C893C1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTHTTPDataStubResponseTest.h; sourceTree = "<group>"; };
+		212C893D1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPDataStubResponseTest.m; sourceTree = "<group>"; };
+		212C893F1508F4E600F2FDBD /* NLTHTTPFileStubResponseTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTHTTPFileStubResponseTest.h; sourceTree = "<group>"; };
+		212C89401508F4E600F2FDBD /* NLTHTTPFileStubResponseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPFileStubResponseTest.m; sourceTree = "<group>"; };
+		212C89421508F53800F2FDBD /* NLTHTTPFileStubResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTHTTPFileStubResponse.h; sourceTree = "<group>"; };
+		212C89431508F53800F2FDBD /* NLTHTTPFileStubResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPFileStubResponse.m; sourceTree = "<group>"; };
 		219025101508BED700F3DD6A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		219025111508BED700F3DD6A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		219025121508BED700F3DD6A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -346,6 +362,10 @@
 				210F55F514FC164D00E90D38 /* Supporting Files */,
 				219025461508CA4400F3DD6A /* NLTStubResponseTest.h */,
 				219025471508CA4600F3DD6A /* NLTStubResponseTest.m */,
+				212C893C1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.h */,
+				212C893D1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.m */,
+				212C893F1508F4E600F2FDBD /* NLTHTTPFileStubResponseTest.h */,
+				212C89401508F4E600F2FDBD /* NLTHTTPFileStubResponseTest.m */,
 			);
 			path = NLTHTTPStubServerTests;
 			sourceTree = "<group>";
@@ -494,6 +514,10 @@
 				B93943F014FA1E57008A8D8C /* Supporting Files */,
 				219025291508C71B00F3DD6A /* NLTStubResponse.h */,
 				2190252A1508C71D00F3DD6A /* NLTStubResponse.m */,
+				212C89371508F0E200F2FDBD /* NLTHTTPDataStubResponse.h */,
+				212C89381508F0E200F2FDBD /* NLTHTTPDataStubResponse.m */,
+				212C89421508F53800F2FDBD /* NLTHTTPFileStubResponse.h */,
+				212C89431508F53800F2FDBD /* NLTHTTPFileStubResponse.m */,
 			);
 			path = NLTHTTPStubServer;
 			sourceTree = "<group>";
@@ -538,6 +562,8 @@
 				210F563414FC1C3600E90D38 /* NLTHGlobalSettings.h in Headers */,
 				210F563914FC1F5300E90D38 /* NLTHTTPStubConnection.h in Headers */,
 				2190252B1508C72100F3DD6A /* NLTStubResponse.h in Headers */,
+				212C89391508F0E200F2FDBD /* NLTHTTPDataStubResponse.h in Headers */,
+				212C89441508F53800F2FDBD /* NLTHTTPFileStubResponse.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,6 +685,10 @@
 				210F568A14FC5D2000E90D38 /* NLTHTTPStubServerWithASIHTTPRequestTest.m in Sources */,
 				2190252D1508C72100F3DD6A /* NLTStubResponse.m in Sources */,
 				219025481508CA4800F3DD6A /* NLTStubResponseTest.m in Sources */,
+				212C893B1508F0E200F2FDBD /* NLTHTTPDataStubResponse.m in Sources */,
+				212C893E1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.m in Sources */,
+				212C89411508F4E600F2FDBD /* NLTHTTPFileStubResponseTest.m in Sources */,
+				212C89461508F53800F2FDBD /* NLTHTTPFileStubResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -690,6 +720,8 @@
 				210F563514FC1C3600E90D38 /* NLTHGlobalSettings.m in Sources */,
 				210F563A14FC1F5300E90D38 /* NLTHTTPStubConnection.m in Sources */,
 				2190252C1508C72100F3DD6A /* NLTStubResponse.m in Sources */,
+				212C893A1508F0E200F2FDBD /* NLTHTTPDataStubResponse.m in Sources */,
+				212C89451508F53800F2FDBD /* NLTHTTPFileStubResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

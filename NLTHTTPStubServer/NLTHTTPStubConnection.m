@@ -14,7 +14,7 @@
 - (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
     
     NSString *relativePath = [[NSURL URLWithString:path] relativePath];
-
+    
     if(!self.stubServer){
         self.stubServer = [NLTHTTPStubServer currentStubServer];
     }

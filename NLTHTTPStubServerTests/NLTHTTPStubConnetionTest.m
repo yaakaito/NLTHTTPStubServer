@@ -26,7 +26,7 @@
     connection.stubServer = stubServer;
 
     NSObject<HTTPResponse> *returnResponse = [connection httpResponseForMethod:@"GET"
-                                                                        URI:@"http://localhost:12345/index"];
+                                                                        URI:@"/index"];
     GHAssertNotNil(returnResponse, @"/indexのstubを取得できるはずだが");
     GHAssertEquals(returnResponse, response, @"同じ物のはずだが、一致しない");
 }
@@ -38,7 +38,7 @@
     NLTHTTPStubConnection *connection = [[NLTHTTPStubConnection alloc] init];
     connection.stubServer = stubServer;
     GHAssertThrows([connection httpResponseForMethod:@"GET"
-                                                 URI:@"http://localhost:12345/index"], @"存在しないので例外が投げられるはず");
+                                                 URI:@"/index"], @"存在しないので例外が投げられるはず");
  
 }
 

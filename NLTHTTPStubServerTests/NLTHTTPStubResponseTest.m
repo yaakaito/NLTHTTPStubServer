@@ -13,6 +13,7 @@
 @implementation NLTHTTPStubResponseTest
 
 - (void)testResponseWith {
+    NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
     NLTHTTPStubResponse *response = [NLTHTTPStubResponse stubResponseWithPath:@"/index"
                                                                    statusCode:200
                                                                          data:[NSData data]];

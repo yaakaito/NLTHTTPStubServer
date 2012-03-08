@@ -10,14 +10,16 @@
 #import <Foundation/Foundation.h>
 #import "NLTStubResponse.h"
 
+typedef BOOL(^__httpStubResponseURICheck)(NSURL *URI);
+
 @interface NLTHTTPStubResponse : NLTStubResponse <HTTPResponse> 
 
-@property(nonatomic,retain) NSString *path;
-@property NSInteger                   statusCode;
-@property(nonatomic,retain) NSData   *data;
+@property(nonatomic,retain) NSString  *path;
+@property                   NSInteger  statusCode;
+@property(nonatomic,retain) NSData    *data;
+@property(nonatomic,retain) NSString  *filepath;
+@property(nonatomic,copy)   __httpStubResponseURICheck uriCheckBlock;
 
 + (NLTHTTPStubResponse*)stubResponse;
-+ (NLTHTTPStubResponse*)stubResponseWithPath:(NSString *)path
-                                  statusCode:(NSInteger)statusCode
-                                        data:(NSData *)data;
+- (void)URICheckWithBlock:(__httpStubResponseURICheck)block;
 @end
