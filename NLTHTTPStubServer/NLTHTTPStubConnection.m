@@ -13,7 +13,8 @@
 @synthesize stubServer;
 - (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
     
-    NSString *relativePath = [[NSURL URLWithString:path] relativePath];
+    NSURL *url = [NSURL URLWithString:path];
+    NSString *relativePath = [url relativePath];
     
     if(!self.stubServer){
         self.stubServer = [NLTHTTPStubServer currentStubServer];
@@ -25,6 +26,9 @@
                     format:@"unstubed request invoked (path=%@)", path];
     }
     
+    if([response uriCheckBlock]){
+        [response uriCheckBlock](url);
+    }
     return response;
 }
 @end

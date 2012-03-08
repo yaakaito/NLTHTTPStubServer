@@ -43,4 +43,23 @@
  
 }
 
+- (void)testCallURICheckBlock {
+    id stubServer = [OCMockObject mockForClass:[NLTHTTPStubServer class]];
+    NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
+    response.path = @"/index";
+    __block BOOL called = NO;
+    [response URICheckWithBlock:^BOOL(NSURL *URI) {
+        called = YES;
+        return YES;
+    }];
+
+    [[[stubServer stub] andReturn:response] responseForPath:[OCMArg any]];
+    
+    NLTHTTPStubConnection *connection = [[NLTHTTPStubConnection alloc] init];
+    connection.stubServer = stubServer;
+    
+   [connection httpResponseForMethod:@"GET" URI:@"/index"];
+    GHAssertTrue(called, @"checkblockが呼ばれていない");
+}
+
 @end
