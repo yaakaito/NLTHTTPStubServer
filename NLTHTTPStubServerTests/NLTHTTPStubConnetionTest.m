@@ -49,6 +49,7 @@
     response.path = @"/index";
     __block BOOL called = NO;
     [response URICheckWithBlock:^BOOL(NSURL *URI) {
+        GHAssertEqualStrings(@"hoge=1", [URI query], @"queryが不一致");
         called = YES;
         return YES;
     }];
@@ -58,7 +59,7 @@
     NLTHTTPStubConnection *connection = [[NLTHTTPStubConnection alloc] init];
     connection.stubServer = stubServer;
     
-   [connection httpResponseForMethod:@"GET" URI:@"/index"];
+   [connection httpResponseForMethod:@"GET" URI:@"/index?hoge=1"];
     GHAssertTrue(called, @"checkblockが呼ばれていない");
 }
 
