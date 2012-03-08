@@ -40,7 +40,6 @@
     NSData *helloWorld = [@"Hello World" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
     stub.path = @"/index";
-    stub.statusCode = 200;
     stub.data = helloWorld;
     [server addStubResponse:stub];
      
@@ -53,14 +52,12 @@
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
 
     
-    GHAssertEquals(200, [request responseStatusCode], @"ステータスコードが違う");
     GHAssertEqualStrings(@"Hello World", [request responseString], @"レスポンス内容が違う");
 }
 
 - (void)testFile {
     NLTHTTPStubResponse *stub = [NLTStubResponse httpFileResponse];
     stub.path = @"/index";
-    stub.statusCode = 200;
     stub.filepath = [[NSBundle bundleForClass:[self class]] pathForResource:@"test"
                                                                      ofType:@"txt"];
     [server addStubResponse:stub];
@@ -74,14 +71,12 @@
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
     
     
-    GHAssertEquals(200, [request responseStatusCode], @"ステータスコードが違う");
     GHAssertEqualStrings(@"hogehogehogehoge", [request responseString], @"レスポンス内容が違う");
 }
 
 - (void)testCheckQuery {
     NLTHTTPStubResponse *stub = [NLTStubResponse httpFileResponse];
     stub.path = @"/index";
-    stub.statusCode = 200;
     stub.filepath = [[NSBundle bundleForClass:[self class]] pathForResource:@"test"
                                                                      ofType:@"txt"];
     [stub URICheckWithBlock:^BOOL(NSURL *URI) {
@@ -98,8 +93,6 @@
     [request startAsynchronous];
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
     
-    
-    GHAssertEquals(200, [request responseStatusCode], @"ステータスコードが違う");
     GHAssertEqualStrings(@"hogehogehogehoge", [request responseString], @"レスポンス内容が違う");
 }
 
@@ -108,7 +101,6 @@
     NSData *jsonData = [@"{\"status\":\"ok\"}" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
     stub.path = @"/index";
-    stub.statusCode = 200;
     stub.data = jsonData;
     [server addStubResponse:stub];
     
@@ -119,8 +111,6 @@
     }];
     [request startAsynchronous];
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
-    
-    GHAssertEquals(200, [request responseStatusCode], @"ステータスコードが違う");
     
     NSError *error=nil;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:NSJSONReadingAllowFragments error:&error];   
@@ -153,14 +143,12 @@
     NSData *response1 = [@"1" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub1 = [NLTStubResponse httpDataResponse];
     stub1.path = @"/one";
-    stub1.statusCode = 200;
     stub1.data = response1;
     [server addStubResponse:stub1];
     
     NSData *response2 = [@"2" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub2 = [NLTStubResponse httpDataResponse];
     stub2.path = @"/two";
-    stub2.statusCode =200;
     stub2.data = response2;
     [server addStubResponse:stub2];
     
@@ -172,8 +160,6 @@
     [request1 startAsynchronous];
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
     
-    
-    GHAssertEquals(200, [request1 responseStatusCode], @"ステータスコードが違う");
     GHAssertEqualStrings(@"1", [request1 responseString], @"レスポンス内容が違う");
     
     ASIHTTPRequest *request2 = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/two"]];
@@ -184,8 +170,6 @@
     [request2 startAsynchronous];
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
     
-    
-    GHAssertEquals(200, [request2 responseStatusCode], @"ステータスコードが違う");
     GHAssertEqualStrings(@"2", [request2 responseString], @"レスポンス内容が違う");
     
 }
@@ -196,7 +180,6 @@
     NSData *helloWorld = [@"Hello World" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
     stub.path = @"/h/e/l/l/o/w/o/r/l/d";
-    stub.statusCode = 200;
     stub.data = helloWorld;
     [server addStubResponse:stub];
     
@@ -209,7 +192,6 @@
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
     
     
-    GHAssertEquals(200, [request responseStatusCode], @"ステータスコードが違う");
     GHAssertEqualStrings(@"Hello World", [request responseString], @"レスポンス内容が違う");
 }
 
@@ -217,14 +199,12 @@
     NSData *response1 = [@"1" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub1 = [NLTStubResponse httpDataResponse];
     stub1.path = @"/index";
-    stub1.statusCode = 200;
     stub1.data = response1;
     [server addStubResponse:stub1];
     
     NSData *response2 = [@"2" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub2 = [NLTStubResponse httpDataResponse];
     stub2.path = @"/index";
-    stub2.statusCode = 200;
     stub2.data = response2;
     [server addStubResponse:stub2];
     
@@ -237,7 +217,6 @@
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
     
     
-    GHAssertEquals(200, [request1 responseStatusCode], @"ステータスコードが違う");
     GHAssertEqualStrings(@"1", [request1 responseString], @"レスポンス内容が違う");
     
     ASIHTTPRequest *request2 = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
@@ -249,7 +228,6 @@
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
     
     
-    GHAssertEquals(200, [request2 responseStatusCode], @"ステータスコードが違う");
     GHAssertEqualStrings(@"2", [request2 responseString], @"レスポンス内容が違う");
 }
 @end

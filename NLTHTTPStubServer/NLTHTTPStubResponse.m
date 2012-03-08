@@ -21,6 +21,14 @@
     return [[[NLTHTTPStubResponse alloc] init] autorelease];
 }
 
+- (id)init {
+    self = [super init];
+    if(self){
+        self.statusCode = 200;
+    }
+    return self;
+}
+
 - (void)dealloc {
     
     self.path = nil;
