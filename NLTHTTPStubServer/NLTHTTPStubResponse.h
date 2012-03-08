@@ -8,19 +8,15 @@
 
 
 #import <Foundation/Foundation.h>
-#import "HTTPResponse.h"
+#import "NLTStubResponse.h"
 
-@interface NLTHTTPStubResponse : NSObject <HTTPResponse> {
-    NSString *_path;
-    NSInteger _statusCode;
-    NSData   *_data;
-    
-    NSInteger _offset;
-}
+@interface NLTHTTPStubResponse : NLTStubResponse <HTTPResponse> 
+
 @property(nonatomic,retain) NSString *path;
 @property NSInteger                   statusCode;
 @property(nonatomic,retain) NSData   *data;
 
++ (NLTHTTPStubResponse*)stubResponse;
 + (NLTHTTPStubResponse*)stubResponseWithPath:(NSString *)path
                                   statusCode:(NSInteger)statusCode
                                         data:(NSData *)data;

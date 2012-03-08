@@ -18,6 +18,7 @@
     if(!self.stubServer){
         self.stubServer = [NLTHTTPStubServer currentStubServer];
     }
+    
     NLTHTTPStubResponse<HTTPResponse> *response = [self.stubServer responseForPath:relativePath];
     if(!response){
         [NSException raise:NSInternalInconsistencyException

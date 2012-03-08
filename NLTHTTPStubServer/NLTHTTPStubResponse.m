@@ -10,9 +10,18 @@
 #import "NLTHTTPStubResponse.h"
 
 @implementation NLTHTTPStubResponse
+{
+    
+    NSInteger _offset;
+}
+
 @synthesize path        = _path;
 @synthesize statusCode  = _statusCode;
 @synthesize data        = _data;
+
++ (NLTHTTPStubResponse *)stubResponse {
+    return [[[NLTHTTPStubResponse alloc] init] autorelease];
+}
 
 + (NLTHTTPStubResponse*)stubResponseWithPath:(NSString *)path
                                   statusCode:(NSInteger)statusCode
