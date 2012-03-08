@@ -13,6 +13,10 @@
     NSInteger _offset;
 }
 
++ (NLTHTTPDataStubResponse *)dataStubResponse {
+    return [[[NLTHTTPDataStubResponse alloc] init] autorelease];
+}
+
 - (UInt64)contentLength
 {
 	return (UInt64)[self.data length];
@@ -44,7 +48,6 @@
 {
 	return (_offset == [self.data length]);
 }
-
 
 - (NSInteger)status {
     return self.statusCode;

@@ -12,7 +12,7 @@
 
 typedef BOOL(^__httpStubResponseURICheck)(NSURL *URI);
 
-@interface NLTHTTPStubResponse : NLTStubResponse <HTTPResponse> 
+@interface NLTHTTPStubResponse : NLTStubResponse
 
 @property(nonatomic,retain) NSString  *path;
 @property                   NSInteger  statusCode;

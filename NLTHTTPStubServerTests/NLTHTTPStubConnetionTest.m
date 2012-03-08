@@ -17,9 +17,10 @@
 
 - (void)testResponseExists {
     id stubServer = [OCMockObject mockForClass:[NLTHTTPStubServer class]];
-    NLTHTTPStubResponse *response = [NLTHTTPStubResponse stubResponseWithPath:@"/index"
-                                                                   statusCode:200
-                                                                         data:[NSData data]];
+    NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
+    response.statusCode = 200;
+    response.path = @"/index";
+    response.data = [NSData data];
     [[[stubServer stub] andReturn:response] responseForPath:[OCMArg any]];
     
     NLTHTTPStubConnection *connection = [[NLTHTTPStubConnection alloc] init];

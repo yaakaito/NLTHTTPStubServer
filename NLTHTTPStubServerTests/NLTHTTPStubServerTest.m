@@ -38,18 +38,14 @@
 - (void)testIsStubEmpty {
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
     GHAssertTrue([server isStubEmpty], @"何もないので空のはずだが");
-    [server addStubResponse:[NLTHTTPStubResponse stubResponseWithPath:@"/index"
-                                                           statusCode:200
-                                                                 data:[NSData data]]];
+    [server addStubResponse: [NLTStubResponse httpDataResponse]];
     GHAssertFalse([server isStubEmpty], @"スタブがあるので空ではないはず");
     
 }
 
 - (void)testClear {
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
-    [server addStubResponse:[NLTHTTPStubResponse stubResponseWithPath:@"/index"
-                                                           statusCode:200
-                                                                 data:[NSData data]]];
+    [server addStubResponse:[NLTStubResponse httpDataResponse]];
     GHAssertFalse([server isStubEmpty], @"スタブがあるので空ではないはず");
     [server clear];
     GHAssertTrue([server isStubEmpty], @"何もないので空のはずだが");

@@ -8,11 +8,12 @@
 
 #import "NLTStubResponse.h"
 #import "NLTHTTPStubResponse.h"
+#import "NLTHTTPDataStubResponse.h"
 
 @implementation NLTStubResponse
 + (id)httpDataResponse {
     
-    return [NLTHTTPStubResponse stubResponse];
+    return [NLTHTTPDataStubResponse dataStubResponse];
 }
 
 + (id)httpFileResponse {
