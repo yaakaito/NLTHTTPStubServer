@@ -1,12 +1,14 @@
 # NLTHTTPStubServer
-* localhostにサーバーを立ててくれます
-* レスポンスをコードで書いて登録します
-* localhostへアクセスします
-* レスポンスが帰ってきます
-* apachecとか使ってやったりするアレです
-## Feature
-exsample on GHUnit
+NLTHTTPStubServer is mocking server.
+launch simple HTTPServer on testcodes.
 
+# Usage 
+How to install
+
+# Feature
+
+on GHUnit and ASIHTTPRequest
+ 
 ```objective-c
 - (void)setUpClass {
     [NLTHTTPStubServer globalSettings].port = 12345;
@@ -45,10 +47,9 @@ exsample on GHUnit
     }];
     [request startAsynchronous];
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
-
-    
-    GHAssertEquals(200, [request responseStatusCode], @"ステータスコードが違う");
-    GHAssertEqualStrings(@"Hello World", [request responseString], @"レスポンス内容が違う");
+ 
+    GHAssertEquals(200, [request responseStatusCode], @"status code");
+    GHAssertEqualStrings(@"Hello World", [request responseString], @"response");
 }
 
 
@@ -66,12 +67,11 @@ exsample on GHUnit
     [request startAsynchronous];
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
     
-    GHAssertEquals(200, [request responseStatusCode], @"ステータスコードが違う");
+    GHAssertEquals(200, [request responseStatusCode], @"status code");
     
     NSError *error=nil;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:NSJSONReadingAllowFragments error:&error];   
-    GHTestLog(@"%@", json.description);
-    GHAssertEqualStrings(@"ok", [json objectForKey:@"status"], @"status=okじゃない");
+    GHAssertEqualStrings(@"ok", [json objectForKey:@"status"], @"status!=ok");
 
 }
 ```
