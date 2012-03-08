@@ -10,5 +10,5 @@
 #import "NLTHTTPStubResponse.h"
 
 @interface NLTHTTPFileStubResponse : NLTHTTPStubResponse <HTTPResponse>
-
++ (NLTHTTPFileStubResponse*)fileStubResponse;
 @end

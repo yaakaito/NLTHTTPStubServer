@@ -38,7 +38,15 @@
     return self;
 }
 
++ (NLTHTTPFileStubResponse *)fileStubResponse {
+    return [[[NLTHTTPFileStubResponse alloc] init] autorelease];
+}
+
 - (void)setFilepath:(NSString *)filepath {
+    if(filepath == nil){
+        [_filepath release];
+        return;
+    }
     [_filepath release];
     _filepath = [filepath retain];
     
@@ -67,7 +75,6 @@
 	if (_buffer)
 		free(_buffer);
 	
-	[_filepath release];
 	[super dealloc];
 }
 
@@ -178,6 +185,9 @@
 	return (_fileOffset == _fileLength);
 }
 
+- (NSInteger)status {
+    return self.statusCode;
+}
 
 
 @end
