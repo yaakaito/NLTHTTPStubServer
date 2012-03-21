@@ -189,5 +189,8 @@
     return self.statusCode;
 }
 
+- (BOOL)delayResponeHeaders {
+    return self.shouldTimeout;
+}
 
 @end

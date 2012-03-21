@@ -237,7 +237,7 @@
     NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
     stub.path = @"/index";
     stub.data = response;
-    stub.delay = 3.0f;
+    stub.shouldTimeout = YES;
     [server addStubResponse:stub];
     
     

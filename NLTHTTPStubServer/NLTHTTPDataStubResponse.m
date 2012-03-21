@@ -54,6 +54,7 @@
 }
 
 - (BOOL)delayResponeHeaders {
-    return YES;
+    return self.shouldTimeout;
 }
+
 @end
