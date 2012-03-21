@@ -144,7 +144,23 @@ on GHUnit and ASIHTTPRequest
     [request startAsynchronous];
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
     
-    
     GHAssertEquals(404, [request responseStatusCode], @": (");
+}
+```
+
+### timeout
+```objective-c
+- (void)testTimeout {
+    NSData *response = [@"hoge" dataUsingEncoding:NSUTF8StringEncoding];
+    NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
+    stub.path = @"/index";
+    stub.data = response;
+    stub.shouldTimeout = YES;
+    [server addStubResponse:stub];
+    
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
+    request.timeOutSeconds = 2.0f;
+    [request startSynchronous];
+    GHAssertEquals(request.error.code, ASIRequestTimedOutErrorType, @"oops...");
 }
 ```
