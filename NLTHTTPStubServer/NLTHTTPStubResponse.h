@@ -18,6 +18,7 @@ typedef BOOL(^__httpStubResponseURICheck)(NSURL *URI);
 @property                   NSInteger  statusCode;
 @property(nonatomic,retain) NSData    *data;
 @property(nonatomic,retain) NSString  *filepath;
+@property                   NSTimeInterval delay;
 @property(nonatomic,copy)   __httpStubResponseURICheck uriCheckBlock;
 
 + (NLTHTTPStubResponse*)stubResponse;

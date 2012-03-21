@@ -17,6 +17,7 @@
     response.statusCode = 200;
     response.path = @"/index";
     response.data = [NSData data];
+    response.delay = 10.0f;
     GHAssertEqualStrings(@"/index", response.path, @"pathちがう");
     GHAssertEquals(200, response.statusCode, @"ステータスコード違う");
     GHAssertNotNil(response.data, @"レスポンス用のデータが存在しない");

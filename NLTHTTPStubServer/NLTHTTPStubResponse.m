@@ -15,6 +15,7 @@
 @synthesize statusCode;
 @synthesize data;
 @synthesize filepath;
+@synthesize delay;
 @synthesize uriCheckBlock;
 
 + (NLTHTTPStubResponse *)stubResponse {
@@ -25,6 +26,7 @@
     self = [super init];
     if(self){
         self.statusCode = 200;
+        self.delay = 0.0f;
     }
     return self;
 }

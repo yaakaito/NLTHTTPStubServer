@@ -43,6 +43,27 @@
  
 }
 
+- (void)testDelayResponse {
+    id stubServer = [OCMockObject mockForClass:[NLTHTTPStubServer class]];
+    NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
+    response.statusCode = 200;
+    response.path = @"/index";
+    response.data = [NSData data];
+    response.delay = 3.0f;
+    [[[stubServer stub] andReturn:response] responseForPath:[OCMArg any]];
+    
+    NLTHTTPStubConnection *connection = [[NLTHTTPStubConnection alloc] init];
+    connection.stubServer = stubServer;
+    
+    NSDate *start = [NSDate date];
+
+    [connection httpResponseForMethod:@"GET"
+                                  URI:@"/index"];
+    
+    NSTimeInterval interval = [start timeIntervalSinceNow];
+    GHAssertTrue(interval < -2.9f, @"delay=3.0fなので3秒後くらいに帰ってくるはず %f", interval);
+}
+
 - (void)testCallURICheckBlock {
     id stubServer = [OCMockObject mockForClass:[NLTHTTPStubServer class]];
     NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
