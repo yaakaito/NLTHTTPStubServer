@@ -40,7 +40,7 @@
 	void *bytes = (void *)([self.data bytes] + _offset);
 	
 	_offset += length;
-	
+    
 	return [NSData dataWithBytesNoCopy:bytes length:length freeWhenDone:NO];
 }
 
@@ -53,4 +53,7 @@
     return self.statusCode;
 }
 
+- (BOOL)delayResponeHeaders {
+    return YES;
+}
 @end

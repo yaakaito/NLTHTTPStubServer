@@ -29,7 +29,6 @@
     if([response uriCheckBlock]){
         [response uriCheckBlock](url);
     }
-    [NSThread sleepForTimeInterval:response.delay];
     
     return response;
 }

@@ -230,4 +230,20 @@
     
     GHAssertEqualStrings(@"2", [request2 responseString], @"レスポンス内容が違う");
 }
+
+- (void)testTimeout {
+    
+    NSData *response = [@"hoge" dataUsingEncoding:NSUTF8StringEncoding];
+    NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
+    stub.path = @"/index";
+    stub.data = response;
+    stub.delay = 3.0f;
+    [server addStubResponse:stub];
+    
+    
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
+    request.timeOutSeconds = 2.0f;
+    [request startSynchronous];
+    GHAssertEquals(request.error.code, ASIRequestTimedOutErrorType, @"タイムアウトしていない");
+}
 @end
