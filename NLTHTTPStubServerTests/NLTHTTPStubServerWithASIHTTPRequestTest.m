@@ -244,6 +244,6 @@
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
     request.timeOutSeconds = 2.0f;
     [request startSynchronous];
-    GHAssertEquals(request.error.code, ASIRequestTimedOutErrorType, @"タイムアウトしていない");
+    GHAssertEquals(request.error.code, ASIRequestTimedOutErrorType, @"oops...");
 }
 @end

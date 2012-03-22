@@ -79,7 +79,6 @@ on GHUnit and ASIHTTPRequest
     NSError *error=nil;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:NSJSONReadingAllowFragments error:&error];   
     GHAssertEqualStrings(@"ok", [json objectForKey:@"status"], @"status!=ok");
-
 }
 ```
 
@@ -122,7 +121,6 @@ on GHUnit and ASIHTTPRequest
     }];
     [request startAsynchronous];
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
-    
 }
 ```
 
