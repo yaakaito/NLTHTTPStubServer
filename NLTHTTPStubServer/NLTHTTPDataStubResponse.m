@@ -17,6 +17,22 @@
     return [[[NLTHTTPDataStubResponse alloc] init] autorelease];
 }
 
++ (NLTHTTPDataStubResponse*)dataStubResponseWithDataStubResponse:(NLTHTTPStubResponse*)response {
+
+    NLTHTTPDataStubResponse *copy = [self dataStubResponse];
+    copy.path = [NSString stringWithString:response.path];
+    copy.statusCode = response.statusCode;
+    copy.data = [NSData dataWithData:response.data];
+    copy.shouldTimeout = response.shouldTimeout;
+    copy.uriCheckBlock = response.uriCheckBlock;
+    
+    return copy;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    return [NLTHTTPDataStubResponse dataStubResponseWithDataStubResponse:self];
+}
+
 - (UInt64)contentLength
 {
 	return (UInt64)[self.data length];
@@ -56,5 +72,6 @@
 - (BOOL)delayResponeHeaders {
     return self.shouldTimeout;
 }
+
 
 @end

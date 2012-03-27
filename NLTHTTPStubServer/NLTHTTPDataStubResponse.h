@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "NLTHTTPStubResponse.h"
 
-@interface NLTHTTPDataStubResponse : NLTHTTPStubResponse <HTTPResponse> 
+@interface NLTHTTPDataStubResponse : NLTHTTPStubResponse <HTTPResponse, NSCopying> 
 + (NLTHTTPDataStubResponse*)dataStubResponse;
 @end

@@ -34,4 +34,28 @@
     GHAssertEquals(200, [response status], @"ステータスコードが一致しない");
 }
 
+
+- (void)testSupportCopy {
+    
+    NSData *data = [@"hogehogehogehoge" dataUsingEncoding:NSUTF8StringEncoding];
+    NLTHTTPDataStubResponse *response = [NLTStubResponse httpDataResponse];
+    response.statusCode = 200;
+    response.path = @"/index";
+    response.data = data;
+    response.shouldTimeout = YES;
+    [response URICheckWithBlock:^BOOL(NSURL *URI) {
+        return YES;
+    }];
+    
+    NLTHTTPDataStubResponse *copy = [response copy];
+
+    GHAssertNotEqualObjects(response, copy, @"同じ物だったら困る");
+    GHAssertEqualStrings(response.path, copy.path, @"pathはおなじ");
+    
+    GHAssertEqualStrings([[[NSString alloc] initWithData:response.data encoding:NSUTF8StringEncoding] autorelease],
+                         [[[NSString alloc] initWithData:copy.data encoding:NSUTF8StringEncoding] autorelease], @"レスポンス内容");
+    GHAssertEquals(response.statusCode, copy.statusCode, @"ステータスコードが同じじゃない");
+    GHAssertEquals(response.shouldTimeout, copy.shouldTimeout, @"shouldTimeoutが同じじゃない");
+}
+
 @end
