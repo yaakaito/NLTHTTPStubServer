@@ -246,4 +246,30 @@
     [request startSynchronous];
     GHAssertEquals(request.error.code, ASIRequestTimedOutErrorType, @"oops...");
 }
+
+- (void)testCopyStub {
+    
+    NSData *response = [@"hoge" dataUsingEncoding:NSUTF8StringEncoding];
+    NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
+    stub.path = @"/index";
+    stub.data = response;
+    [server addStubResponse:stub];
+    [server addStubResponse:[stub copy]];
+    NLTHTTPStubResponse *stubCopy = [stub copy];
+    stubCopy.path = @"/copy";
+    [server addStubResponse:stubCopy];
+    
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
+    [request startSynchronous];
+    GHAssertEqualStrings(@"hoge", [request responseString], @"oh...");
+    
+    ASIHTTPRequest *requestCopy = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
+    [requestCopy startSynchronous];
+    GHAssertEqualStrings(@"hoge", [requestCopy responseString], @"copy :(");
+    
+    ASIHTTPRequest *requestCopyAndChange = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/copy"]];
+    [requestCopyAndChange startSynchronous];
+    GHAssertEqualStrings(@"hoge", [requestCopyAndChange responseString], @"copy and change :("); 
+    
+}
 @end

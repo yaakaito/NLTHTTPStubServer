@@ -42,6 +42,22 @@
     return [[[NLTHTTPFileStubResponse alloc] init] autorelease];
 }
 
++ (NLTHTTPFileStubResponse*)fileStubResponseWithFileStubResponse:(NLTHTTPFileStubResponse*)response {
+    
+    NLTHTTPFileStubResponse *copy = [self fileStubResponse];
+    copy.path = [NSString stringWithString:response.path];
+    copy.statusCode = response.statusCode;
+    copy.filepath = response.filepath;
+    copy.shouldTimeout = response.shouldTimeout;
+    copy.uriCheckBlock = response.uriCheckBlock;
+    
+    return copy;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    return [NLTHTTPFileStubResponse fileStubResponseWithFileStubResponse:self];
+}
+
 - (void)setFilepath:(NSString *)filepath {
     if(filepath == nil){
         [_filepath release];

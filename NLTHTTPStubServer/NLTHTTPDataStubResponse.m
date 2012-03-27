@@ -17,7 +17,7 @@
     return [[[NLTHTTPDataStubResponse alloc] init] autorelease];
 }
 
-+ (NLTHTTPDataStubResponse*)dataStubResponseWithDataStubResponse:(NLTHTTPStubResponse*)response {
++ (NLTHTTPDataStubResponse*)dataStubResponseWithDataStubResponse:(NLTHTTPDataStubResponse*)response {
 
     NLTHTTPDataStubResponse *copy = [self dataStubResponse];
     copy.path = [NSString stringWithString:response.path];
