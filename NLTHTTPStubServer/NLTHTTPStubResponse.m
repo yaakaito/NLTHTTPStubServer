@@ -17,6 +17,7 @@
 @synthesize filepath;
 @synthesize shouldTimeout;
 @synthesize uriCheckBlock;
+@synthesize httpHeaders;
 
 + (NLTHTTPStubResponse *)stubResponse {
     return [[[NLTHTTPStubResponse alloc] init] autorelease];
@@ -27,6 +28,7 @@
     if(self){
         self.statusCode = 200;
         self.shouldTimeout = NO;
+        self.httpHeaders = [NSDictionary dictionary];
     }
     return self;
 }
@@ -36,6 +38,7 @@
     self.path = nil;
     self.data = nil;
     self.filepath = nil;
+    self.httpHeaders = nil;
     
     [super dealloc];
 }

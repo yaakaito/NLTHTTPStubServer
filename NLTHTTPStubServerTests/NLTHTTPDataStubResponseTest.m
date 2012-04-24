@@ -17,6 +17,7 @@
     response.statusCode = 200;
     response.path = @"/index";
     response.data = data;
+    response.httpHeaders = [NSDictionary dictionaryWithObject:@"text/html; charset=UTF-8" forKey:@"Content-Type"];
     
     GHAssertFalse([response isDone], @"まだ読み込みは完了していないはず");
     GHAssertEquals((UInt64)16, [response contentLength], @"contentLenghtが違う");
@@ -32,6 +33,7 @@
     GHAssertTrue([response isDone], @"読み込みが完了しているはず");
     
     GHAssertEquals(200, [response status], @"ステータスコードが一致しない");
+    GHAssertEqualObjects(@"text/html; charset=UTF-8", [response.httpHeaders objectForKey:@"Content-Type"], @"Content-Type違う");
 }
 
 
@@ -43,6 +45,7 @@
     response.path = @"/index";
     response.data = data;
     response.shouldTimeout = YES;
+    response.httpHeaders = [NSDictionary dictionaryWithObject:@"text/html; charset=UTF-8" forKey:@"Content-Type"];
     [response URICheckWithBlock:^BOOL(NSURL *URI) {
         return YES;
     }];
@@ -56,6 +59,7 @@
                          [[[NSString alloc] initWithData:copy.data encoding:NSUTF8StringEncoding] autorelease], @"レスポンス内容");
     GHAssertEquals(response.statusCode, copy.statusCode, @"ステータスコードが同じじゃない");
     GHAssertEquals(response.shouldTimeout, copy.shouldTimeout, @"shouldTimeoutが同じじゃない");
+    GHAssertEquals([response.httpHeaders objectForKey:@"Content-Type"], [copy.httpHeaders objectForKey:@"Content-Type"], @"Content-Typeが同じじゃない");
 }
 
 @end
