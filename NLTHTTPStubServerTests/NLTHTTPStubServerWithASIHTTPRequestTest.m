@@ -41,6 +41,7 @@
     NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
     stub.path = @"/index";
     stub.data = helloWorld;
+    stub.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
     [server addStubResponse:stub];
      
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
@@ -53,6 +54,7 @@
 
     
     GHAssertEqualStrings(@"Hello World", [request responseString], @"レスポンス内容が違う");
+    GHAssertEqualStrings(@"text/plain; charset=utf-8", [[request responseHeaders] objectForKey:@"Content-Type"], @"Content-Typeが違う");
 }
 
 - (void)testFile {
@@ -60,6 +62,7 @@
     stub.path = @"/index";
     stub.filepath = [[NSBundle bundleForClass:[self class]] pathForResource:@"test"
                                                                      ofType:@"txt"];
+    stub.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
     [server addStubResponse:stub];
     
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
@@ -72,6 +75,7 @@
     
     
     GHAssertEqualStrings(@"hogehogehogehoge", [request responseString], @"レスポンス内容が違う");
+    GHAssertEqualStrings(@"text/plain; charset=utf-8", [[request responseHeaders] objectForKey:@"Content-Type"], @"Content-Typeが違う");
 }
 
 - (void)testCheckQuery {
@@ -79,6 +83,7 @@
     stub.path = @"/index";
     stub.filepath = [[NSBundle bundleForClass:[self class]] pathForResource:@"test"
                                                                      ofType:@"txt"];
+    stub.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
     [stub URICheckWithBlock:^BOOL(NSURL *URI) {
         GHAssertEqualStrings(@"key=value", [URI query], @"queryが一致しない");
         return YES;
@@ -94,6 +99,7 @@
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
     
     GHAssertEqualStrings(@"hogehogehogehoge", [request responseString], @"レスポンス内容が違う");
+    GHAssertEqualStrings(@"text/plain; charset=utf-8", [[request responseHeaders] objectForKey:@"Content-Type"], @"Content-Typeが違う");
 }
 
 
@@ -102,6 +108,7 @@
     NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
     stub.path = @"/index";
     stub.data = jsonData;
+    stub.httpHeaders = [NSDictionary dictionaryWithObject:@"application/json; charset=utf-8" forKey:@"Content-Type"];
     [server addStubResponse:stub];
     
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
@@ -116,6 +123,7 @@
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:NSJSONReadingAllowFragments error:&error];   
     GHTestLog(@"%@", json.description);
     GHAssertEqualStrings(@"ok", [json objectForKey:@"status"], @"status=okじゃない");
+    GHAssertEqualStrings(@"application/json; charset=utf-8", [[request responseHeaders] objectForKey:@"Content-Type"], @"Content-Typeが違う");
 }
 
 - (void)testNotFound {
@@ -144,12 +152,14 @@
     NLTHTTPStubResponse *stub1 = [NLTStubResponse httpDataResponse];
     stub1.path = @"/one";
     stub1.data = response1;
+    stub1.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
     [server addStubResponse:stub1];
     
     NSData *response2 = [@"2" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub2 = [NLTStubResponse httpDataResponse];
     stub2.path = @"/two";
     stub2.data = response2;
+    stub2.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
     [server addStubResponse:stub2];
     
     ASIHTTPRequest *request1 = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/one"]];
@@ -161,6 +171,7 @@
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
     
     GHAssertEqualStrings(@"1", [request1 responseString], @"レスポンス内容が違う");
+    GHAssertEqualStrings(@"text/plain; charset=utf-8", [[request1 responseHeaders] objectForKey:@"Content-Type"], @"Content-Typeが違う");
     
     ASIHTTPRequest *request2 = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/two"]];
     [self prepare];
@@ -171,7 +182,7 @@
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
     
     GHAssertEqualStrings(@"2", [request2 responseString], @"レスポンス内容が違う");
-    
+    GHAssertEqualStrings(@"text/plain; charset=utf-8", [[request2 responseHeaders] objectForKey:@"Content-Type"], @"Content-Typeが違う");
 }
 
 
@@ -181,6 +192,7 @@
     NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
     stub.path = @"/h/e/l/l/o/w/o/r/l/d";
     stub.data = helloWorld;
+    stub.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
     [server addStubResponse:stub];
     
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/h/e/l/l/o/w/o/r/l/d"]];
@@ -193,6 +205,7 @@
     
     
     GHAssertEqualStrings(@"Hello World", [request responseString], @"レスポンス内容が違う");
+    GHAssertEqualStrings(@"text/plain; charset=utf-8", [[request responseHeaders] objectForKey:@"Content-Type"], @"Content-Typeが違う");
 }
 
 - (void)testDuplicated {
@@ -200,12 +213,14 @@
     NLTHTTPStubResponse *stub1 = [NLTStubResponse httpDataResponse];
     stub1.path = @"/index";
     stub1.data = response1;
+    stub1.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
     [server addStubResponse:stub1];
     
     NSData *response2 = [@"2" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub2 = [NLTStubResponse httpDataResponse];
     stub2.path = @"/index";
     stub2.data = response2;
+    stub2.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
     [server addStubResponse:stub2];
     
     ASIHTTPRequest *request1 = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
@@ -218,6 +233,7 @@
     
     
     GHAssertEqualStrings(@"1", [request1 responseString], @"レスポンス内容が違う");
+    GHAssertEqualStrings(@"text/plain; charset=utf-8", [[request1 responseHeaders] objectForKey:@"Content-Type"], @"Content-Typeが違う");
     
     ASIHTTPRequest *request2 = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
     [self prepare];
@@ -229,6 +245,7 @@
     
     
     GHAssertEqualStrings(@"2", [request2 responseString], @"レスポンス内容が違う");
+    GHAssertEqualStrings(@"text/plain; charset=utf-8", [[request2 responseHeaders] objectForKey:@"Content-Type"], @"Content-Typeが違う");
 }
 
 - (void)testTimeout {
@@ -253,6 +270,7 @@
     NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
     stub.path = @"/index";
     stub.data = response;
+    stub.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
     [server addStubResponse:stub];
     [server addStubResponse:[stub copy]];
     NLTHTTPStubResponse *stubCopy = [stub copy];
@@ -262,14 +280,16 @@
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
     [request startSynchronous];
     GHAssertEqualStrings(@"hoge", [request responseString], @"oh...");
+    GHAssertEqualStrings(@"text/plain; charset=utf-8", [[request responseHeaders] objectForKey:@"Content-Type"], @"Content-Typeが違う");
     
     ASIHTTPRequest *requestCopy = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
     [requestCopy startSynchronous];
     GHAssertEqualStrings(@"hoge", [requestCopy responseString], @"copy :(");
+    GHAssertEqualStrings(@"text/plain; charset=utf-8", [[requestCopy responseHeaders] objectForKey:@"Content-Type"], @"Content-Typeが違う");
     
     ASIHTTPRequest *requestCopyAndChange = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/copy"]];
     [requestCopyAndChange startSynchronous];
     GHAssertEqualStrings(@"hoge", [requestCopyAndChange responseString], @"copy and change :("); 
-    
+    GHAssertEqualStrings(@"text/plain; charset=utf-8", [[requestCopyAndChange responseHeaders] objectForKey:@"Content-Type"], @"Content-Typeが違う");
 }
 @end

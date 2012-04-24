@@ -50,6 +50,7 @@
     copy.filepath = response.filepath;
     copy.shouldTimeout = response.shouldTimeout;
     copy.uriCheckBlock = response.uriCheckBlock;
+    copy.httpHeaders = response.httpHeaders;
     
     return copy;
 }

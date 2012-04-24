@@ -26,6 +26,7 @@
     NLTHTTPFileStubResponse *response = [NLTHTTPFileStubResponse fileStubResponse];
     response.statusCode = 200;
     response.path = @"/index";
+    response.httpHeaders = [NSDictionary dictionaryWithObject:@"text/html; charset=UTF-8" forKey:@"Content-Type"];
     response.filepath = [[NSBundle bundleForClass:[self class]] pathForResource:@"test"
                                                                          ofType:@"txt"];
     
@@ -43,6 +44,7 @@
     GHAssertTrue([response isDone], @"読み込みが完了しているはず");
     
     GHAssertEquals(200, [response status], @"ステータスコードが一致しない");
+    GHAssertEqualObjects(@"text/html; charset=UTF-8", [response.httpHeaders objectForKey:@"Content-Type"], @"Content-Type違う");
 }
 
 - (void)testSupportCopy {
@@ -53,6 +55,7 @@
     response.path = @"/index";
     response.data = data;
     response.shouldTimeout = YES;
+    response.httpHeaders = [NSDictionary dictionaryWithObject:@"text/html; charset=UTF-8" forKey:@"Content-Type"];
     [response URICheckWithBlock:^BOOL(NSURL *URI) {
         return YES;
     }];
@@ -65,5 +68,6 @@
     GHAssertEqualStrings(response.filepath, copy.filepath, @"ファイルパス不一致");
     GHAssertEquals(response.statusCode, copy.statusCode, @"ステータスコードが同じじゃない");
     GHAssertEquals(response.shouldTimeout, copy.shouldTimeout, @"shouldTimeoutが同じじゃない");
+    GHAssertEquals([response.httpHeaders objectForKey:@"Content-Type"], [copy.httpHeaders objectForKey:@"Content-Type"], @"Content-Typeが同じじゃない");
 }
 @end

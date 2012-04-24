@@ -18,9 +18,13 @@
     response.path = @"/index";
     response.data = [NSData data];
     response.shouldTimeout = YES;
+    response.httpHeaders = [NSDictionary dictionaryWithObject:@"text/html; charset=UTF-8" forKey:@"Content-Type"];
     GHAssertEqualStrings(@"/index", response.path, @"pathちがう");
     GHAssertEquals(200, response.statusCode, @"ステータスコード違う");
     GHAssertNotNil(response.data, @"レスポンス用のデータが存在しない");
+    GHAssertNotNil(response.httpHeaders, @"httpHeadersが存在しない");
+    GHAssertNotNil([response.httpHeaders objectForKey:@"Content-Type"], @"Content-Typeが存在しない");
+    GHAssertEqualObjects(@"text/html; charset=UTF-8", [response.httpHeaders objectForKey:@"Content-Type"], @"Content-Type違う");
 }
 
 - (void)testURICheckBlock {

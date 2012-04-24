@@ -20,6 +20,7 @@ typedef BOOL(^__httpStubResponseURICheck)(NSURL *URI);
 @property(nonatomic,retain) NSString  *filepath;
 @property                   BOOL       shouldTimeout;
 @property(nonatomic,copy)   __httpStubResponseURICheck uriCheckBlock;
+@property(nonatomic,retain) NSDictionary *httpHeaders;
 
 + (NLTHTTPStubResponse*)stubResponse;
 - (void)URICheckWithBlock:(__httpStubResponseURICheck)block;
