@@ -25,6 +25,7 @@
     copy.data = [NSData dataWithData:response.data];
     copy.shouldTimeout = response.shouldTimeout;
     copy.uriCheckBlock = response.uriCheckBlock;
+    copy.httpHeaders = response.httpHeaders;
     
     return copy;
 }
