@@ -8,9 +8,8 @@
 
 
 #import <Foundation/Foundation.h>
+#import "NLTSConsts.h"
 #import "NLTStubResponse.h"
-
-typedef void(^__httpStubResponseURICheck)(NSURL *URI);
 
 @interface NLTHTTPStubResponse : NLTStubResponse
 

@@ -116,6 +116,7 @@
 		219025481508CA4800F3DD6A /* NLTStubResponseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 219025471508CA4600F3DD6A /* NLTStubResponseTest.m */; };
 		B93943EE14FA1E57008A8D8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B93943ED14FA1E57008A8D8C /* Foundation.framework */; };
 		B93943F414FA1E57008A8D8C /* NLTHTTPStubServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B93943F314FA1E57008A8D8C /* NLTHTTPStubServer.m */; };
+		B955BF1115480A9A004717E5 /* NLTSConsts.h in Headers */ = {isa = PBXBuildFile; fileRef = B955BF1015480A9A004717E5 /* NLTSConsts.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -238,6 +239,7 @@
 		B93943F114FA1E57008A8D8C /* NLTHTTPStubServer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NLTHTTPStubServer-Prefix.pch"; sourceTree = "<group>"; };
 		B93943F214FA1E57008A8D8C /* NLTHTTPStubServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NLTHTTPStubServer.h; sourceTree = "<group>"; };
 		B93943F314FA1E57008A8D8C /* NLTHTTPStubServer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPStubServer.m; sourceTree = "<group>"; };
+		B955BF1015480A9A004717E5 /* NLTSConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTSConsts.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -531,6 +533,7 @@
 				212C89421508F53800F2FDBD /* NLTHTTPFileStubResponse.h */,
 				212C89431508F53800F2FDBD /* NLTHTTPFileStubResponse.m */,
 				B93943F014FA1E57008A8D8C /* Supporting Files */,
+				B955BF1015480A9A004717E5 /* NLTSConsts.h */,
 			);
 			path = NLTHTTPStubServer;
 			sourceTree = "<group>";
@@ -577,6 +580,7 @@
 				2190252B1508C72100F3DD6A /* NLTStubResponse.h in Headers */,
 				212C89391508F0E200F2FDBD /* NLTHTTPDataStubResponse.h in Headers */,
 				212C89441508F53800F2FDBD /* NLTHTTPFileStubResponse.h in Headers */,
+				B955BF1115480A9A004717E5 /* NLTSConsts.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
