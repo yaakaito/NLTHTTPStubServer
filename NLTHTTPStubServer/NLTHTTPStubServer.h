@@ -9,17 +9,14 @@
 
 #import <Foundation/Foundation.h>
 #import "HTTPServer.h"
-
+#import "NLTSConsts.h"
 #import "NLTHGlobalSettings.h"
 #import "NLTHTTPStubConnection.h"
 #import "NLTHTTPStubResponse.h"
 
 @class NLTHCurrentStubGetter;
 
-@interface NLTHTTPStubServer : NSObject {
-    HTTPServer *_httpServer;
-    NSMutableArray *_stubResponses;
-}
+@interface NLTHTTPStubServer : NSObject<NLTServerChaining>
 
 @property(nonatomic,retain) NSMutableArray *stubResponses;
 

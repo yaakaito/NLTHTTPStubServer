@@ -51,4 +51,17 @@
     GHAssertTrue([server isStubEmpty], @"何もないので空のはずだが");
 
 }
+
+- (void)testChainingStub {
+    
+    NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
+    NLTHTTPStubResponse *response = [server stub];
+    GHAssertEquals(1U, [server.stubResponses count], @"スタブが1つ作られるはず");
+    GHAssertEqualObjects(response, [server.stubResponses objectAtIndex:0], @"オブジェクトが一致しない");
+    
+    [server stub];
+    GHAssertEquals(2U, [server.stubResponses count], @"スタブが2つ作られるはず");
+
+    
+}
 @end
