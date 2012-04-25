@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 #import "NLTStubResponse.h"
 
-typedef BOOL(^__httpStubResponseURICheck)(NSURL *URI);
+typedef void(^__httpStubResponseURICheck)(NSURL *URI);
 
 @interface NLTHTTPStubResponse : NLTStubResponse
 

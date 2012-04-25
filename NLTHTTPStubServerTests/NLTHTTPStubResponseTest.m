@@ -29,10 +29,12 @@
 
 - (void)testURICheckBlock {
     NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
-    [response URICheckWithBlock:^BOOL(NSURL *URI) {
-        return YES;
+    __block BOOL called = NO;
+    [response URICheckWithBlock:^(NSURL *URI) {
+        called = YES;
     }];
-    GHAssertTrue([response uriCheckBlock](nil), @"YESにならないのは変");
+    [response uriCheckBlock](nil);
+    GHAssertTrue(called, @"YESにならないのは変");
 }
 
 
