@@ -79,6 +79,7 @@
 }
 
 - (void)testAndContentTypeWithData {
+    
     NSData *data = [@"hello" dataUsingEncoding:NSUTF8StringEncoding];
     
     NLTHTTPStubResponse *json = [[NLTHTTPStubResponse httpDataResponse] andJSONResponse:data];
@@ -96,8 +97,6 @@
     NLTHTTPStubResponse *xml = [[NLTHTTPStubResponse httpDataResponse] andXMLResponse:data];
     GHAssertEqualStrings(@"text/xml; charset=utf-8", [xml.httpHeaders objectForKey:@"Content-Type"], @"xml");
     GHAssertEqualStrings(@"hello", [[[NSString alloc] initWithData:xml.data encoding:NSUTF8StringEncoding] autorelease], @"data = hello");
-    
-    
 }
 
 @end
