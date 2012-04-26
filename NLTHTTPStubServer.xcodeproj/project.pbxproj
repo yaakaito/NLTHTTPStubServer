@@ -518,6 +518,7 @@
 		B93943EF14FA1E57008A8D8C /* NLTHTTPStubServer */ = {
 			isa = PBXGroup;
 			children = (
+				B955BF1015480A9A004717E5 /* NLTSConsts.h */,
 				B93943F214FA1E57008A8D8C /* NLTHTTPStubServer.h */,
 				B93943F314FA1E57008A8D8C /* NLTHTTPStubServer.m */,
 				210F562414FC1A9D00E90D38 /* NLTHTTPStubResponse.h */,
@@ -533,7 +534,6 @@
 				212C89421508F53800F2FDBD /* NLTHTTPFileStubResponse.h */,
 				212C89431508F53800F2FDBD /* NLTHTTPFileStubResponse.m */,
 				B93943F014FA1E57008A8D8C /* Supporting Files */,
-				B955BF1015480A9A004717E5 /* NLTSConsts.h */,
 			);
 			path = NLTHTTPStubServer;
 			sourceTree = "<group>";

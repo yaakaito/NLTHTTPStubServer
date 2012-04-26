@@ -47,4 +47,24 @@
     self.uriCheckBlock = block;
 }
 
+
+- (id)forPath:(NSString *)path_ {
+    self.path = path_;
+    return self;
+}
+
+- (id)andResponse:(NSData *)data_ {
+    self.data = data_;
+    return self;
+}
+
+- (id)andStatusCode:(NSInteger)statusCode_ {
+    self.statusCode = statusCode_;
+    return self;
+}
+
+- (id)andCheckURI:(__httpStubResponseURICheck)checkBlock_ {
+    self.uriCheckBlock = checkBlock_;
+    return self;
+}
 @end

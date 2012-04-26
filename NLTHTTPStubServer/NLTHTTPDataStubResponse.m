@@ -74,5 +74,4 @@
     return self.shouldTimeout;
 }
 
-
 @end

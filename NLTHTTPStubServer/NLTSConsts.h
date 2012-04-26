@@ -20,9 +20,8 @@ typedef void(^__httpStubResponseURICheck)(NSURL *URI);
 @protocol NLTResponseChaining
 - (id)forPath:(NSString*)path;
 - (id)andResponse:(NSData*)data;
-- (id)andStatusCode:(NSUInteger)statusCode;
+- (id)andStatusCode:(NSInteger)statusCode;
 - (id)andCheckURI:(__httpStubResponseURICheck)checkBlock;
 @end
-
 
 #endif

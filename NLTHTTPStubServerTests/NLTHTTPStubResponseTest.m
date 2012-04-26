@@ -37,5 +37,23 @@
     GHAssertTrue(called, @"YESにならないのは変");
 }
 
+- (void)testChaining {
+    
+    __block BOOL called = NO;
+    NLTHTTPStubResponse *stub = [[[[[NLTHTTPStubResponse httpDataResponse]
+                                        forPath:@"/index"]
+                                       andResponse:[@"hoge" dataUsingEncoding:NSUTF8StringEncoding]]
+                                      andStatusCode:200]
+                                     andCheckURI:^(NSURL *URI) {
+                                         called = YES;
+                                     }];
+    
+    
+    GHAssertEqualStrings(@"/index", stub.path, @"パス指定が間違ってる");
+    GHAssertEqualStrings(@"hoge", [[[NSString alloc] initWithData:stub.data encoding:NSUTF8StringEncoding] autorelease], @"データが違う");
+    GHAssertEquals(200, stub.statusCode, @"ステータスコードが違う");
+    stub.uriCheckBlock(nil);
+    GHAssertTrue(called, @"チェックブロックがコールされない");
+}
 
 @end

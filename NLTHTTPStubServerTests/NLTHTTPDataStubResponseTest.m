@@ -58,7 +58,10 @@
                          [[[NSString alloc] initWithData:copy.data encoding:NSUTF8StringEncoding] autorelease], @"レスポンス内容");
     GHAssertEquals(response.statusCode, copy.statusCode, @"ステータスコードが同じじゃない");
     GHAssertEquals(response.shouldTimeout, copy.shouldTimeout, @"shouldTimeoutが同じじゃない");
+    
+    
     GHAssertEquals([response.httpHeaders objectForKey:@"Content-Type"], [copy.httpHeaders objectForKey:@"Content-Type"], @"Content-Typeが同じじゃない");
 }
+
 
 @end
