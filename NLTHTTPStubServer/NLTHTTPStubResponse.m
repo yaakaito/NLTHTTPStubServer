@@ -122,4 +122,20 @@
     [self addContentType:[self contentTypeXML:kNLTHTTPStubResponseHeaderValueCharsetUTF8]];
     return self;
 }
+
+- (id)andJSONResponse:(NSData *)data_ {
+    return [[self andResponse:data_] andJSONHeader];
+}
+
+- (id)andPlainResponse:(NSData *)data_ {
+    return [[self andResponse:data_] andPlainHeader];
+}
+
+- (id)andHTMLResponse:(NSData *)data_ {
+    return [[self andResponse:data_] andHTMLHeader];
+}
+
+- (id)andXMLResponse:(NSData *)data_ {
+    return [[self andResponse:data_] andXMLHeader];
+}
 @end
