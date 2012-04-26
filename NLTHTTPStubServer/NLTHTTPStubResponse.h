@@ -11,7 +11,8 @@
 #import "NLTSConsts.h"
 #import "NLTStubResponse.h"
 
-@interface NLTHTTPStubResponse : NLTStubResponse <NLTResponseChaining>
+@interface NLTHTTPStubResponse : NLTStubResponse <NLTResponseChaining
+                                                , NLTResponseHeaderPresetChaining>
 
 @property(nonatomic,retain) NSString  *path;
 @property                   NSInteger  statusCode;

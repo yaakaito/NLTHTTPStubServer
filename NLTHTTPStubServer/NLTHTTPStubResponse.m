@@ -9,6 +9,13 @@
 
 #import "NLTHTTPStubResponse.h"
 
+#define kNLTHTTPStubResponseHeaderKeyContentType        (@"Content-Type")
+#define kNLTHTTPStubResponseHeaderValueContentTypeJSON  (@"application/json; charset=%@")
+#define kNLTHTTPStubResponseHeaderValueContentTypePlain (@"text/plain; charset=%@")
+#define kNLTHTTPStubResponseHeaderValueContentTypeHTML  (@"text/html; charset=%@")
+#define kNLTHTTPStubResponseHeaderValueContentTypeXML   (@"text/xml; charset=%@")
+#define kNLTHTTPStubResponseHeaderValueCharsetUTF8      (@"utf-8")
+
 @implementation NLTHTTPStubResponse
 
 @synthesize path;
@@ -65,6 +72,54 @@
 
 - (id)andCheckURI:(__httpStubResponseURICheck)checkBlock_ {
     self.uriCheckBlock = checkBlock_;
+    return self;
+}
+
+- (void)addContentType:(NSString*)contentType {
+    NSMutableDictionary *base;
+    if(self.httpHeaders){
+        base = [NSMutableDictionary dictionaryWithDictionary:self.httpHeaders];
+    }
+    else {
+        base = [NSMutableDictionary dictionary];
+    }
+    [base setObject:contentType forKey:kNLTHTTPStubResponseHeaderKeyContentType];
+    self.httpHeaders = base;
+}
+
+- (NSString*)contentTypeJSON:(NSString*)charset {
+    return [NSString stringWithFormat:kNLTHTTPStubResponseHeaderValueContentTypeJSON, charset];
+}
+
+- (id)andJSONHeader {
+    [self addContentType:[self contentTypeJSON:kNLTHTTPStubResponseHeaderValueCharsetUTF8]];
+    return self;
+}
+
+- (NSString*)contentTypePlain:(NSString*)charset {
+    return [NSString stringWithFormat:kNLTHTTPStubResponseHeaderValueContentTypePlain, charset];
+}
+
+- (id)andPlainHeader {
+    [self addContentType:[self contentTypePlain:kNLTHTTPStubResponseHeaderValueCharsetUTF8]];
+    return self;
+}
+
+- (NSString*)contentTypeHTML:(NSString*)charset {
+    return [NSString stringWithFormat:kNLTHTTPStubResponseHeaderValueContentTypeHTML, charset];
+}
+
+- (id)andHTMLHeader {
+    [self addContentType:[self contentTypeHTML:kNLTHTTPStubResponseHeaderValueCharsetUTF8]];
+    return self;
+}
+
+- (NSString*)contentTypeXML:(NSString*)charset {
+    return [NSString stringWithFormat:kNLTHTTPStubResponseHeaderValueContentTypeXML, charset];
+}
+
+- (id)andXMLHeader {
+    [self addContentType:[self contentTypeXML:kNLTHTTPStubResponseHeaderValueCharsetUTF8]];
     return self;
 }
 @end
