@@ -67,6 +67,12 @@
     NLTHTTPStubResponse *xml = [[NLTHTTPStubResponse httpDataResponse] andXMLHeader];
     GHAssertEqualStrings(@"text/xml; charset=utf-8", [xml.httpHeaders objectForKey:@"Content-Type"], @"xml");
     
+    NLTHTTPStubResponse *aliveHeader = [NLTHTTPStubResponse httpDataResponse];
+    aliveHeader.httpHeaders = [NSDictionary dictionaryWithObject:@"hoge" forKey:@"fuga"];
+    [aliveHeader andJSONHeader];
+    GHAssertEquals(2U, [[aliveHeader.httpHeaders allKeys] count], @"ヘッダー2つ設定されているはず");
+    GHAssertEqualStrings(@"application/json; charset=utf-8", [aliveHeader.httpHeaders objectForKey:@"Content-Type"], @"json");
+    GHAssertEqualStrings(@"hoge", [aliveHeader.httpHeaders objectForKey:@"fuga"], @"fuga = hoge");
 }
 
 @end
