@@ -48,10 +48,9 @@
     NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
     response.path = @"/index";
     __block BOOL called = NO;
-    [response URICheckWithBlock:^BOOL(NSURL *URI) {
+    [response URICheckWithBlock:^(NSURL *URI) {
         GHAssertEqualStrings(@"hoge=1", [URI query], @"queryが不一致");
         called = YES;
-        return YES;
     }];
 
     [[[stubServer stub] andReturn:response] responseForPath:[OCMArg any]];
