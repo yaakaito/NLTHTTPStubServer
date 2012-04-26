@@ -24,4 +24,18 @@ typedef void(^__httpStubResponseURICheck)(NSURL *URI);
 - (id)andCheckURI:(__httpStubResponseURICheck)checkBlock;
 @end
 
+@protocol NLTResponseHeaderPresetChaining
+- (id)andJSONHeader;
+- (id)andPlainTextHeader;
+- (id)andHTMLHeader;
+- (id)andXMLHeader;
+@end
+
+@protocol NLTResponseDataPresetChaining<NLTResponseHeaderPresetChaining>
+- (id)andJSONResponse:(NSData*)data;
+- (id)andPlainTextResponse:(NSData*)data;
+- (id)andHTMLResponse:(NSData*)data;
+- (id)andXMLResponse:(NSData*)data;
+@end
+
 #endif
