@@ -138,4 +138,40 @@
 - (id)andXMLResponse:(NSData *)data_ {
     return [[self andResponse:data_] andXMLHeader];
 }
+
+- (id)andJSONHeader:(NSString *)charset {
+    [self addContentType:[self contentTypeJSON:charset]];
+    return self;
+}
+
+- (id)andPlainHeader:(NSString *)charset {
+    [self addContentType:[self contentTypePlain:charset]];
+    return self;
+}
+
+- (id)andHTMLHeader:(NSString *)charset {
+    [self addContentType:[self contentTypeHTML:charset]];
+    return self;
+}
+
+- (id)andXMLHeader:(NSString *)charset {
+    [self addContentType:[self contentTypeXML:charset]];
+    return self;
+}
+
+- (id)andJSONResponse:(NSData *)data_ charset:(NSString *)charset {
+    return [[self andResponse:data_] andJSONHeader:charset];
+}
+
+- (id)andPlainResponse:(NSData *)data_ charset:(NSString *)charset {
+    return [[self andResponse:data_] andPlainHeader:charset];
+}
+
+- (id)andHTMLResponse:(NSData *)data_ charset:(NSString *)charset {
+    return [[self andResponse:data_] andHTMLHeader:charset];
+}
+
+- (id)andXMLResponse:(NSData *)data_ charset:(NSString *)charset {
+    return [[self andResponse:data_] andXMLHeader:charset];
+}
 @end
