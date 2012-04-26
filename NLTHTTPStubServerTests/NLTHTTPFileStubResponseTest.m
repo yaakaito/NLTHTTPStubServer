@@ -56,8 +56,7 @@
     response.data = data;
     response.shouldTimeout = YES;
     response.httpHeaders = [NSDictionary dictionaryWithObject:@"text/html; charset=UTF-8" forKey:@"Content-Type"];
-    [response URICheckWithBlock:^BOOL(NSURL *URI) {
-        return YES;
+    [response URICheckWithBlock:^(NSURL *URI) {
     }];
     
     NLTHTTPFileStubResponse *copy = [response copy];

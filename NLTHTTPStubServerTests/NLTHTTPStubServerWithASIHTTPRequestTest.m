@@ -84,9 +84,8 @@
     stub.filepath = [[NSBundle bundleForClass:[self class]] pathForResource:@"test"
                                                                      ofType:@"txt"];
     stub.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
-    [stub URICheckWithBlock:^BOOL(NSURL *URI) {
+    [stub URICheckWithBlock:^(NSURL *URI) {
         GHAssertEqualStrings(@"key=value", [URI query], @"queryが一致しない");
-        return YES;
     }];
     [server addStubResponse:stub];
     

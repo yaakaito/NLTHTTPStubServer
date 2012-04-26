@@ -8,11 +8,14 @@
 
 
 #import <Foundation/Foundation.h>
+#import "NLTSConsts.h"
 #import "NLTStubResponse.h"
 
-typedef BOOL(^__httpStubResponseURICheck)(NSURL *URI);
-
-@interface NLTHTTPStubResponse : NLTStubResponse
+@interface NLTHTTPStubResponse : NLTStubResponse <NLTResponseChaining
+                                                , NLTResponseHeaderPresetChaining
+                                                , NLTResponseDataPresetChaining
+                                                , NLTResponseHeaderCharsetChaining
+                                                , NLTResponseDataCharsetChaining>
 
 @property(nonatomic,retain) NSString  *path;
 @property                   NSInteger  statusCode;

@@ -9,7 +9,11 @@
 
 #import "NLTHTTPStubServer.h"
 
-@implementation NLTHTTPStubServer
+@implementation NLTHTTPStubServer {
+    HTTPServer *_httpServer;
+    NSMutableArray *_stubResponses;
+}
+
 
 @synthesize stubResponses = _stubResponses;
 
@@ -102,6 +106,13 @@
 
 - (void)stopServer {
     [_httpServer stop];
+}
+
+- (id)stub {
+    
+    NLTHTTPStubResponse *stub = [NLTHTTPStubResponse httpDataResponse];
+    [self addStubResponse:stub];
+    return [stub retain];
 }
 
 @end

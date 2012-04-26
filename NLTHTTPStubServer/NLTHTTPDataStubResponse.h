@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NLTSConsts.h"
 #import "NLTHTTPStubResponse.h"
+
 
 @interface NLTHTTPDataStubResponse : NLTHTTPStubResponse <HTTPResponse, NSCopying> 
 + (NLTHTTPDataStubResponse*)dataStubResponse;
