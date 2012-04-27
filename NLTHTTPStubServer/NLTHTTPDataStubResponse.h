@@ -12,5 +12,7 @@
 
 
 @interface NLTHTTPDataStubResponse : NLTHTTPStubResponse <HTTPResponse, NSCopying> 
-+ (NLTHTTPDataStubResponse*)dataStubResponse;
++ (id)dataStubResponse;
++ (id)dataStubResponseWithDataStubResponse:(NLTHTTPDataStubResponse*)response;
+- (id)initWithDataStubResponse:(NLTHTTPDataStubResponse*)response;
 @end

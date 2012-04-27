@@ -23,7 +23,7 @@
     response.data = [NSData data];
     [[[stubServer stub] andReturn:response] responseForPath:[OCMArg any]];
     
-    NLTHTTPStubConnection *connection = [[NLTHTTPStubConnection alloc] init];
+    NLTHTTPStubConnection *connection = [[[NLTHTTPStubConnection alloc] init] autorelease];
     connection.stubServer = stubServer;
 
     NSObject<HTTPResponse> *returnResponse = [connection httpResponseForMethod:@"GET"
@@ -36,7 +36,7 @@
     id stubServer = [OCMockObject mockForClass:[NLTHTTPStubServer class]];
     [[[stubServer stub] andReturn:nil] responseForPath:[OCMArg any]];
     
-    NLTHTTPStubConnection *connection = [[NLTHTTPStubConnection alloc] init];
+    NLTHTTPStubConnection *connection = [[[NLTHTTPStubConnection alloc] init] autorelease];
     connection.stubServer = stubServer;
     GHAssertThrows([connection httpResponseForMethod:@"GET"
                                                  URI:@"/index"], @"存在しないので例外が投げられるはず");
@@ -55,7 +55,7 @@
 
     [[[stubServer stub] andReturn:response] responseForPath:[OCMArg any]];
     
-    NLTHTTPStubConnection *connection = [[NLTHTTPStubConnection alloc] init];
+    NLTHTTPStubConnection *connection = [[[NLTHTTPStubConnection alloc] init] autorelease];
     connection.stubServer = stubServer;
     
    [connection httpResponseForMethod:@"GET" URI:@"/index?hoge=1"];

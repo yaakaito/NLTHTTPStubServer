@@ -10,5 +10,7 @@
 #import "NLTHTTPStubResponse.h"
 
 @interface NLTHTTPFileStubResponse : NLTHTTPStubResponse <HTTPResponse,NSCopying>
-+ (NLTHTTPFileStubResponse*)fileStubResponse;
++ (id)fileStubResponse;
++ (id)fileStubResponseWithFileStubResponse:(NLTHTTPFileStubResponse*)response;
+- (id)initWithFileStubResponse:(NLTHTTPFileStubResponse*)response;
 @end
