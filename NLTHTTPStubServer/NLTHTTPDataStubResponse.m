@@ -13,25 +13,31 @@
     NSInteger _offset;
 }
 
-+ (NLTHTTPDataStubResponse *)dataStubResponse {
+- (id)initWithDataStubResponse:(NLTHTTPDataStubResponse*)response {
+    self = [super init];
+    if (self) {
+        self.path = [[response.path copy] autorelease];
+        self.statusCode = response.statusCode;
+        self.data = [[response.data copy] autorelease];
+        self.shouldTimeout = response.shouldTimeout;
+        self.uriCheckBlock = response.uriCheckBlock;
+        self.httpHeaders = [[response.httpHeaders copy] autorelease];
+    }
+    return self;
+}
+
++ (id)dataStubResponse {
     return [[[NLTHTTPDataStubResponse alloc] init] autorelease];
 }
 
-+ (NLTHTTPDataStubResponse*)dataStubResponseWithDataStubResponse:(NLTHTTPDataStubResponse*)response {
-
-    NLTHTTPDataStubResponse *copy = [self dataStubResponse];
-    copy.path = [NSString stringWithString:response.path];
-    copy.statusCode = response.statusCode;
-    copy.data = [NSData dataWithData:response.data];
-    copy.shouldTimeout = response.shouldTimeout;
-    copy.uriCheckBlock = response.uriCheckBlock;
-    copy.httpHeaders = response.httpHeaders;
-    
-    return copy;
++ (id)dataStubResponseWithDataStubResponse:(NLTHTTPDataStubResponse*)response {
+    return [[[NLTHTTPDataStubResponse alloc] initWithDataStubResponse:response] autorelease];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-    return [NLTHTTPDataStubResponse dataStubResponseWithDataStubResponse:self];
+    id copiedObject = [[[self class] allocWithZone:zone] initWithDataStubResponse:self];
+    
+    return copiedObject;
 }
 
 - (UInt64)contentLength
