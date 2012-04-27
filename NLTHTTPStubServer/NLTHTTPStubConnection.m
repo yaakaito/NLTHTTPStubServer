@@ -11,6 +11,16 @@
 
 @implementation NLTHTTPStubConnection
 @synthesize stubServer;
+
+- (id)init
+{
+    self = [super initWithAsyncSocket:nil configuration:nil];
+    if (self) {
+        
+    }
+    return self;
+}
+
 - (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
     
     NSURL *url = [NSURL URLWithString:path];

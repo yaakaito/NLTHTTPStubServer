@@ -38,25 +38,31 @@
     return self;
 }
 
-+ (NLTHTTPFileStubResponse *)fileStubResponse {
+- (id)initWithFileStubResponse:(NLTHTTPFileStubResponse*)response {
+    self = [super init];
+    if (self) {
+        self.path = [[response.path copy] autorelease];
+        self.statusCode = response.statusCode;
+        self.filepath = [[response.filepath copy] autorelease];
+        self.shouldTimeout = response.shouldTimeout;
+        self.uriCheckBlock = response.uriCheckBlock;
+        self.httpHeaders = [[response.httpHeaders copy] autorelease];
+    }
+    return self;
+}
+
++ (id)fileStubResponse {
     return [[[NLTHTTPFileStubResponse alloc] init] autorelease];
 }
 
-+ (NLTHTTPFileStubResponse*)fileStubResponseWithFileStubResponse:(NLTHTTPFileStubResponse*)response {
-    
-    NLTHTTPFileStubResponse *copy = [self fileStubResponse];
-    copy.path = [NSString stringWithString:response.path];
-    copy.statusCode = response.statusCode;
-    copy.filepath = response.filepath;
-    copy.shouldTimeout = response.shouldTimeout;
-    copy.uriCheckBlock = response.uriCheckBlock;
-    copy.httpHeaders = response.httpHeaders;
-    
-    return copy;
++ (id)fileStubResponseWithFileStubResponse:(NLTHTTPFileStubResponse*)response {
+    return [[[NLTHTTPFileStubResponse alloc] initWithFileStubResponse:response] autorelease];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-    return [NLTHTTPFileStubResponse fileStubResponseWithFileStubResponse:self];
+    id copiedObject = [[[self class] allocWithZone:zone] initWithFileStubResponse:self];
+    
+    return copiedObject;
 }
 
 - (void)setFilepath:(NSString *)filepath {

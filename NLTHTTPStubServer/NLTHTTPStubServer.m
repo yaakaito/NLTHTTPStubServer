@@ -112,7 +112,7 @@
     
     NLTHTTPStubResponse *stub = [NLTHTTPStubResponse httpDataResponse];
     [self addStubResponse:stub];
-    return [stub retain];
+    return stub;
 }
 
 @end
