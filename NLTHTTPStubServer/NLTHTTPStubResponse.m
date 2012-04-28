@@ -65,6 +65,17 @@
     return self;
 }
 
+- (void)setResponseResource:(NSString *)filename ofType:(NSString*)type {
+    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:filename ofType:type];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    self.data = data;
+}
+
+- (id)andResponseResource:(NSString *)filename ofType:(NSString *)type {
+    [self setResponseResource:filename ofType:type];
+    return self;
+}
+
 - (id)andStatusCode:(NSInteger)statusCode_ {
     self.statusCode = statusCode_;
     return self;

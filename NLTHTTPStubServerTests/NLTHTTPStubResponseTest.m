@@ -136,4 +136,12 @@
     GHAssertEqualStrings(@"hello", [[[NSString alloc] initWithData:xml.data encoding:NSShiftJISStringEncoding] autorelease], @"data = hello");
 }
 
+- (void)testAndResponseResource {
+    NLTHTTPStubResponse *stub = [NLTHTTPStubResponse httpDataResponse];
+    [stub andResponseResource:@"test" ofType:@"txt"];
+    NSString *response = [[NSString alloc] initWithData:stub.data encoding:NSUTF8StringEncoding];
+    GHAssertEqualStrings(@"hogehogehogehoge", response, @"読み込み失敗してる");
+    [response release];
+}
+
 @end
