@@ -66,9 +66,9 @@
 }
 
 - (void)setResponseResource:(NSString *)filename ofType:(NSString*)type {
-    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:filename ofType:type];
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    self.data = data;
+    NSString *path_ = [[NSBundle bundleForClass:[self class]] pathForResource:filename ofType:type];
+    NSData *data_ = [NSData dataWithContentsOfFile:path_];
+    self.data = data_;
 }
 
 - (id)andResponseResource:(NSString *)filename ofType:(NSString *)type {
@@ -148,6 +148,22 @@
 
 - (id)andXMLResponse:(NSData *)data_ {
     return [[self andResponse:data_] andXMLHeader];
+}
+
+- (id)andJSONResponseResource:(NSString *)filename ofType:(NSString *)type {
+    return [[self andResponseResource:filename ofType:type] andJSONHeader];
+}
+
+- (id)andPlainResponseResource:(NSString *)filename ofType:(NSString *)type {
+    return [[self andResponseResource:filename ofType:type] andPlainHeader];
+}
+
+- (id)andHTMLResponseResource:(NSString *)filename ofType:(NSString *)type {
+    return [[self andResponseResource:filename ofType:type] andHTMLHeader];
+}
+
+- (id)andXMLResponseResource:(NSString *)filename ofType:(NSString *)type {
+    return [[self andResponseResource:filename ofType:type] andXMLHeader];
 }
 
 - (id)andJSONHeader:(NSString *)charset {
