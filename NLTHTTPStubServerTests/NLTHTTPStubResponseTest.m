@@ -54,6 +54,10 @@
     GHAssertEquals(200, stub.statusCode, @"ステータスコードが違う");
     stub.uriCheckBlock(nil);
     GHAssertTrue(called, @"チェックブロックがコールされない");
+    GHAssertFalse(stub.shouldTimeout, @"タイムアウトしない");
+    
+    [stub andTimeout];
+    GHAssertTrue(stub.shouldTimeout, @"タイムアウトする");
 }
 
 - (void)testAndContentType {
@@ -136,4 +140,51 @@
     GHAssertEqualStrings(@"hello", [[[NSString alloc] initWithData:xml.data encoding:NSShiftJISStringEncoding] autorelease], @"data = hello");
 }
 
+- (void)testAndResponseResource {
+    NLTHTTPStubResponse *stub = [NLTHTTPStubResponse httpDataResponse];
+    [stub andResponseResource:@"test" ofType:@"txt"];
+    NSString *response = [[NSString alloc] initWithData:stub.data encoding:NSUTF8StringEncoding];
+    GHAssertEqualStrings(@"hogehogehogehoge", response, @"読み込み失敗してる");
+    [response release];
+}
+
+- (void)testAndContentTypeWithResource {
+    
+    NLTHTTPStubResponse *json = [[NLTHTTPStubResponse httpDataResponse] andJSONResponseResource:@"test" ofType:@"txt"];
+    GHAssertEqualStrings(@"application/json; charset=utf-8", [json.httpHeaders objectForKey:@"Content-Type"], @"json");
+    GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:json.data encoding:NSUTF8StringEncoding] autorelease], @"data = hello");
+    
+    NLTHTTPStubResponse *plain = [[NLTHTTPStubResponse httpDataResponse] andPlainResponseResource:@"test" ofType:@"txt"];
+    GHAssertEqualStrings(@"text/plain; charset=utf-8", [plain.httpHeaders objectForKey:@"Content-Type"], @"plain text");
+    GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:plain.data encoding:NSUTF8StringEncoding] autorelease], @"data = hello");
+    
+    NLTHTTPStubResponse *html = [[NLTHTTPStubResponse httpDataResponse] andHTMLResponseResource:@"test" ofType:@"txt"];
+    GHAssertEqualStrings(@"text/html; charset=utf-8", [html.httpHeaders objectForKey:@"Content-Type"], @"html");
+    GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:html.data encoding:NSUTF8StringEncoding] autorelease], @"data = hello");
+    
+    NLTHTTPStubResponse *xml = [[NLTHTTPStubResponse httpDataResponse] andXMLResponseResource:@"test" ofType:@"txt"];
+    GHAssertEqualStrings(@"text/xml; charset=utf-8", [xml.httpHeaders objectForKey:@"Content-Type"], @"xml");
+    GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:xml.data encoding:NSUTF8StringEncoding] autorelease], @"data = hello");
+
+}
+
+- (void)testAndContentTypeWithResourceAndCharset {
+    
+    NLTHTTPStubResponse *json = [[NLTHTTPStubResponse httpDataResponse] andJSONResponseResource:@"test" ofType:@"txt" charset:@"shift_jis"];
+    GHAssertEqualStrings(@"application/json; charset=shift_jis", [json.httpHeaders objectForKey:@"Content-Type"], @"json");
+    GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:json.data encoding:NSUTF8StringEncoding] autorelease], @"data = hello");
+    
+    NLTHTTPStubResponse *plain = [[NLTHTTPStubResponse httpDataResponse] andPlainResponseResource:@"test" ofType:@"txt" charset:@"shift_jis"];
+    GHAssertEqualStrings(@"text/plain; charset=shift_jis", [plain.httpHeaders objectForKey:@"Content-Type"], @"plain text");
+    GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:plain.data encoding:NSUTF8StringEncoding] autorelease], @"data = hello");
+    
+    NLTHTTPStubResponse *html = [[NLTHTTPStubResponse httpDataResponse] andHTMLResponseResource:@"test" ofType:@"txt" charset:@"shift_jis"];
+    GHAssertEqualStrings(@"text/html; charset=shift_jis", [html.httpHeaders objectForKey:@"Content-Type"], @"html");
+    GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:html.data encoding:NSUTF8StringEncoding] autorelease], @"data = hello");
+    
+    NLTHTTPStubResponse *xml = [[NLTHTTPStubResponse httpDataResponse] andXMLResponseResource:@"test" ofType:@"txt" charset:@"shift_jis"];
+    GHAssertEqualStrings(@"text/xml; charset=shift_jis", [xml.httpHeaders objectForKey:@"Content-Type"], @"xml");
+    GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:xml.data encoding:NSUTF8StringEncoding] autorelease], @"data = hello");
+    
+}
 @end

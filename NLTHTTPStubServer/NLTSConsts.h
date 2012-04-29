@@ -20,8 +20,10 @@ typedef void(^__httpStubResponseURICheck)(NSURL *URI);
 @protocol NLTResponseChaining
 - (id)forPath:(NSString*)path;
 - (id)andResponse:(NSData*)data;
+- (id)andResponseResource:(NSString*)filename ofType:(NSString*)type;
 - (id)andStatusCode:(NSInteger)statusCode;
 - (id)andCheckURI:(__httpStubResponseURICheck)checkBlock;
+- (id)andTimeout;
 @end
 
 @protocol NLTResponseHeaderPresetChaining
@@ -36,6 +38,10 @@ typedef void(^__httpStubResponseURICheck)(NSURL *URI);
 - (id)andPlainResponse:(NSData*)data;
 - (id)andHTMLResponse:(NSData*)data;
 - (id)andXMLResponse:(NSData*)data;
+- (id)andJSONResponseResource:(NSString*)filename ofType:(NSString*)type;
+- (id)andPlainResponseResource:(NSString*)filename ofType:(NSString*)type;
+- (id)andHTMLResponseResource:(NSString*)filename ofType:(NSString*)type;
+- (id)andXMLResponseResource:(NSString*)filename ofType:(NSString*)type;
 @end
 
 @protocol NLTResponseHeaderCharsetChaining
@@ -50,5 +56,9 @@ typedef void(^__httpStubResponseURICheck)(NSURL *URI);
 - (id)andPlainResponse:(NSData*)data charset:(NSString*)charset;
 - (id)andHTMLResponse:(NSData*)data charset:(NSString*)charset;
 - (id)andXMLResponse:(NSData*)data charset:(NSString*)charset;
+- (id)andJSONResponseResource:(NSString*)filename ofType:(NSString*)type charset:(NSString*)charset;
+- (id)andPlainResponseResource:(NSString*)filename ofType:(NSString*)type charset:(NSString*)charset;
+- (id)andHTMLResponseResource:(NSString*)filename ofType:(NSString*)type charset:(NSString*)charset;
+- (id)andXMLResponseResource:(NSString*)filename ofType:(NSString*)type charset:(NSString*)charset;
 @end
 #endif

@@ -128,6 +128,7 @@
 		B9B64CE31549640D00C735FE /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B64CD81549640D00C735FE /* AFXMLRequestOperation.m */; };
 		B9B64CE41549640D00C735FE /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B64CDA1549640D00C735FE /* UIImageView+AFNetworking.m */; };
 		B9B64CE71549643700C735FE /* NLTHTTPStubServerWithAFNetwrokingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B64CE61549643700C735FE /* NLTHTTPStubServerWithAFNetwrokingTest.m */; };
+		B9F3D279154D02F200B87F18 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = B9F3D277154D023E00B87F18 /* test.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -274,6 +275,7 @@
 		B9B64CDA1549640D00C735FE /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "Frameworks/AFNetworking/UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		B9B64CE51549643700C735FE /* NLTHTTPStubServerWithAFNetwrokingTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTHTTPStubServerWithAFNetwrokingTest.h; sourceTree = "<group>"; };
 		B9B64CE61549643700C735FE /* NLTHTTPStubServerWithAFNetwrokingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPStubServerWithAFNetwrokingTest.m; sourceTree = "<group>"; };
+		B9F3D277154D023E00B87F18 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -496,6 +498,7 @@
 			isa = PBXGroup;
 			children = (
 				212C8948150903C400F2FDBD /* test.txt */,
+				B9F3D277154D023E00B87F18 /* test.json */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 			files = (
 				210F55F914FC164D00E90D38 /* InfoPlist.strings in Resources */,
 				212C8949150903C400F2FDBD /* test.txt in Resources */,
+				B9F3D279154D02F200B87F18 /* test.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
