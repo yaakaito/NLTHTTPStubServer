@@ -201,4 +201,21 @@
 - (id)andXMLResponse:(NSData *)data_ charset:(NSString *)charset {
     return [[self andResponse:data_] andXMLHeader:charset];
 }
+
+- (id)andJSONResponseResource:(NSString *)filename ofType:(NSString *)type charset:(NSString *)charset {
+    return [[self andResponseResource:filename ofType:type] andJSONHeader:charset];
+}
+
+- (id)andPlainResponseResource:(NSString *)filename ofType:(NSString *)type charset:(NSString *)charset {
+    return [[self andResponseResource:filename ofType:type] andPlainHeader:charset];
+}
+
+- (id)andHTMLResponseResource:(NSString *)filename ofType:(NSString *)type charset:(NSString *)charset {
+    return [[self andResponseResource:filename ofType:type] andHTMLHeader:charset];
+}
+
+- (id)andXMLResponseResource:(NSString *)filename ofType:(NSString *)type charset:(NSString *)charset {
+    return [[self andResponseResource:filename ofType:type] andXMLHeader:charset];
+}
+
 @end
