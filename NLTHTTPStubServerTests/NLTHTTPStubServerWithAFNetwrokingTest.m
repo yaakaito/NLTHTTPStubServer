@@ -49,4 +49,21 @@
     [operation start];
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0f];
 }
+
+- (void)testResponseResource {
+    
+    [[[server stub] forPath:@"/index.json"] andJSONResponseResource:@"test" ofType:@"json"];
+    
+    [self prepare];
+    NSURL *url = [NSURL URLWithString:@"http://localhost:12345/index.json"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        GHAssertEqualStrings(@"ok", [JSON objectForKey:@"status"], @"status = ok");
+        GHAssertEqualStrings(@"json", [JSON objectForKey:@"format"], @"format = json");
+        [self notify:kGHUnitWaitStatusSuccess];
+    } failure:nil];
+    [operation start];
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0f];
+    
+}
 @end
