@@ -23,6 +23,7 @@ typedef void(^__httpStubResponseURICheck)(NSURL *URI);
 - (id)andResponseResource:(NSString*)filename ofType:(NSString*)type;
 - (id)andStatusCode:(NSInteger)statusCode;
 - (id)andCheckURI:(__httpStubResponseURICheck)checkBlock;
+- (id)andTimeout;
 @end
 
 @protocol NLTResponseHeaderPresetChaining

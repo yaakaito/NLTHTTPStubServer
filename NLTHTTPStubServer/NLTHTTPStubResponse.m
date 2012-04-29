@@ -86,6 +86,11 @@
     return self;
 }
 
+- (id)andTimeout {
+    self.shouldTimeout = YES;
+    return self;
+}
+
 - (void)addContentType:(NSString*)contentType {
     NSMutableDictionary *base;
     if(self.httpHeaders){

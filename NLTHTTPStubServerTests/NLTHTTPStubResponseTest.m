@@ -54,6 +54,10 @@
     GHAssertEquals(200, stub.statusCode, @"ステータスコードが違う");
     stub.uriCheckBlock(nil);
     GHAssertTrue(called, @"チェックブロックがコールされない");
+    GHAssertFalse(stub.shouldTimeout, @"タイムアウトしない");
+    
+    [stub andTimeout];
+    GHAssertTrue(stub.shouldTimeout, @"タイムアウトする");
 }
 
 - (void)testAndContentType {
@@ -183,5 +187,4 @@
     GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:xml.data encoding:NSUTF8StringEncoding] autorelease], @"data = hello");
     
 }
-
 @end
