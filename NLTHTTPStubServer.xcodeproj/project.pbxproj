@@ -44,11 +44,16 @@
 		2190252C1508C72100F3DD6A /* NLTStubResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2190252A1508C71D00F3DD6A /* NLTStubResponse.m */; };
 		2190252D1508C72100F3DD6A /* NLTStubResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2190252A1508C71D00F3DD6A /* NLTStubResponse.m */; };
 		219025481508CA4800F3DD6A /* NLTStubResponseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 219025471508CA4600F3DD6A /* NLTStubResponseTest.m */; };
+		35BBB69AF42F46A4A77CBCD8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8710FB411A4046B60DBB67 /* libPods.a */; };
 		B93943EE14FA1E57008A8D8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B93943ED14FA1E57008A8D8C /* Foundation.framework */; };
 		B93943F414FA1E57008A8D8C /* NLTHTTPStubServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B93943F314FA1E57008A8D8C /* NLTHTTPStubServer.m */; };
+		B93EEF22154D691A00914A7D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B93EEF21154D691900914A7D /* Security.framework */; };
+		B93EEF24154D697400914A7D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B93EEF23154D697400914A7D /* CoreLocation.framework */; };
+		B93EEF26154E8D6500914A7D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B93EEF25154E8D6500914A7D /* libxml2.dylib */; };
 		B955BF1115480A9A004717E5 /* NLTSConsts.h in Headers */ = {isa = PBXBuildFile; fileRef = B955BF1015480A9A004717E5 /* NLTSConsts.h */; };
 		B9B64CE71549643700C735FE /* NLTHTTPStubServerWithAFNetwrokingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B64CE61549643700C735FE /* NLTHTTPStubServerWithAFNetwrokingTest.m */; };
 		B9F3D279154D02F200B87F18 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = B9F3D277154D023E00B87F18 /* test.json */; };
+		BA89A7D320144FD89486A7F6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8710FB411A4046B60DBB67 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,18 +92,20 @@
 		212C89431508F53800F2FDBD /* NLTHTTPFileStubResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPFileStubResponse.m; sourceTree = "<group>"; };
 		212C8948150903C400F2FDBD /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test.txt; path = Resources/test.txt; sourceTree = "<group>"; };
 		212C894A150916C200F2FDBD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		219025101508BED700F3DD6A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		219025111508BED700F3DD6A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		219025121508BED700F3DD6A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		219025291508C71B00F3DD6A /* NLTStubResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTStubResponse.h; sourceTree = "<group>"; };
 		2190252A1508C71D00F3DD6A /* NLTStubResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTStubResponse.m; sourceTree = "<group>"; };
 		219025461508CA4400F3DD6A /* NLTStubResponseTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTStubResponseTest.h; sourceTree = "<group>"; };
 		219025471508CA4600F3DD6A /* NLTStubResponseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTStubResponseTest.m; sourceTree = "<group>"; };
+		4F8710FB411A4046B60DBB67 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		803EAECA4F454248913EEB50 /* Pods.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		B93943EA14FA1E57008A8D8C /* libNLTHTTPStubServer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNLTHTTPStubServer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B93943ED14FA1E57008A8D8C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B93943F114FA1E57008A8D8C /* NLTHTTPStubServer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NLTHTTPStubServer-Prefix.pch"; sourceTree = "<group>"; };
 		B93943F214FA1E57008A8D8C /* NLTHTTPStubServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NLTHTTPStubServer.h; sourceTree = "<group>"; };
 		B93943F314FA1E57008A8D8C /* NLTHTTPStubServer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPStubServer.m; sourceTree = "<group>"; };
+		B93EEF21154D691900914A7D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		B93EEF23154D697400914A7D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B93EEF25154E8D6500914A7D /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		B955BF1015480A9A004717E5 /* NLTSConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTSConsts.h; sourceTree = "<group>"; };
 		B9B64CE51549643700C735FE /* NLTHTTPStubServerWithAFNetwrokingTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTHTTPStubServerWithAFNetwrokingTest.h; sourceTree = "<group>"; };
 		B9B64CE61549643700C735FE /* NLTHTTPStubServerWithAFNetwrokingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPStubServerWithAFNetwrokingTest.m; sourceTree = "<group>"; };
@@ -110,6 +117,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B93EEF26154E8D6500914A7D /* libxml2.dylib in Frameworks */,
+				B93EEF24154D697400914A7D /* CoreLocation.framework in Frameworks */,
+				B93EEF22154D691A00914A7D /* Security.framework in Frameworks */,
 				210F568714FC5CD500E90D38 /* libz.dylib in Frameworks */,
 				210F568514FC5BFD00E90D38 /* SystemConfiguration.framework in Frameworks */,
 				210F568314FC5BDC00E90D38 /* MobileCoreServices.framework in Frameworks */,
@@ -117,6 +127,7 @@
 				210F55F014FC164D00E90D38 /* UIKit.framework in Frameworks */,
 				210F55F114FC164D00E90D38 /* Foundation.framework in Frameworks */,
 				210F55F314FC164D00E90D38 /* CoreGraphics.framework in Frameworks */,
+				35BBB69AF42F46A4A77CBCD8 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +137,7 @@
 			files = (
 				210F562214FC177300E90D38 /* CFNetwork.framework in Frameworks */,
 				B93943EE14FA1E57008A8D8C /* Foundation.framework in Frameworks */,
+				BA89A7D320144FD89486A7F6 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,16 +189,6 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		2190250F1508BED600F3DD6A /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				219025101508BED700F3DD6A /* AppKit.framework */,
-				219025111508BED700F3DD6A /* CoreData.framework */,
-				219025121508BED700F3DD6A /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
-			sourceTree = "<group>";
-		};
 		B93943DF14FA1E57008A8D8C = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +197,7 @@
 				B93943EC14FA1E57008A8D8C /* Frameworks */,
 				B93943EB14FA1E57008A8D8C /* Products */,
 				212C894A150916C200F2FDBD /* README.md */,
+				803EAECA4F454248913EEB50 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -210,14 +213,17 @@
 		B93943EC14FA1E57008A8D8C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B93EEF25154E8D6500914A7D /* libxml2.dylib */,
 				210F568614FC5CD400E90D38 /* libz.dylib */,
+				B93EEF23154D697400914A7D /* CoreLocation.framework */,
+				B93EEF21154D691900914A7D /* Security.framework */,
 				210F568414FC5BFC00E90D38 /* SystemConfiguration.framework */,
 				210F568214FC5BDC00E90D38 /* MobileCoreServices.framework */,
 				210F562114FC177300E90D38 /* CFNetwork.framework */,
 				B93943ED14FA1E57008A8D8C /* Foundation.framework */,
 				210F55EF14FC164D00E90D38 /* UIKit.framework */,
 				210F55F214FC164D00E90D38 /* CoreGraphics.framework */,
-				2190250F1508BED600F3DD6A /* Other Frameworks */,
+				4F8710FB411A4046B60DBB67 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -280,6 +286,7 @@
 				210F55E914FC164C00E90D38 /* Sources */,
 				210F55EA14FC164C00E90D38 /* Frameworks */,
 				210F55EB14FC164C00E90D38 /* Resources */,
+				3553DC13DEB84DF09B594A27 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -297,6 +304,7 @@
 				B93943E614FA1E57008A8D8C /* Sources */,
 				B93943E714FA1E57008A8D8C /* Frameworks */,
 				B93943E814FA1E57008A8D8C /* Headers */,
+				3553DC13DEB84DF09B594A27 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -345,6 +353,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3553DC13DEB84DF09B594A27 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		210F55E914FC164C00E90D38 /* Sources */ = {
@@ -400,26 +425,34 @@
 /* Begin XCBuildConfiguration section */
 		210F560A14FC164D00E90D38 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 803EAECA4F454248913EEB50 /* Pods.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Frameworks\"",
-				);
+				DSTROOT = /tmp/xcodeproj.dst;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NLTHTTPStubServerTests/NLTHTTPStubServerTests-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/OCMock/Library/Headers";
-				INFOPLIST_FILE = "NLTHTTPStubServerTests/NLTHTTPStubServerTests-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Frameworks/OCMock\"",
-					"\"$(SRCROOT)/Frameworks/OCMock/Library\"",
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"\"$(PODS_ROOT)/Headers\"",
+					"$(SDKROOT)/usr/include/libxml2",
+					"\"$(PODS_ROOT)/Headers/AFNetworking\"",
+					"\"$(PODS_ROOT)/Headers/ASIHTTPRequest\"",
+					"\"$(PODS_ROOT)/Headers/CocoaAsyncSocket\"",
+					"\"$(PODS_ROOT)/Headers/CocoaHTTPServer\"",
+					"\"$(PODS_ROOT)/Headers/CocoaLumberjack\"",
+					"\"$(PODS_ROOT)/Headers/GHUnitIOS\"",
+					"\"$(PODS_ROOT)/Headers/OCMock\"",
+					"\"$(PODS_ROOT)/Headers/Reachability\"",
 				);
+				INFOPLIST_FILE = "NLTHTTPStubServerTests/NLTHTTPStubServerTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -427,27 +460,35 @@
 		};
 		210F560B14FC164D00E90D38 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 803EAECA4F454248913EEB50 /* Pods.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Frameworks\"",
-				);
+				DSTROOT = /tmp/xcodeproj.dst;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NLTHTTPStubServerTests/NLTHTTPStubServerTests-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/OCMock/Library/Headers";
-				INFOPLIST_FILE = "NLTHTTPStubServerTests/NLTHTTPStubServerTests-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Frameworks/OCMock\"",
-					"\"$(SRCROOT)/Frameworks/OCMock/Library\"",
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"\"$(PODS_ROOT)/Headers\"",
+					"$(SDKROOT)/usr/include/libxml2",
+					"\"$(PODS_ROOT)/Headers/AFNetworking\"",
+					"\"$(PODS_ROOT)/Headers/ASIHTTPRequest\"",
+					"\"$(PODS_ROOT)/Headers/CocoaAsyncSocket\"",
+					"\"$(PODS_ROOT)/Headers/CocoaHTTPServer\"",
+					"\"$(PODS_ROOT)/Headers/CocoaLumberjack\"",
+					"\"$(PODS_ROOT)/Headers/GHUnitIOS\"",
+					"\"$(PODS_ROOT)/Headers/OCMock\"",
+					"\"$(PODS_ROOT)/Headers/Reachability\"",
 				);
+				INFOPLIST_FILE = "NLTHTTPStubServerTests/NLTHTTPStubServerTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -495,10 +536,12 @@
 		};
 		B93943F814FA1E57008A8D8C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 803EAECA4F454248913EEB50 /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/NLTHTTPStubServer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NLTHTTPStubServer/NLTHTTPStubServer-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -507,10 +550,12 @@
 		};
 		B93943F914FA1E57008A8D8C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 803EAECA4F454248913EEB50 /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/NLTHTTPStubServer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NLTHTTPStubServer/NLTHTTPStubServer-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
