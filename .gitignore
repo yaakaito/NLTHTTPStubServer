@@ -3,3 +3,4 @@ NLTHTTPStubServer.xcodeproj/xcuserdata
 NLTHTTPStubServer/.DS_Store
 .DS_Store
 Pods
+Podfile.lock
