@@ -6,7 +6,7 @@
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import <GHUnitIOS/GHUnit.h>
+#import "GHUnit.h"
 #import "NLTHTTPStubServer.h"
 
 @interface NLTHTTPStubServerWithAFNetwrokingTest : GHAsyncTestCase {

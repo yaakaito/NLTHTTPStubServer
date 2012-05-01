@@ -7,7 +7,7 @@
 //
 
 
-#import <GHUnitIOS/GHUnit.h>
+#import "GHUnit.h"
 #import "NLTHTTPStubServer.h"
 
 @interface NLTHTTPStubServerWithASIHTTPRequestTest : GHAsyncTestCase {

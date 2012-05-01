@@ -7,7 +7,7 @@
 //
 
 
-#import <GHUnitIOS/GHUnit.h>
+#import "GHUnit.h"
 
 @interface NLTHTTPStubConnetionTest : GHTestCase
 
