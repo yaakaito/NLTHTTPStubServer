@@ -2,24 +2,24 @@
 NLTHTTPStubServer is mocking server.
 launch simple HTTPServer on testcodes.
 
-# Usage 
-How to install
+# How to install 
+[CocoaPods](https://github.com/CocoaPods/)
 
-# Feature
+# Usage
 
-on GHUnit and ASIHTTPRequest
+GHUnit and AFNetworking example
 
-## setup
 ```objective-c
+@implementation NLTHTTPStubServerWithAFNetwrokingTest
+
 - (void)setUpClass {
     [NLTHTTPStubServer globalSettings].port = 12345;
-    
     server = [[NLTHTTPStubServer stubServer] retain];
     [server startServer];
 }
 
 - (void)tearDownClass {
-
+    
     [server stopServer];
     [server release];
 }
@@ -33,132 +33,64 @@ on GHUnit and ASIHTTPRequest
         GHFail(@"stubs not empty");
     }
 }
-```
-## e.g.
-### NSData
-```objective-c
-- (void)testNSData {
-    NSData *helloWorld = [@"Hello World" dataUsingEncoding:NSUTF8StringEncoding];
-    NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
-    stub.path = @"/index";
-    stub.data = helloWorld;
-    [server addStubResponse:stub];
-     
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
+
+- (void)testJSONResponse {
+    
+    [[[server stub] forPath:@"/index.json"] andJSONResponseResource:@"test" ofType:@"json"]; // create stub response
+    
     [self prepare];
-    [request setCompletionBlock:^{
+    NSURL *url = [NSURL URLWithString:@"http://localhost:12345/index.json"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        GHAssertEqualStrings(@"ok", [JSON objectForKey:@"status"], @"status = ok");
+        GHAssertEqualStrings(@"json", [JSON objectForKey:@"format"], @"format = json");
         [self notify:kGHUnitWaitStatusSuccess];
-    }];
-    [request startAsynchronous];
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
- 
-    GHAssertEquals(200, [request responseStatusCode], @"status code");
-    GHAssertEqualStrings(@"Hello World", [request responseString], @"response");
+    } failure:nil];
+    [operation start];
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0f];
+    
 }
+@end
 ```
 
-### JSON(NSData)
+## setup server
+
 ```objective-c
-- (void)testJSON {
-    NSData *jsonData = [@"{\"status\":\"ok\"}" dataUsingEncoding:NSUTF8StringEncoding];
-    NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
-    stub.path = @"/index";
-    stub.data = jsonData;
-    [server addStubResponse:stub];
-    
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
-    [self prepare];
-    [request setCompletionBlock:^{
-        [self notify:kGHUnitWaitStatusSuccess];
-    }];
-    [request startAsynchronous];
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
-    
-    GHAssertEquals(200, [request responseStatusCode], @"status code");
-    
-    NSError *error=nil;
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:NSJSONReadingAllowFragments error:&error];   
-    GHAssertEqualStrings(@"ok", [json objectForKey:@"status"], @"status!=ok");
-}
+[NLTHTTPStubServer globalSettings].port = 12345;
+server = [[NLTHTTPStubServer stubServer] retain];
+[server startServer];
 ```
 
-### File
+## stop server
 ```objective-c
-- (void)testFile {
-    NLTHTTPStubResponse *stub = [NLTStubResponse httpFileResponse];
-    stub.path = @"/index";
-    stub.filepath = [[NSBundle bundleForClass:[self class]] pathForResource:@"test"
-                                                                     ofType:@"txt"];
-    [server addStubResponse:stub];
-    
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
-    [self prepare];
-    [request setCompletionBlock:^{
-        [self notify:kGHUnitWaitStatusSuccess];
-    }];
-    [request startAsynchronous];
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
-}
+[server stopServer];
+[server release];
 ```
 
-### checking URI
+## create simple response
 ```objective-c
-- (void)testCheckQuery {
-    NLTHTTPStubResponse *stub = [NLTStubResponse httpFileResponse];
-    stub.path = @"/index";
-    stub.filepath = [[NSBundle bundleForClass:[self class]] pathForResource:@"test"
-                                                                     ofType:@"txt"];
-    [stub URICheckWithBlock:^BOOL(NSURL *URI) {
-        // check relative URL
-        return YES;
-    }];
-    [server addStubResponse:stub];
-    
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index?key=value"]];
-    [self prepare];
-    [request setCompletionBlock:^{
-        [self notify:kGHUnitWaitStatusSuccess];
-    }];
-    [request startAsynchronous];
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
-}
+[[[server stub] forPath:@"/api.json"] andJSONResponse:json];
 ```
 
-### status code 
+### support content-types
+* JSON
+* HTML
+* XML
+* Plain Text
+
+## set status code
 ```objective-c
-- (void)testNotFound {
-    NSData *notFound = [@"404 Not Found" dataUsingEncoding:NSUTF8StringEncoding];
-    NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
-    stub.path = @"/index";
-    stub.statusCode = 404;
-    stub.data = notFound;
-    [server addStubResponse:stub];
-    
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
-    [self prepare];
-    [request setCompletionBlock:^{
-        [self notify:kGHUnitWaitStatusSuccess];
-    }];
-    [request startAsynchronous];
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
-    
-    GHAssertEquals(404, [request responseStatusCode], @": (");
-}
+[[[server stub] forPath:@"/api.json"] andStatusCode:200];
 ```
 
-### timeout
+## simulate timeout
 ```objective-c
-- (void)testTimeout {
-    NSData *response = [@"hoge" dataUsingEncoding:NSUTF8StringEncoding];
-    NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
-    stub.path = @"/index";
-    stub.data = response;
-    stub.shouldTimeout = YES;
-    [server addStubResponse:stub];
-    
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
-    request.timeOutSeconds = 2.0f;
-    [request startSynchronous];
-    GHAssertEquals(request.error.code, ASIRequestTimedOutErrorType, @"oops...");
-}
+[[[server stub] forPath:@"/api.json"] andTimeout];
+```
+
+## check query
+```objective-c
+[[[server stub] forPath:@"api.json"] andCheckURI:^(NSURL *URI) {
+    // check URI
+}];
 ```
