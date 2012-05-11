@@ -1,1 +1,0 @@
-../../GHUnitIOS/Classes-iOS/Mock/GHMockCLLocationManager.h

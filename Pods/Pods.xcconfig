@@ -1,4 +1,0 @@
-OTHER_LDFLAGS = -ObjC -all_load -framework SystemConfiguration -framework MobileCoreServices -framework CFNetwork -framework CoreGraphics -lz.1 -framework CFNetwork -framework Security -framework CFNetwork -framework Security -lxml2 -framework CoreLocation -framework SystemConfiguration
-ALWAYS_SEARCH_USER_PATHS = YES
-HEADER_SEARCH_PATHS = "$(PODS_ROOT)/Headers" $(SDKROOT)/usr/include/libxml2 "$(PODS_ROOT)/Headers/AFNetworking" "$(PODS_ROOT)/Headers/ASIHTTPRequest" "$(PODS_ROOT)/Headers/CocoaAsyncSocket" "$(PODS_ROOT)/Headers/CocoaHTTPServer" "$(PODS_ROOT)/Headers/CocoaLumberjack" "$(PODS_ROOT)/Headers/GHUnitIOS" "$(PODS_ROOT)/Headers/OCMock" "$(PODS_ROOT)/Headers/Reachability"
-PODS_ROOT = $(SRCROOT)/Pods

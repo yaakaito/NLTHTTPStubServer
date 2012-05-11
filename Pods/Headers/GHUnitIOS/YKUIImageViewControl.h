@@ -1,1 +1,0 @@
-../../GHUnitIOS/Libraries/YelpKit/YKUIImageViewControl.h
