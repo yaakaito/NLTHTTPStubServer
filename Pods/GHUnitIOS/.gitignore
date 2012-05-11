@@ -1,0 +1,15 @@
+build
+*.mode1v3
+*.mode2v3
+*.pbxuser
+*.perspectivev3
+.DS_Store
+Documentation/output
+*.tm_build_errors
+*.swp
+*~.nib
+.gitattributes
+GHUnit.docset
+*.xcuserdatad
+Project-iOS/GHUnitIOS.xcodeproj/xcuserdata
+Project-iOS/GHUnitIOS.xcodeproj/project.xcworkspace/xcuserdata

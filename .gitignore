@@ -2,7 +2,5 @@ NLTHTTPStubServer.xcodeproj/project.xcworkspace
 NLTHTTPStubServer.xcodeproj/xcuserdata
 NLTHTTPStubServer/.DS_Store
 .DS_Store
-Pods
-Podfile.lock
-NLTHTTPStubServer.xcworkspace
 NLTHTTPStubServer.xcworkspace/xcuserdata
+Pods/Pods.xcodeproj/xcuserdata
