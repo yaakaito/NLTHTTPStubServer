@@ -70,8 +70,16 @@
 		{
 			postString = [[[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding] autorelease];
 		}
+        
+        NSMutableDictionary *postKeyValues = [NSMutableDictionary dictionary];
+        NSArray *keyValues = [postString componentsSeparatedByString:@"&"];
+        for (NSString *keyValue in keyValues) {
+            NSString *key = [[keyValue componentsSeparatedByString:@"="] objectAtIndex:0];
+            NSString *value = [[keyValue componentsSeparatedByString:@"="] objectAtIndex:1];
+            [postKeyValues setObject:value forKey:key];
+        }
 		
-        NSLog(@"postString %@", postString);
+        NSLog(@"postString %@", postKeyValues);
 	}
     
     if([response uriCheckBlock]){
