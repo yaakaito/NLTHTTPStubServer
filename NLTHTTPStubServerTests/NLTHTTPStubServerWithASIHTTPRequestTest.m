@@ -9,6 +9,7 @@
 
 #import "NLTHTTPStubServerWithASIHTTPRequestTest.h"
 #import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
 
 @implementation NLTHTTPStubServerWithASIHTTPRequestTest
 
@@ -290,5 +291,17 @@
     [requestCopyAndChange startSynchronous];
     GHAssertEqualStrings(@"hoge", [requestCopyAndChange responseString], @"copy and change :("); 
     GHAssertEqualStrings(@"text/plain; charset=utf-8", [[requestCopyAndChange responseHeaders] objectForKey:@"Content-Type"], @"Content-Typeが違う");
+}
+
+- (void)testPostRequest {
+    
+    [[[server stub] forPath:@"/post-index"] andPlainResponse:[@"hoge" dataUsingEncoding:NSUTF8StringEncoding]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/post-index"]];
+    [request setPostValue:@"post-value" forKey:@"post-key"];
+    [request startSynchronous];
+    
+    NSString *response = [request responseString];
+    GHAssertEqualStrings(@"hoge", response, @"レスポンス内容あってないよ");
+    
 }
 @end
