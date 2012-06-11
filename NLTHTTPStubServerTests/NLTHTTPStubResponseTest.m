@@ -37,14 +37,27 @@
     GHAssertTrue(called, @"YESにならないのは変");
 }
 
+- (void)testPostBodyCheckBlock {
+    NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
+    __block BOOL called = NO;
+    [response postBodyCheckWithBlock:^(NSDictionary *postBody) {
+        called = YES;
+    }];
+    [response postBodyCheckBlock](nil);
+    GHAssertTrue(called, @"YESにならないのは変");
+}
+
 - (void)testChaining {
     
     __block BOOL called = NO;
-    NLTHTTPStubResponse *stub = [[[[[NLTHTTPStubResponse httpDataResponse]
+    NLTHTTPStubResponse *stub = [[[[[[NLTHTTPStubResponse httpDataResponse]
                                         forPath:@"/index"]
                                        andResponse:[@"hoge" dataUsingEncoding:NSUTF8StringEncoding]]
                                       andStatusCode:200]
                                      andCheckURI:^(NSURL *URI) {
+                                         called = YES;
+                                     }]
+                                    andCheckPostBody:^(NSDictionary *postBody) {
                                          called = YES;
                                      }];
     
@@ -53,6 +66,9 @@
     GHAssertEqualStrings(@"hoge", [[[NSString alloc] initWithData:stub.data encoding:NSUTF8StringEncoding] autorelease], @"データが違う");
     GHAssertEquals(200, stub.statusCode, @"ステータスコードが違う");
     stub.uriCheckBlock(nil);
+    GHAssertTrue(called, @"チェックブロックがコールされない");
+    called = NO;
+    stub.postBodyCheckBlock(nil);
     GHAssertTrue(called, @"チェックブロックがコールされない");
     GHAssertFalse(stub.shouldTimeout, @"タイムアウトしない");
     

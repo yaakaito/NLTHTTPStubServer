@@ -23,8 +23,10 @@
 @property(nonatomic,retain) NSString  *filepath;
 @property                   BOOL       shouldTimeout;
 @property(nonatomic,copy)   __httpStubResponseURICheck uriCheckBlock;
+@property(nonatomic,copy)   __httpStubResponsePostBodyCheck postBodyCheckBlock;
 @property(nonatomic,retain) NSDictionary *httpHeaders;
 
 + (NLTHTTPStubResponse*)stubResponse;
 - (void)URICheckWithBlock:(__httpStubResponseURICheck)block;
+- (void)postBodyCheckWithBlock:(__httpStubResponsePostBodyCheck)block;
 @end

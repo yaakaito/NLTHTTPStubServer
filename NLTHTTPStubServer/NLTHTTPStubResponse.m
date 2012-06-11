@@ -24,6 +24,7 @@
 @synthesize filepath;
 @synthesize shouldTimeout;
 @synthesize uriCheckBlock;
+@synthesize postBodyCheckBlock;
 @synthesize httpHeaders;
 
 + (NLTHTTPStubResponse *)stubResponse {
@@ -54,6 +55,9 @@
     self.uriCheckBlock = block;
 }
 
+- (void)postBodyCheckWithBlock:(__httpStubResponsePostBodyCheck)block {
+    self.postBodyCheckBlock = block;
+}
 
 - (id)forPath:(NSString *)path_ {
     self.path = path_;
@@ -83,6 +87,11 @@
 
 - (id)andCheckURI:(__httpStubResponseURICheck)checkBlock_ {
     self.uriCheckBlock = checkBlock_;
+    return self;
+}
+
+- (id)andCheckPostBody:(__httpStubResponsePostBodyCheck)checkBlock_ {
+    self.postBodyCheckBlock = checkBlock_;
     return self;
 }
 

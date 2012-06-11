@@ -79,7 +79,9 @@
             [postKeyValues setObject:value forKey:key];
         }
 		
-        NSLog(@"postString %@", postKeyValues);
+        if([response postBodyCheckBlock]){
+            [response postBodyCheckBlock](postKeyValues);
+        }
 	}
     
     if([response uriCheckBlock]){

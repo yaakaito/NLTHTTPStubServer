@@ -62,4 +62,23 @@
     GHAssertTrue(called, @"checkblockが呼ばれていない");
 }
 
+- (void)testCallPostBodyCheckBlock {
+    id stubServer = [OCMockObject mockForClass:[NLTHTTPStubServer class]];
+    NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
+    response.path = @"/index";
+    __block BOOL called = NO;
+    [response postBodyCheckWithBlock:^(NSDictionary *postBody) {
+        GHAssertEqualStrings(@"1", [postBody objectForKey:@"hoge"], @"valueが不一致");
+        called = YES;
+    }];
+    
+    [[[stubServer stub] andReturn:response] responseForPath:[OCMArg any]];
+    
+    NLTHTTPStubConnection *connection = [[[NLTHTTPStubConnection alloc] init] autorelease];
+    connection.stubServer = stubServer;
+    
+    [connection processBodyData:[@"hoge=1" dataUsingEncoding:NSUTF8StringEncoding]];
+    [connection httpResponseForMethod:@"POST" URI:@"/index"];
+    GHAssertTrue(called, @"checkblockが呼ばれていない");
+}
 @end
