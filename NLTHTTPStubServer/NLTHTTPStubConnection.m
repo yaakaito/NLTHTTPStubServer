@@ -21,6 +21,25 @@
     return self;
 }
 
+- (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path {
+
+    [super supportsMethod:method atPath:path];
+    
+	if ([method isEqualToString:@"GET"]) {
+		return YES;
+    }
+	
+	if ([method isEqualToString:@"HEAD"]) {
+		return YES;
+    }
+
+    if ([method isEqualToString:@"POST"]) {
+        return YES;
+    }
+    
+	return NO;
+}
+
 - (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
     
     NSURL *url = [NSURL URLWithString:path];
