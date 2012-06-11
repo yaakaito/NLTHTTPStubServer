@@ -8,6 +8,7 @@
 
 #import "NLTHTTPStubConnection.h"
 #import "NLTHTTPStubServer.h"
+#import "HTTPMessage.h"
 
 @implementation NLTHTTPStubConnection
 @synthesize stubServer;
@@ -23,24 +24,29 @@
 
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path {
 
-    [super supportsMethod:method atPath:path];
-    
-	if ([method isEqualToString:@"GET"]) {
-		return YES;
-    }
-	
-	if ([method isEqualToString:@"HEAD"]) {
-		return YES;
-    }
-
-    if ([method isEqualToString:@"POST"]) {
+    if([method isEqualToString:@"POST"]){
         return YES;
     }
     
-	return NO;
+	return [super supportsMethod:method atPath:path];
+}
+
+- (BOOL)expectsRequestBodyFromMethod:(NSString *)method atPath:(NSString *)path
+{
+	if([method isEqualToString:@"POST"]){
+		return YES;
+    }
+	
+	return [super expectsRequestBodyFromMethod:method atPath:path];
+}
+
+- (void)processBodyData:(NSData *)postDataChunk
+{
+	[request appendData:postDataChunk];
 }
 
 - (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
+
     
     NSURL *url = [NSURL URLWithString:path];
     NSString *relativePath = [url relativePath];
@@ -54,6 +60,19 @@
         [NSException raise:NSInternalInconsistencyException
                     format:@"unstubed request invoked (path=%@)", path];
     }
+    
+    if ([method isEqualToString:@"POST"])
+	{
+        NSString *postString = nil;
+		
+		NSData *postData = [request body];
+		if (postData)
+		{
+			postString = [[[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding] autorelease];
+		}
+		
+        NSLog(@"postString %@", postString);
+	}
     
     if([response uriCheckBlock]){
         [response uriCheckBlock](url);

@@ -297,7 +297,8 @@
     
     [[[server stub] forPath:@"/post-index"] andPlainResponse:[@"hoge" dataUsingEncoding:NSUTF8StringEncoding]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/post-index"]];
-    [request setPostValue:@"post-value" forKey:@"post-key"];
+    [request addPostValue:@"post-value1" forKey:@"post-key1"];
+    [request addPostValue:@"post-value2" forKey:@"post-key2"];
     [request startSynchronous];
     
     NSString *response = [request responseString];
