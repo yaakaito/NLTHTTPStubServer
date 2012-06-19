@@ -20,6 +20,7 @@ typedef void(^__httpStubResponsePostBodyCheck)(NSDictionary *postBody);
 
 @protocol NLTResponseChaining
 - (id)forPath:(NSString*)path;
+- (id)forPath:(NSString *)path HTTPMethod:(NSString *)method;
 - (id)andResponse:(NSData*)data;
 - (id)andResponseResource:(NSString*)filename ofType:(NSString*)type;
 - (id)andStatusCode:(NSInteger)statusCode;
