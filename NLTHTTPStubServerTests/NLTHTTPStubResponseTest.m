@@ -19,12 +19,14 @@
     response.data = [NSData data];
     response.shouldTimeout = YES;
     response.httpHeaders = [NSDictionary dictionaryWithObject:@"text/html; charset=UTF-8" forKey:@"Content-Type"];
+    response.httpMethod = @"POST";
     GHAssertEqualStrings(@"/index", response.path, @"pathちがう");
     GHAssertEquals(200, response.statusCode, @"ステータスコード違う");
     GHAssertNotNil(response.data, @"レスポンス用のデータが存在しない");
     GHAssertNotNil(response.httpHeaders, @"httpHeadersが存在しない");
     GHAssertNotNil([response.httpHeaders objectForKey:@"Content-Type"], @"Content-Typeが存在しない");
     GHAssertEqualObjects(@"text/html; charset=UTF-8", [response.httpHeaders objectForKey:@"Content-Type"], @"Content-Type違う");
+    GHAssertEqualStrings(@"POST", response.httpMethod, @"httpMethodちがう");
 }
 
 - (void)testURICheckBlock {
@@ -63,6 +65,7 @@
     
     
     GHAssertEqualStrings(@"/index", stub.path, @"パス指定が間違ってる");
+    GHAssertEqualStrings(@"GET", stub.httpMethod, @"httpMethodが間違ってる");
     GHAssertEqualStrings(@"hoge", [[[NSString alloc] initWithData:stub.data encoding:NSUTF8StringEncoding] autorelease], @"データが違う");
     GHAssertEquals(200, stub.statusCode, @"ステータスコードが違う");
     stub.uriCheckBlock(nil);

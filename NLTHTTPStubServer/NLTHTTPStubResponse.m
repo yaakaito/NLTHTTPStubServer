@@ -26,6 +26,7 @@
 @synthesize uriCheckBlock;
 @synthesize postBodyCheckBlock;
 @synthesize httpHeaders;
+@synthesize httpMethod;
 
 + (NLTHTTPStubResponse *)stubResponse {
     return [[[NLTHTTPStubResponse alloc] init] autorelease];
@@ -37,6 +38,7 @@
         self.statusCode = 200;
         self.shouldTimeout = NO;
         self.httpHeaders = [NSDictionary dictionary];
+        self.httpMethod = @"GET";
     }
     return self;
 }
@@ -47,6 +49,7 @@
     self.data = nil;
     self.filepath = nil;
     self.httpHeaders = nil;
+    self.httpMethod = nil;
     
     [super dealloc];
 }
@@ -60,7 +63,12 @@
 }
 
 - (id)forPath:(NSString *)path_ {
+    return [self forPath:path_ HTTPMethod:@"GET"];
+}
+
+- (id)forPath:(NSString *)path_ HTTPMethod:(NSString *)method_ {
     self.path = path_;
+    self.httpMethod = method_;
     return self;
 }
 

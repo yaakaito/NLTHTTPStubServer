@@ -36,7 +36,7 @@
 - (void)startServer;
 - (void)stopServer;
 
-- (NLTHTTPStubResponse<HTTPResponse>*)responseForPath:(NSString*)path;
+- (NLTHTTPStubResponse<HTTPResponse>*)responseForPath:(NSString*)path HTTPMethod:(NSString*)method;
 @end
 
 @interface NLTHCurrentStubGetter : NLTHTTPStubServer

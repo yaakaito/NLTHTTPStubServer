@@ -72,10 +72,10 @@
     return [NLTHGlobalSettings globalSettings];
 }
 
-- (NLTHTTPStubResponse<HTTPResponse>*)responseForPath:(NSString*)path {
+- (NLTHTTPStubResponse<HTTPResponse>*)responseForPath:(NSString*)path HTTPMethod:(NSString *)method {
     for (NSUInteger i = 0; i < [self.stubResponses count]; i++) {
         NLTHTTPStubResponse *response = [self.stubResponses objectAtIndex:i];
-        if([response.path isEqualToString:path]){
+        if([response.path isEqualToString:path] && [[response httpMethod] isEqualToString:method]){
             [self.stubResponses removeObject:response];
             return (NLTHTTPStubResponse<HTTPResponse>*)response;
         }
