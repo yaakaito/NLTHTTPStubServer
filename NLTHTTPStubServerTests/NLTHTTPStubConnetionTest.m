@@ -67,7 +67,7 @@
     NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
     response.path = @"/index";
     __block BOOL called = NO;
-    [response postBodyCheckWithBlock:^(NSDictionary *postBody) {
+    [response postKeyValueBodyCheckWithBlock:^(NSDictionary *postBody) {
         GHAssertEqualStrings(@"1", [postBody objectForKey:@"hoge"], @"valueが不一致");
         called = YES;
     }];

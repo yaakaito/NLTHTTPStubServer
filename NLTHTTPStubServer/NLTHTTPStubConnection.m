@@ -66,21 +66,23 @@
         NSString *postString = nil;
 		
 		NSData *postData = [request body];
-		if (postData)
-		{
-			postString = [[[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding] autorelease];
-		}
-        
-        NSMutableDictionary *postKeyValues = [NSMutableDictionary dictionary];
-        NSArray *keyValues = [postString componentsSeparatedByString:@"&"];
-        for (NSString *keyValue in keyValues) {
-            NSString *key = [[keyValue componentsSeparatedByString:@"="] objectAtIndex:0];
-            NSString *value = [[keyValue componentsSeparatedByString:@"="] objectAtIndex:1];
-            [postKeyValues setObject:value forKey:key];
+        if([response postBodyCheckBlock]) {
+            [response postBodyCheckBlock](postData);
         }
-		
-        if([response postBodyCheckBlock]){
-            [response postBodyCheckBlock](postKeyValues);
+		if([response postKeyValueBodyCheckBlock]){
+            if (postData)
+            {
+                postString = [[[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding] autorelease];
+            }
+            
+            NSMutableDictionary *postKeyValues = [NSMutableDictionary dictionary];
+            NSArray *keyValues = [postString componentsSeparatedByString:@"&"];
+            for (NSString *keyValue in keyValues) {
+                NSString *key = [[keyValue componentsSeparatedByString:@"="] objectAtIndex:0];
+                NSString *value = [[keyValue componentsSeparatedByString:@"="] objectAtIndex:1];
+                [postKeyValues setObject:value forKey:key];
+            }
+            [response postKeyValueBodyCheckBlock](postKeyValues);		
         }
 	}
     

@@ -24,10 +24,12 @@
 @property                   BOOL       shouldTimeout;
 @property(nonatomic,copy)   __httpStubResponseURICheck uriCheckBlock;
 @property(nonatomic,copy)   __httpStubResponsePostBodyCheck postBodyCheckBlock;
+@property(nonatomic,copy)   __httpStubResponsePostKeyValueBodyCheck postKeyValueBodyCheckBlock;
 @property(nonatomic,retain) NSDictionary *httpHeaders;
 @property(nonatomic,retain) NSString *httpMethod;
 
 + (NLTHTTPStubResponse*)stubResponse;
 - (void)URICheckWithBlock:(__httpStubResponseURICheck)block;
 - (void)postBodyCheckWithBlock:(__httpStubResponsePostBodyCheck)block;
+- (void)postKeyValueBodyCheckWithBlock:(__httpStubResponsePostKeyValueBodyCheck)block;
 @end

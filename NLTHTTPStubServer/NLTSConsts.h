@@ -16,7 +16,8 @@
 @end
 
 typedef void(^__httpStubResponseURICheck)(NSURL *URI);
-typedef void(^__httpStubResponsePostBodyCheck)(NSDictionary *postBody);
+typedef void(^__httpStubResponsePostBodyCheck)(NSData* postBody);
+typedef void(^__httpStubResponsePostKeyValueBodyCheck)(NSDictionary *postBody);
 
 @protocol NLTResponseChaining
 - (id)forPath:(NSString*)path;
@@ -26,6 +27,7 @@ typedef void(^__httpStubResponsePostBodyCheck)(NSDictionary *postBody);
 - (id)andStatusCode:(NSInteger)statusCode;
 - (id)andCheckURI:(__httpStubResponseURICheck)checkBlock;
 - (id)andCheckPostBody:(__httpStubResponsePostBodyCheck)checkBlock;
+- (id)andCheckKeyValuePostBody:(__httpStubResponsePostKeyValueBodyCheck)checkBlock;
 - (id)andTimeout;
 @end
 

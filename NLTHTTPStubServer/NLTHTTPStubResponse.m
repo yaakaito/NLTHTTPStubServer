@@ -25,6 +25,7 @@
 @synthesize shouldTimeout;
 @synthesize uriCheckBlock;
 @synthesize postBodyCheckBlock;
+@synthesize postKeyValueBodyCheckBlock;
 @synthesize httpHeaders;
 @synthesize httpMethod;
 
@@ -60,6 +61,10 @@
 
 - (void)postBodyCheckWithBlock:(__httpStubResponsePostBodyCheck)block {
     self.postBodyCheckBlock = block;
+}
+
+- (void)postKeyValueBodyCheckWithBlock:(__httpStubResponsePostKeyValueBodyCheck)block {
+    self.postKeyValueBodyCheckBlock = block;
 }
 
 - (id)forPath:(NSString *)path_ {
@@ -100,6 +105,11 @@
 
 - (id)andCheckPostBody:(__httpStubResponsePostBodyCheck)checkBlock_ {
     self.postBodyCheckBlock = checkBlock_;
+    return self;
+}
+
+- (id)andCheckKeyValuePostBody:(__httpStubResponsePostKeyValueBodyCheck)checkBlock_ {
+    self.postKeyValueBodyCheckBlock = checkBlock_;
     return self;
 }
 
