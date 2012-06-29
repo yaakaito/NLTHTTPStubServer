@@ -28,6 +28,7 @@
 @synthesize postKeyValueBodyCheckBlock;
 @synthesize httpHeaders;
 @synthesize httpMethod;
+@synthesize processingTimeSeconds;
 
 + (NLTHTTPStubResponse *)stubResponse {
     return [[[NLTHTTPStubResponse alloc] init] autorelease];
@@ -40,6 +41,7 @@
         self.shouldTimeout = NO;
         self.httpHeaders = [NSDictionary dictionary];
         self.httpMethod = @"GET";
+        self.processingTimeSeconds = 0.0f;
     }
     return self;
 }
@@ -115,6 +117,11 @@
 
 - (id)andTimeout {
     self.shouldTimeout = YES;
+    return self;
+}
+
+- (id)andProcessingTime:(NSTimeInterval)processingTimeSeconds_ {
+    self.processingTimeSeconds = processingTimeSeconds_;
     return self;
 }
 
