@@ -27,6 +27,7 @@
 @property(nonatomic,copy)   __httpStubResponsePostKeyValueBodyCheck postKeyValueBodyCheckBlock;
 @property(nonatomic,retain) NSDictionary *httpHeaders;
 @property(nonatomic,retain) NSString *httpMethod;
+@property(nonatomic)        NSTimeInterval processingTimeSeconds;
 
 + (NLTHTTPStubResponse*)stubResponse;
 - (void)URICheckWithBlock:(__httpStubResponseURICheck)block;
