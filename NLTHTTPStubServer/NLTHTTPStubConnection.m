@@ -61,6 +61,10 @@
                     format:@"unstubed request invoked (path=%@)", path];
     }
     
+    if (response.processingTimeSeconds > 0.0f) {
+        [NSThread sleepForTimeInterval:response.processingTimeSeconds];
+    }
+    
     if ([method isEqualToString:@"POST"])
 	{
         NSString *postString = nil;

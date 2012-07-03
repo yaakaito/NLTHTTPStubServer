@@ -264,6 +264,21 @@
     GHAssertEquals(request.error.code, ASIRequestTimedOutErrorType, @"oops...");
 }
 
+- (void)testProcessingTime {
+    NSData *response = [@"hoge" dataUsingEncoding:NSUTF8StringEncoding];
+    NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
+    stub.path = @"/index";
+    stub.data = response;
+    stub.processingTimeSeconds = 2.0;
+    [server addStubResponse:stub];
+    
+    
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
+    NSDate *t1 = [NSDate date];
+    [request startSynchronous];
+    GHAssertTrue(-[t1 timeIntervalSinceNow] > 1.9,  @"ちゃんと待ってない");
+}
+
 - (void)testCopyStub {
     
     NSData *response = [@"hoge" dataUsingEncoding:NSUTF8StringEncoding];

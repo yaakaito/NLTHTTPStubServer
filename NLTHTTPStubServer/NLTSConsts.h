@@ -29,6 +29,7 @@ typedef void(^__httpStubResponsePostKeyValueBodyCheck)(NSDictionary *postBody);
 - (id)andCheckPostBody:(__httpStubResponsePostBodyCheck)checkBlock;
 - (id)andCheckKeyValuePostBody:(__httpStubResponsePostKeyValueBodyCheck)checkBlock;
 - (id)andTimeout;
+- (id)andProcessingTime:(NSTimeInterval)processingTimeSeconds;
 @end
 
 @protocol NLTResponseHeaderPresetChaining
