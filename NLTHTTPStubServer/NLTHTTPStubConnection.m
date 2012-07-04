@@ -28,6 +28,14 @@
         return YES;
     }
     
+    if([method isEqualToString:@"PUT"]){
+        return YES;
+    }
+    
+    if([method isEqualToString:@"DELETE"]){
+        return YES;
+    }
+    
 	return [super supportsMethod:method atPath:path];
 }
 
@@ -37,6 +45,10 @@
 		return YES;
     }
 	
+    if([method isEqualToString:@"PUT"]){
+        return YES;
+    }
+    
 	return [super expectsRequestBodyFromMethod:method atPath:path];
 }
 
@@ -65,7 +77,7 @@
         [NSThread sleepForTimeInterval:response.processingTimeSeconds];
     }
     
-    if ([method isEqualToString:@"POST"])
+    if ([method isEqualToString:@"POST"] || [method isEqualToString:@"PUT"])
 	{
         NSString *postString = nil;
 		
