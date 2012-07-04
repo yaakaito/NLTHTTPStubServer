@@ -352,4 +352,65 @@
     GHAssertEqualStrings(@"hoge", response, @"レスポンス内容あってないよ");
     
 }
+
+- (void)testPutRequest {
+    
+    [[[server stub] forPath:@"/put-index" HTTPMethod:@"PUT"] andPlainResponse:[@"hoge" dataUsingEncoding:NSUTF8StringEncoding]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/put-index"]];
+    [request addPostValue:@"post-value1" forKey:@"post-key1"];
+    [request addPostValue:@"post-value2" forKey:@"post-key2"];
+    [request setRequestMethod:@"PUT"];
+    [request startSynchronous];
+    
+    NSString *response = [request responseString];
+    GHAssertEqualStrings(@"hoge", response, @"レスポンス内容あってないよ");
+    
+}
+
+- (void)testPutRequestAndCheckKeyValue {
+    
+    [[[[server stub] forPath:@"/put-index" HTTPMethod:@"PUT"] andPlainResponse:[@"hoge" dataUsingEncoding:NSUTF8StringEncoding]] andCheckKeyValuePostBody:^(NSDictionary *postBody){
+        GHAssertEqualStrings(@"post-value1", [postBody objectForKey:@"post-key1"],@"ポストされたデータが違う");
+        GHAssertEqualStrings(@"post-value2", [postBody objectForKey:@"post-key2"],@"ポストされたデータが違う");
+    }];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/put-index"]];
+    [request addPostValue:@"post-value1" forKey:@"post-key1"];
+    [request addPostValue:@"post-value2" forKey:@"post-key2"];
+    [request setRequestMethod:@"PUT"];
+    [request startSynchronous];
+    
+    NSString *response = [request responseString];
+    GHAssertEqualStrings(@"hoge", response, @"レスポンス内容あってないよ");
+    
+}
+
+- (void)testPutRequestAndCheckBody {
+    
+    [[[[server stub] forPath:@"/put-index" HTTPMethod:@"PUT"] andPlainResponse:[@"hoge" dataUsingEncoding:NSUTF8StringEncoding]] andCheckPostBody:^(NSData *postBody) {
+        NSString *dataStr = [[NSString alloc] initWithData:postBody encoding:NSUTF8StringEncoding];
+        GHAssertEqualStrings(@"hogehogehoge", dataStr, @"ポストされたデータが違う");
+    }];
+    NSData *data = [@"hogehogehoge" dataUsingEncoding:NSUTF8StringEncoding];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/put-index"]];
+    [request setPostBody:[[data mutableCopy] autorelease]];
+    [request setRequestMethod:@"PUT"];
+    [request startSynchronous];
+    
+    NSString *response = [request responseString];
+    GHAssertEqualStrings(@"hoge", response, @"レスポンス内容あってないよ");
+    
+}
+
+- (void)testDeleteRequest {
+    
+    [[[server stub] forPath:@"/delete-index" HTTPMethod:@"DELETE"] andPlainResponse:[@"hoge" dataUsingEncoding:NSUTF8StringEncoding]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/delete-index"]];
+    [request setRequestMethod:@"DELETE"];
+    [request startSynchronous];
+    
+    NSString *response = [request responseString];
+    GHAssertEqualStrings(@"hoge", response, @"レスポンス内容あってないよ");
+}
+
+
 @end
