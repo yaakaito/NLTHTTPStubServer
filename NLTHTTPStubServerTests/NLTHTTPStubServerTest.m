@@ -64,4 +64,26 @@
 
     
 }
+
+- (void)testResponseForPathForContainsMultibyteText {
+    NSString *encodedString = [(NSString *)CFURLCreateStringByAddingPercentEscapes(
+                                                                                   NULL,
+                                                                                   (CFStringRef)@"マルチバイト文字列",
+                                                                                   NULL,
+                                                                                   (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                   kCFStringEncodingUTF8 ) autorelease];
+    NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
+    [server addStubResponse:[NLTStubResponse httpDataResponse]];
+    NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
+    response.statusCode = 200;
+    response.path = [NSString stringWithFormat:@"/index/%@", encodedString];
+    response.data = [NSData data];
+    [server addStubResponse:response];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"/index/%@", encodedString]];
+    NLTHTTPStubResponse *testedResponse = [server responseForPath:[url relativePath] HTTPMethod:@"GET"];
+    
+    GHAssertNotNil(testedResponse, @"responseはあるはず");
+    NSString *encodedPath = [NSString stringWithFormat:@"/index/%@", encodedString];
+    GHAssertEqualStrings(encodedPath, testedResponse.path, @"/index/マルチバイト文字列のstubを取得できるはずだが");
+}
 @end
