@@ -115,12 +115,26 @@
     NLTHTTPStubResponse *xml = [[NLTHTTPStubResponse httpDataResponse] andXMLHeader];
     GHAssertEqualStrings(@"text/xml; charset=utf-8", [xml.httpHeaders objectForKey:@"Content-Type"], @"xml");
     
+    NLTHTTPStubResponse *binary = [[NLTHTTPStubResponse httpDataResponse] andBinaryHeader];
+    GHAssertEqualStrings(@"application/octet-stream", [binary.httpHeaders objectForKey:@"Content-Type"], @"binary");
+    
+    NLTHTTPStubResponse *contentType = [[NLTHTTPStubResponse httpDataResponse] andContentTypeHeader:@"image/png"];
+    GHAssertEqualStrings(@"image/png", [contentType.httpHeaders objectForKey:@"Content-Type"], @"content-type");
+    
     NLTHTTPStubResponse *aliveHeader = [NLTHTTPStubResponse httpDataResponse];
     aliveHeader.httpHeaders = [NSDictionary dictionaryWithObject:@"hoge" forKey:@"fuga"];
     [aliveHeader andJSONHeader];
     GHAssertEquals(2U, [[aliveHeader.httpHeaders allKeys] count], @"ヘッダー2つ設定されているはず");
     GHAssertEqualStrings(@"application/json; charset=utf-8", [aliveHeader.httpHeaders objectForKey:@"Content-Type"], @"json");
     GHAssertEqualStrings(@"hoge", [aliveHeader.httpHeaders objectForKey:@"fuga"], @"fuga = hoge");
+    
+    NLTHTTPStubResponse *overwriteHeader = [NLTHTTPStubResponse httpDataResponse];
+    overwriteHeader.httpHeaders = [NSDictionary dictionaryWithObject:@"hoge" forKey:@"fuga"];
+    [overwriteHeader andJSONHeader];
+    [overwriteHeader andPlainHeader];
+    GHAssertEquals(2U, [[overwriteHeader.httpHeaders allKeys] count], @"ヘッダー2つ設定されているはず");
+    GHAssertEqualStrings(@"text/plain; charset=utf-8", [overwriteHeader.httpHeaders objectForKey:@"Content-Type"], @"plain textがjsonを上書きしているはず");
+    GHAssertEqualStrings(@"hoge", [overwriteHeader.httpHeaders objectForKey:@"fuga"], @"fuga = hoge");
 }
 
 - (void)testAndContentTypeWithData {
@@ -142,6 +156,14 @@
     NLTHTTPStubResponse *xml = [[NLTHTTPStubResponse httpDataResponse] andXMLResponse:data];
     GHAssertEqualStrings(@"text/xml; charset=utf-8", [xml.httpHeaders objectForKey:@"Content-Type"], @"xml");
     GHAssertEqualStrings(@"hello", [[[NSString alloc] initWithData:xml.data encoding:NSUTF8StringEncoding] autorelease], @"data = hello");
+    
+    NLTHTTPStubResponse *binary = [[NLTHTTPStubResponse httpDataResponse] andBinaryResponse:data];
+    GHAssertEqualStrings(@"application/octet-stream", [binary.httpHeaders objectForKey:@"Content-Type"], @"binary");
+    GHAssertEqualStrings(@"hello", [[[NSString alloc] initWithData:binary.data encoding:NSUTF8StringEncoding] autorelease], @"data = hello");
+    
+    NLTHTTPStubResponse *contentType = [[NLTHTTPStubResponse httpDataResponse] andContentType:@"image/png" response:data];
+    GHAssertEqualStrings(@"image/png", [contentType.httpHeaders objectForKey:@"Content-Type"], @"content-type");
+    GHAssertEqualStrings(@"hello", [[[NSString alloc] initWithData:contentType.data encoding:NSUTF8StringEncoding] autorelease], @"data = hello");
 }
 
 - (void)testAndContentTypeAndCharset {
@@ -193,20 +215,27 @@
     
     NLTHTTPStubResponse *json = [[NLTHTTPStubResponse httpDataResponse] andJSONResponseResource:@"test" ofType:@"txt"];
     GHAssertEqualStrings(@"application/json; charset=utf-8", [json.httpHeaders objectForKey:@"Content-Type"], @"json");
-    GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:json.data encoding:NSUTF8StringEncoding] autorelease], @"data = hello");
+    GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:json.data encoding:NSUTF8StringEncoding] autorelease], @"data = hogehogehogehoge");
     
     NLTHTTPStubResponse *plain = [[NLTHTTPStubResponse httpDataResponse] andPlainResponseResource:@"test" ofType:@"txt"];
     GHAssertEqualStrings(@"text/plain; charset=utf-8", [plain.httpHeaders objectForKey:@"Content-Type"], @"plain text");
-    GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:plain.data encoding:NSUTF8StringEncoding] autorelease], @"data = hello");
+    GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:plain.data encoding:NSUTF8StringEncoding] autorelease], @"data = hogehogehogehoge");
     
     NLTHTTPStubResponse *html = [[NLTHTTPStubResponse httpDataResponse] andHTMLResponseResource:@"test" ofType:@"txt"];
     GHAssertEqualStrings(@"text/html; charset=utf-8", [html.httpHeaders objectForKey:@"Content-Type"], @"html");
-    GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:html.data encoding:NSUTF8StringEncoding] autorelease], @"data = hello");
+    GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:html.data encoding:NSUTF8StringEncoding] autorelease], @"data = hogehogehogehoge");
     
     NLTHTTPStubResponse *xml = [[NLTHTTPStubResponse httpDataResponse] andXMLResponseResource:@"test" ofType:@"txt"];
     GHAssertEqualStrings(@"text/xml; charset=utf-8", [xml.httpHeaders objectForKey:@"Content-Type"], @"xml");
-    GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:xml.data encoding:NSUTF8StringEncoding] autorelease], @"data = hello");
-
+    GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:xml.data encoding:NSUTF8StringEncoding] autorelease], @"data = hogehogehogehoge");
+    
+    NLTHTTPStubResponse *binary = [[NLTHTTPStubResponse httpDataResponse] andBinaryResponseResource:@"test" ofType:@"txt"];
+    GHAssertEqualStrings(@"application/octet-stream", [binary.httpHeaders objectForKey:@"Content-Type"], @"binary");
+    GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:binary.data encoding:NSUTF8StringEncoding] autorelease], @"data = hogehogehogehoge");
+    
+    NLTHTTPStubResponse *contentType = [[NLTHTTPStubResponse httpDataResponse] andContentType:@"image/png" resource:@"test" ofType:@"txt"];
+    GHAssertEqualStrings(@"image/png", [contentType.httpHeaders objectForKey:@"Content-Type"], @"binary");
+    GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:contentType.data encoding:NSUTF8StringEncoding] autorelease], @"data = hogehogehogehoge");
 }
 
 - (void)testAndContentTypeWithResourceAndCharset {
