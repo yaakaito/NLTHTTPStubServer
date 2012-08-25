@@ -61,8 +61,42 @@
     
     [server stub];
     GHAssertEquals(2U, [server.stubResponses count], @"スタブが2つ作られるはず");
+}
 
+- (void)testResponseForPath {
+    NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
+    GHAssertNil([server responseForPath:@"/index" HTTPMethod:nil], @"まだスタブされてない");
+    GHAssertNil([server responseForPath:@"/index" HTTPMethod:@""], @"まだスタブされてない");
+    GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"GET"], @"まだスタブされてない");
+    GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"POST"], @"まだスタブされてない");
+    GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"PUT"], @"まだスタブされてない");
+    GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"DELETE"], @"まだスタブされてない");
     
+    NLTHTTPStubResponse *get_index = [[NLTHTTPStubResponse httpDataResponse] forPath:@"/index" HTTPMethod:@"GET"];
+    [server addStubResponse:get_index];
+    GHAssertNil([server responseForPath:@"/index" HTTPMethod:nil], @"HTTPMethodがnilだと問答無用で返せない");
+    GHAssertNil([server responseForPath:@"/index" HTTPMethod:@""], @"HTTPMethodが空文字列だと問答無用で返せない");
+    GHAssertEqualObjects(get_index, [server responseForPath:@"/index" HTTPMethod:@"GET"], @"スタブされているので返せるはず");
+    GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"GET"], @"スタブは一度返すと消費されてしまうので次はもう返ってこない");
+    [server addStubResponse:get_index];
+    GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"POST"], @"メソッドが違うので返せない");
+    GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"PUT"], @"メソッドが違うので返せない");
+    GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"DELETE"], @"メソッドが違うので返せない");
+    [server clear];
+    GHAssertTrue([server isStubEmpty], @"次のテストの前に状態を空にしておく");
+    
+    NLTHTTPStubResponse *post_index = [[NLTHTTPStubResponse httpDataResponse] forPath:@"/index" HTTPMethod:@"POST"];
+    [server addStubResponse:post_index];
+    GHAssertNil([server responseForPath:@"/index" HTTPMethod:nil], @"HTTPMethodがnilだと問答無用で返せない");
+    GHAssertNil([server responseForPath:@"/index" HTTPMethod:@""], @"HTTPMethodが空文字列だと問答無用で返せない");
+    GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"GET"], @"メソッドが違うので返せない");
+    GHAssertEqualObjects(post_index, [server responseForPath:@"/index" HTTPMethod:@"POST"], @"スタブされているので返せるはず");
+    GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"POST"], @"スタブは一度返すと消費されてしまうので次はもう返ってこない");
+    [server addStubResponse:post_index];
+    GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"PUT"], @"メソッドが違うので返せない");
+    GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"DELETE"], @"メソッドが違うので返せない");
+    [server clear];
+    GHAssertTrue([server isStubEmpty], @"次のテストの前に状態を空にしておく");
 }
 
 - (void)testResponseForPathForContainsMultibyteText {
