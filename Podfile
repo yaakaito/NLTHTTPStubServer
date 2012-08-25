@@ -1,6 +1,6 @@
 platform :ios
-dependency 'GHUnitIOS'
-dependency 'OCMock'
-dependency 'CocoaHTTPServer'
-dependency 'ASIHTTPRequest'
-dependency 'AFNetworking'
+pod 'GHUnitIOS'
+pod 'OCMock'
+pod 'CocoaHTTPServer'
+pod 'ASIHTTPRequest'
+pod 'AFNetworking'
