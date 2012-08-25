@@ -37,6 +37,8 @@ typedef void(^__httpStubResponsePostKeyValueBodyCheck)(NSDictionary *postBody);
 - (id)andPlainHeader;
 - (id)andHTMLHeader;
 - (id)andXMLHeader;
+- (id)andBinaryHeader;
+- (id)andContentTypeHeader:(NSString*)contentType;
 @end
 
 @protocol NLTResponseDataPresetChaining
@@ -44,10 +46,14 @@ typedef void(^__httpStubResponsePostKeyValueBodyCheck)(NSDictionary *postBody);
 - (id)andPlainResponse:(NSData*)data;
 - (id)andHTMLResponse:(NSData*)data;
 - (id)andXMLResponse:(NSData*)data;
+- (id)andBinaryResponse:(NSData*)data;
+- (id)andContentType:(NSString*)contentType response:(NSData*)data;
 - (id)andJSONResponseResource:(NSString*)filename ofType:(NSString*)type;
 - (id)andPlainResponseResource:(NSString*)filename ofType:(NSString*)type;
 - (id)andHTMLResponseResource:(NSString*)filename ofType:(NSString*)type;
 - (id)andXMLResponseResource:(NSString*)filename ofType:(NSString*)type;
+- (id)andBinaryResponseResource:(NSString*)filename ofType:(NSString*)type;
+- (id)andContentType:(NSString*)contentType resource:(NSString*)filename ofType:(NSString*)type;
 @end
 
 @protocol NLTResponseHeaderCharsetChaining

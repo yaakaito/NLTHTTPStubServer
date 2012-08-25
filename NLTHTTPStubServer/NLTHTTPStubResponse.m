@@ -9,12 +9,13 @@
 
 #import "NLTHTTPStubResponse.h"
 
-#define kNLTHTTPStubResponseHeaderKeyContentType        (@"Content-Type")
-#define kNLTHTTPStubResponseHeaderValueContentTypeJSON  (@"application/json; charset=%@")
-#define kNLTHTTPStubResponseHeaderValueContentTypePlain (@"text/plain; charset=%@")
-#define kNLTHTTPStubResponseHeaderValueContentTypeHTML  (@"text/html; charset=%@")
-#define kNLTHTTPStubResponseHeaderValueContentTypeXML   (@"text/xml; charset=%@")
-#define kNLTHTTPStubResponseHeaderValueCharsetUTF8      (@"utf-8")
+#define kNLTHTTPStubResponseHeaderKeyContentType         (@"Content-Type")
+#define kNLTHTTPStubResponseHeaderValueContentTypeJSON   (@"application/json; charset=%@")
+#define kNLTHTTPStubResponseHeaderValueContentTypePlain  (@"text/plain; charset=%@")
+#define kNLTHTTPStubResponseHeaderValueContentTypeHTML   (@"text/html; charset=%@")
+#define kNLTHTTPStubResponseHeaderValueContentTypeXML    (@"text/xml; charset=%@")
+#define kNLTHTTPStubResponseHeaderValueContentTypeBinary (@"application/octet-stream")
+#define kNLTHTTPStubResponseHeaderValueCharsetUTF8       (@"utf-8")
 
 @implementation NLTHTTPStubResponse
 
@@ -173,6 +174,16 @@
     return self;
 }
 
+- (id)andBinaryHeader {
+    [self addContentType:kNLTHTTPStubResponseHeaderValueContentTypeBinary];
+    return self;
+}
+
+- (id)andContentTypeHeader:(NSString *)contentType {
+    [self addContentType:contentType];
+    return self;
+}
+
 - (id)andJSONResponse:(NSData *)data_ {
     return [[self andResponse:data_] andJSONHeader];
 }
@@ -189,6 +200,14 @@
     return [[self andResponse:data_] andXMLHeader];
 }
 
+- (id)andBinaryResponse:(NSData *)data_ {
+    return [[self andResponse:data_] andBinaryHeader];
+}
+
+- (id)andContentType:(NSString *)contentType response:(NSData *)data_ {
+    return [[self andResponse:data_] andContentTypeHeader:contentType];
+}
+
 - (id)andJSONResponseResource:(NSString *)filename ofType:(NSString *)type {
     return [[self andResponseResource:filename ofType:type] andJSONHeader];
 }
@@ -203,6 +222,14 @@
 
 - (id)andXMLResponseResource:(NSString *)filename ofType:(NSString *)type {
     return [[self andResponseResource:filename ofType:type] andXMLHeader];
+}
+
+- (id)andBinaryResponseResource:(NSString *)filename ofType:(NSString *)type {
+    return [[self andResponseResource:filename ofType:type] andBinaryHeader];
+}
+
+- (id)andContentType:(NSString *)contentType resource:(NSString *)filename ofType:(NSString *)type {
+    return [[self andResponseResource:filename ofType:type] andContentTypeHeader:contentType];
 }
 
 - (id)andJSONHeader:(NSString *)charset {
