@@ -99,6 +99,14 @@
     GHAssertTrue([server isStubEmpty], @"次のテストの前に状態を空にしておく");
 }
 
+- (void)testResponseForPathWithQueryString {
+    NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
+    NLTHTTPStubResponse *get_index_query1 = [[NLTHTTPStubResponse httpDataResponse] forPath:@"/index?foo=bar" HTTPMethod:@"GET"];
+    [server addStubResponse:get_index_query1];
+    GHAssertNil([server responseForPath:@"/index?foo=bar" HTTPMethod:@"GET"], @"クエリストリングを指定するとなぜか返ってこない（バグor嫌な仕様）");
+    GHAssertEqualObjects(get_index_query1, [server responseForPath:@"/index" HTTPMethod:@"GET"], @"現状はクエリストリングがついてない呼び出しをすると返ってくる");
+}
+
 - (void)testResponseForPathForContainsMultibyteText {
     NSString *encodedString = [(NSString *)CFURLCreateStringByAddingPercentEscapes(
                                                                                    NULL,
