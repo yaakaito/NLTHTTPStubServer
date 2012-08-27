@@ -77,6 +77,8 @@ server = [[NLTHTTPStubServer stubServer] retain];
 * HTML
 * XML
 * Plain Text
+* Binary
+  * application/octet-stream
 
 ## set status code
 ```objective-c
