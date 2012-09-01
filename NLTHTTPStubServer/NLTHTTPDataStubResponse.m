@@ -34,6 +34,8 @@
     return [[[NLTHTTPDataStubResponse alloc] initWithDataStubResponse:response] autorelease];
 }
 
+
+
 - (id)copyWithZone:(NSZone *)zone {
     id copiedObject = [[[self class] allocWithZone:zone] initWithDataStubResponse:self];
     

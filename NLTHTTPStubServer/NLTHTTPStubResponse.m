@@ -70,12 +70,17 @@
     self.postKeyValueBodyCheckBlock = block;
 }
 
-- (id)forPath:(NSString *)path_ {
+- (id)forPath:(id)path_ {
     return [self forPath:path_ HTTPMethod:@"GET"];
 }
 
-- (id)forPath:(NSString *)path_ HTTPMethod:(NSString *)method_ {
-    self.path = path_;
+- (id)forPath:(id)path_ HTTPMethod:(NSString *)method_ {
+    if([path_ isKindOfClass:[NLTPath class]]) {
+        self.path = path_;
+    }
+    else {
+        self.path = [NLTPath pathWithPathString:path_];
+    }
     self.httpMethod = method_;
     return self;
 }

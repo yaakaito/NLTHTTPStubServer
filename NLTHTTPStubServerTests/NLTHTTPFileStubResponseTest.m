@@ -25,7 +25,7 @@
 - (void)testHttpResponseProtocol {
     NLTHTTPFileStubResponse *response = [NLTHTTPFileStubResponse fileStubResponse];
     response.statusCode = 200;
-    response.path = @"/index";
+    response.path = [NLTPath pathWithPathString:@"/index"];
     response.httpHeaders = [NSDictionary dictionaryWithObject:@"text/html; charset=UTF-8" forKey:@"Content-Type"];
     response.filepath = [[NSBundle bundleForClass:[self class]] pathForResource:@"test"
                                                                          ofType:@"txt"];
@@ -52,7 +52,7 @@
     NSData *data = [@"hogehogehogehoge" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPFileStubResponse *response = [NLTStubResponse httpFileResponse];
     response.statusCode = 200;
-    response.path = @"/index";
+    response.path = [NLTPath pathWithPathString:@"/index"];
     response.data = data;
     response.shouldTimeout = YES;
     response.httpHeaders = [NSDictionary dictionaryWithObject:@"text/html; charset=UTF-8" forKey:@"Content-Type"];
@@ -62,7 +62,7 @@
     NLTHTTPFileStubResponse *copy = [response copy];
     
     GHAssertNotEqualObjects(response, copy, @"同じ物だったら困る");
-    GHAssertEqualStrings(response.path, copy.path, @"pathはおなじ");
+    GHAssertEqualStrings(response.path.pathString, copy.path.pathString, @"pathStringはおなじ");
     
     GHAssertEqualStrings(response.filepath, copy.filepath, @"ファイルパス不一致");
     GHAssertEquals(response.statusCode, copy.statusCode, @"ステータスコードが同じじゃない");

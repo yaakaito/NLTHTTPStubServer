@@ -15,13 +15,13 @@
 - (void)testResponseWith {
     NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
     response.statusCode = 200;
-    response.path = @"/index";
+    response.path = [NLTPath pathWithPathString:@"/index"];
     response.data = [NSData data];
     response.shouldTimeout = YES;
     response.httpHeaders = [NSDictionary dictionaryWithObject:@"text/html; charset=UTF-8" forKey:@"Content-Type"];
     response.httpMethod = @"POST";
     response.processingTimeSeconds = 1.0f;
-    GHAssertEqualStrings(@"/index", response.path, @"pathちがう");
+    GHAssertEqualStrings(@"/index", response.path.pathString, @"pathStringちがう");
     GHAssertEquals(200, response.statusCode, @"ステータスコード違う");
     GHAssertNotNil(response.data, @"レスポンス用のデータが存在しない");
     GHAssertNotNil(response.httpHeaders, @"httpHeadersが存在しない");
@@ -79,7 +79,7 @@
                                    }];
     
     
-    GHAssertEqualStrings(@"/index", stub.path, @"パス指定が間違ってる");
+    GHAssertEqualStrings(@"/index", stub.path.pathString, @"パス指定が間違ってる");
     GHAssertEqualStrings(@"GET", stub.httpMethod, @"httpMethodが間違ってる");
     GHAssertEqualStrings(@"hoge", [[[NSString alloc] initWithData:stub.data encoding:NSUTF8StringEncoding] autorelease], @"データが違う");
     GHAssertEquals(200, stub.statusCode, @"ステータスコードが違う");
