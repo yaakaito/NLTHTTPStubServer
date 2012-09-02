@@ -78,8 +78,11 @@
     if([path_ isKindOfClass:[NLTPath class]]) {
         self.path = path_;
     }
-    else {
+    else if([path_ isKindOfClass:[NSString class]]){
         self.path = [NLTPath pathWithPathString:path_];
+    }
+    else {
+        [NSException raise:NSInvalidArgumentException format:@"`path` is NSString of NLTPath (path = %@)", [path_ class]];
     }
     self.httpMethod = method_;
     return self;

@@ -257,4 +257,9 @@
     GHAssertEqualStrings(@"hogehogehogehoge", [[[NSString alloc] initWithData:xml.data encoding:NSUTF8StringEncoding] autorelease], @"data = hello");
     
 }
+
+- (void)testInvalidPath {
+    NLTHTTPStubResponse *stub = [NLTHTTPStubResponse httpDataResponse];
+    GHAssertThrows([stub forPath:[NSArray array]], @"NLTPathかNSStringしか受け付けない");
+}
 @end
