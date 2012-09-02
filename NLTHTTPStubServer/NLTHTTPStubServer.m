@@ -8,6 +8,7 @@
 
 
 #import "NLTHTTPStubServer.h"
+#import "NLTPath.h"
 
 @implementation NLTHTTPStubServer {
     HTTPServer *_httpServer;
@@ -73,10 +74,17 @@
 }
 
 - (NLTHTTPStubResponse<HTTPResponse>*)responseForPath:(NSString*)path HTTPMethod:(NSString *)method {
+    NSString *encodedPathString = [(NSString *)CFURLCreateStringByAddingPercentEscapes(
+                                                                                       NULL,
+                                                                                       (CFStringRef)path,
+                                                                                       NULL,
+                                                                                       NULL,
+                                                                                       kCFStringEncodingUTF8 ) autorelease];
+
+    NSURL *url = [NSURL URLWithString:encodedPathString];
     for (NSUInteger i = 0; i < [self.stubResponses count]; i++) {
         NLTHTTPStubResponse *response = [self.stubResponses objectAtIndex:i];
-        NSURL *url = [NSURL URLWithString:response.path];
-        if([[url relativePath] isEqualToString:path] && [[response httpMethod] isEqualToString:method]){
+        if([response.path isMatchURL:url] && [[response httpMethod] isEqualToString:method]){
             [self.stubResponses removeObject:response];
             return (NLTHTTPStubResponse<HTTPResponse>*)response;
         }

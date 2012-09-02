@@ -19,7 +19,7 @@
     id stubServer = [OCMockObject mockForClass:[NLTHTTPStubServer class]];
     NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
     response.statusCode = 200;
-    response.path = @"/index";
+    response.path = [NLTPath pathWithPathString:@"/index"];
     response.data = [NSData data];
     [[[stubServer stub] andReturn:response] responseForPath:[OCMArg any] HTTPMethod:[OCMArg any]];
     
@@ -46,7 +46,7 @@
 - (void)testCallURICheckBlock {
     id stubServer = [OCMockObject mockForClass:[NLTHTTPStubServer class]];
     NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
-    response.path = @"/index";
+    response.path = [NLTPath pathWithPathString:@"/index"];
     __block BOOL called = NO;
     [response URICheckWithBlock:^(NSURL *URI) {
         GHAssertEqualStrings(@"hoge=1", [URI query], @"queryが不一致");
@@ -65,7 +65,7 @@
 - (void)testCallPostBodyCheckBlock {
     id stubServer = [OCMockObject mockForClass:[NLTHTTPStubServer class]];
     NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
-    response.path = @"/index";
+    response.path = [NLTPath pathWithPathString:@"/index"];
     __block BOOL called = NO;
     [response postKeyValueBodyCheckWithBlock:^(NSDictionary *postBody) {
         GHAssertEqualStrings(@"1", [postBody objectForKey:@"hoge"], @"valueが不一致");

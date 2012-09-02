@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #import "NLTSConsts.h"
 #import "NLTStubResponse.h"
+#import "NLTPath.h"
 
 @interface NLTHTTPStubResponse : NLTStubResponse <NLTResponseChaining
                                                 , NLTResponseHeaderPresetChaining
@@ -17,7 +18,7 @@
                                                 , NLTResponseHeaderCharsetChaining
                                                 , NLTResponseDataCharsetChaining>
 
-@property(nonatomic,retain) NSString  *path;
+@property(nonatomic,retain) NLTPath   *path;
 @property                   NSInteger  statusCode;
 @property(nonatomic,retain) NSData    *data;
 @property(nonatomic,retain) NSString  *filepath;
