@@ -26,10 +26,6 @@
 @end
 
 @implementation NLTPath
-{
-    NSString *_pathString;
-    NSDictionary *_parameters;
-}
 
 @synthesize pathString = _pathString;
 @synthesize parameters = _parameters;
