@@ -44,7 +44,7 @@
     
     NSMutableDictionary *newParameters = [[parameters mutableCopy] autorelease];
     [newParameters setValuesForKeysWithDictionary:path.parameters];
-    return [[self alloc] initWithPathString:path.pathString andParameters:newParameters];
+    return [[[self alloc] initWithPathString:path.pathString andParameters:newParameters] autorelease];
 }
 
 + (id)anyValue {
