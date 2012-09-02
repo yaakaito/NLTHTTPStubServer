@@ -20,7 +20,7 @@
 + (NLTPath*)pathWithPathString:(NSString*)pathString andParameters:(NSDictionary*)parameters;
 
 // for v2s feature "global stub".
-+ (NLTPath*)pathWithPath:(NLTPath*)path andPatameters:(NSDictionary*)parameters;
++ (NLTPath*)pathWithPath:(NLTPath*)path andParameters:(NSDictionary*)parameters;
 
 - (BOOL)isMatchURL:(NSURL*)url;
 //- (BOOL)isMatchRelativePathString:(NSString*)pathString;

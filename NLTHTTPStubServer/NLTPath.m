@@ -40,7 +40,7 @@
     return [[[self alloc] initWithPathString:pathString andParameters:parameters] autorelease];
 }
 
-+ (NLTPath *)pathWithPath:(NLTPath *)path andPatameters:(NSDictionary *)parameters {
++ (NLTPath *)pathWithPath:(NLTPath *)path andParameters:(NSDictionary *)parameters {
     
     NSMutableDictionary *newParameters = [[parameters mutableCopy] autorelease];
     [newParameters setValuesForKeysWithDictionary:path.parameters];

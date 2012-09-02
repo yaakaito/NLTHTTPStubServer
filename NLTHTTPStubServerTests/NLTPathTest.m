@@ -89,7 +89,7 @@
 
 - (void)testPathWithPath {
     NLTPath *first = [NLTPath pathWithPathString:@"/index" andParameters:[NSDictionary dictionaryWithObject:@"value1" forKey:@"key1"]];
-    NLTPath *second = [NLTPath pathWithPath:first andPatameters:[NSDictionary dictionaryWithObject:@"value2" forKey:@"key2"]];
+    NLTPath *second = [NLTPath pathWithPath:first andParameters:[NSDictionary dictionaryWithObject:@"value2" forKey:@"key2"]];
     GHAssertNotNil(second, @"合成されたパスが作られる");
     GHAssertEqualStrings(first.pathString, second.pathString, @"pathStringが受け継がれる");
     GHAssertEquals(2U, [[second.parameters allKeys] count], @"合成されてパラメーターは2つ");
