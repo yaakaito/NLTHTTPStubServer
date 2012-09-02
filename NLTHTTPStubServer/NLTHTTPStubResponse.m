@@ -82,7 +82,7 @@
         self.path = [NLTPath pathWithPathString:path_];
     }
     else {
-        [NSException raise:NSInvalidArgumentException format:@"`path` is NSString of NLTPath (path = %@)", [path_ class]];
+        [NSException raise:NSInvalidArgumentException format:@"`path` is NSString or NLTPath (path = %@)", [path_ class]];
     }
     self.httpMethod = method_;
     return self;
