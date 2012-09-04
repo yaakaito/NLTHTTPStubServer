@@ -15,7 +15,7 @@
     NSData *data = [@"hogehogehogehoge" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPDataStubResponse *response = [NLTStubResponse httpDataResponse];
     response.statusCode = 200;
-    response.path = @"/index";
+    response.path = [NLTPath pathWithPathString:@"/index"];
     response.data = data;
     response.httpHeaders = [NSDictionary dictionaryWithObject:@"text/html; charset=UTF-8" forKey:@"Content-Type"];
     
@@ -42,7 +42,7 @@
     NSData *data = [@"hogehogehogehoge" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPDataStubResponse *response = [NLTStubResponse httpDataResponse];
     response.statusCode = 200;
-    response.path = @"/index";
+    response.path = [NLTPath pathWithPathString:@"/index"];
     response.data = data;
     response.shouldTimeout = YES;
     response.httpHeaders = [NSDictionary dictionaryWithObject:@"text/html; charset=UTF-8" forKey:@"Content-Type"];
@@ -52,7 +52,7 @@
     NLTHTTPDataStubResponse *copy = [response copy];
 
     GHAssertNotEqualObjects(response, copy, @"同じ物だったら困る");
-    GHAssertEqualStrings(response.path, copy.path, @"pathはおなじ");
+    GHAssertEqualStrings(response.path.pathString, copy.path.pathString, @"pathStringはおなじ");
     
     GHAssertEqualStrings([[[NSString alloc] initWithData:response.data encoding:NSUTF8StringEncoding] autorelease],
                          [[[NSString alloc] initWithData:copy.data encoding:NSUTF8StringEncoding] autorelease], @"レスポンス内容");

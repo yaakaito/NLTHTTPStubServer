@@ -10,6 +10,7 @@
 #import "NLTHTTPStubServerWithASIHTTPRequestTest.h"
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
+#import "NLTPath.h"
 
 @implementation NLTHTTPStubServerWithASIHTTPRequestTest
 
@@ -40,7 +41,7 @@
     
     NSData *helloWorld = [@"Hello World" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
-    stub.path = @"/index";
+    stub.path = [NLTPath pathWithPathString:@"/index"];
     stub.data = helloWorld;
     stub.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
     [server addStubResponse:stub];
@@ -60,7 +61,7 @@
 
 - (void)testFile {
     NLTHTTPStubResponse *stub = [NLTStubResponse httpFileResponse];
-    stub.path = @"/index";
+    stub.path = [NLTPath pathWithPathString:@"/index"];
     stub.filepath = [[NSBundle bundleForClass:[self class]] pathForResource:@"test"
                                                                      ofType:@"txt"];
     stub.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
@@ -81,7 +82,8 @@
 
 - (void)testCheckQuery {
     NLTHTTPStubResponse *stub = [NLTStubResponse httpFileResponse];
-    stub.path = @"/index";
+    // with wildcard
+    stub.path = [NLTPath pathWithPathString:@"/index" andParameters:[NSDictionary dictionaryWithObject:[NLTPath anyValue] forKey:@"key"]];
     stub.filepath = [[NSBundle bundleForClass:[self class]] pathForResource:@"test"
                                                                      ofType:@"txt"];
     stub.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
@@ -106,7 +108,7 @@
 - (void)testJSON {
     NSData *jsonData = [@"{\"status\":\"ok\"}" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
-    stub.path = @"/index";
+    stub.path = [NLTPath pathWithPathString:@"/index"];
     stub.data = jsonData;
     stub.httpHeaders = [NSDictionary dictionaryWithObject:@"application/json; charset=utf-8" forKey:@"Content-Type"];
     [server addStubResponse:stub];
@@ -129,7 +131,7 @@
 - (void)testNotFound {
     NSData *notFound = [@"404 Not Found" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
-    stub.path = @"/index";
+    stub.path = [NLTPath pathWithPathString:@"/index"];
     stub.statusCode = 404;
     stub.data = notFound;
     [server addStubResponse:stub];
@@ -150,14 +152,15 @@
 - (void)testTwice {
     NSData *response1 = [@"1" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub1 = [NLTStubResponse httpDataResponse];
-    stub1.path = @"/one";
+    stub1.path = [NLTPath pathWithPathString:@"/one"];
     stub1.data = response1;
     stub1.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
     [server addStubResponse:stub1];
     
     NSData *response2 = [@"2" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub2 = [NLTStubResponse httpDataResponse];
-    stub2.path = @"/two";
+    stub2.path = [NLTPath pathWithPathString:@"/two"];
+
     stub2.data = response2;
     stub2.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
     [server addStubResponse:stub2];
@@ -190,7 +193,8 @@
     
     NSData *helloWorld = [@"Hello World" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
-    stub.path = @"/h/e/l/l/o/w/o/r/l/d";
+    stub.path = [NLTPath pathWithPathString:@"/h/e/l/l/o/w/o/r/l/d"];
+
     stub.data = helloWorld;
     stub.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
     [server addStubResponse:stub];
@@ -211,14 +215,14 @@
 - (void)testDuplicated {
     NSData *response1 = [@"1" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub1 = [NLTStubResponse httpDataResponse];
-    stub1.path = @"/index";
+    stub1.path = [NLTPath pathWithPathString:@"/index"];
     stub1.data = response1;
     stub1.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
     [server addStubResponse:stub1];
     
     NSData *response2 = [@"2" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub2 = [NLTStubResponse httpDataResponse];
-    stub2.path = @"/index";
+    stub2.path = [NLTPath pathWithPathString:@"/index"];
     stub2.data = response2;
     stub2.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
     [server addStubResponse:stub2];
@@ -252,7 +256,7 @@
     
     NSData *response = [@"hoge" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
-    stub.path = @"/index";
+    stub.path = [NLTPath pathWithPathString:@"/index"];
     stub.data = response;
     stub.shouldTimeout = YES;
     [server addStubResponse:stub];
@@ -267,7 +271,7 @@
 - (void)testProcessingTime {
     NSData *response = [@"hoge" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
-    stub.path = @"/index";
+    stub.path = [NLTPath pathWithPathString:@"/index"];
     stub.data = response;
     stub.processingTimeSeconds = 2.0;
     [server addStubResponse:stub];
@@ -283,13 +287,13 @@
     
     NSData *response = [@"hoge" dataUsingEncoding:NSUTF8StringEncoding];
     NLTHTTPStubResponse *stub = [NLTStubResponse httpDataResponse];
-    stub.path = @"/index";
+    stub.path = [NLTPath pathWithPathString:@"/index"];
     stub.data = response;
     stub.httpHeaders = [NSDictionary dictionaryWithObject:@"text/plain; charset=utf-8" forKey:@"Content-Type"];
     [server addStubResponse:stub];
     [server addStubResponse:[stub copy]];
     NLTHTTPStubResponse *stubCopy = [stub copy];
-    stubCopy.path = @"/copy";
+    stubCopy.path = [NLTPath pathWithPathString:@"/copy"];
     [server addStubResponse:stubCopy];
     
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index"]];
@@ -307,6 +311,17 @@
     GHAssertEqualStrings(@"hoge", [requestCopyAndChange responseString], @"copy and change :("); 
     GHAssertEqualStrings(@"text/plain; charset=utf-8", [[requestCopyAndChange responseHeaders] objectForKey:@"Content-Type"], @"Content-Typeが違う");
 }
+
+- (void)testQueryRequest {
+    
+    [[[server stub] forPath:[NLTPath pathWithPathString:@"/index" andParameters:[NSDictionary dictionaryWithObject:@"query" forKey:@"nice"]] HTTPMethod:@"GET"] andPlainResponse:[@"hoge" dataUsingEncoding:NSUTF8StringEncoding]];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/index?nice=query"]];
+    [request startSynchronous];
+
+    NSString *response = [request responseString];
+    GHAssertEqualStrings(@"hoge", response, @"レスポンス内容あってないよ");
+}
+
 
 - (void)testPostRequest {
     

@@ -103,8 +103,7 @@
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
     NLTHTTPStubResponse *get_index_query1 = [[NLTHTTPStubResponse httpDataResponse] forPath:@"/index?foo=bar" HTTPMethod:@"GET"];
     [server addStubResponse:get_index_query1];
-    GHAssertNil([server responseForPath:@"/index?foo=bar" HTTPMethod:@"GET"], @"クエリストリングを指定するとなぜか返ってこない（バグor嫌な仕様）");
-    GHAssertEqualObjects(get_index_query1, [server responseForPath:@"/index" HTTPMethod:@"GET"], @"現状はクエリストリングがついてない呼び出しをすると返ってくる");
+    GHAssertNil([server responseForPath:@"/index?foo=bar" HTTPMethod:@"GET"], @"クエリストリングを指定しても返ってくる");
 }
 
 - (void)testResponseForPathForContainsMultibyteText {
@@ -118,7 +117,7 @@
     [server addStubResponse:[NLTStubResponse httpDataResponse]];
     NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
     response.statusCode = 200;
-    response.path = [NSString stringWithFormat:@"/index/%@", encodedString];
+    response.path = [NLTPath pathWithPathString:[NSString stringWithFormat:@"/index/%@", encodedString]];
     response.data = [NSData data];
     [server addStubResponse:response];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"/index/%@", encodedString]];
@@ -126,6 +125,6 @@
     
     GHAssertNotNil(testedResponse, @"responseはあるはず");
     NSString *encodedPath = [NSString stringWithFormat:@"/index/%@", encodedString];
-    GHAssertEqualStrings(encodedPath, testedResponse.path, @"/index/マルチバイト文字列のstubを取得できるはずだが");
+    GHAssertEqualStrings(encodedPath, testedResponse.path.pathString, @"/index/マルチバイト文字列のstubを取得できるはずだが");
 }
 @end

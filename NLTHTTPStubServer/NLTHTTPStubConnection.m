@@ -61,13 +61,12 @@
 
     
     NSURL *url = [NSURL URLWithString:path];
-    NSString *relativePath = [url relativePath];
     
     if(!self.stubServer){
         self.stubServer = [NLTHTTPStubServer currentStubServer];
     }
     
-    NLTHTTPStubResponse<HTTPResponse> *response = [self.stubServer responseForPath:relativePath HTTPMethod:method];
+    NLTHTTPStubResponse<HTTPResponse> *response = [self.stubServer responseForPath:path HTTPMethod:method];
     if(!response){
         [NSException raise:NSInternalInconsistencyException
                     format:@"unstubed request invoked (path=%@)", path];
