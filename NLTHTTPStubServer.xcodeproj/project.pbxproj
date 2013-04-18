@@ -48,6 +48,7 @@
 		BA89A7D320144FD89486A7F6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8710FB411A4046B60DBB67 /* libPods.a */; };
 		F2B7CAD417207CAA00099197 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B7CAD317207CAA00099197 /* QuartzCore.framework */; };
 		F2B7CAD617209EE000099197 /* WithNSURLConnectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B7CAD517209EE000099197 /* WithNSURLConnectionTest.m */; };
+		F2B7CAD81720A4AF00099197 /* fake.json in Resources */ = {isa = PBXBuildFile; fileRef = F2B7CAD71720A4AF00099197 /* fake.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +96,7 @@
 		B9BD480915F27D2400DBAA04 /* NLTPathTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTPathTest.m; sourceTree = "<group>"; };
 		F2B7CAD317207CAA00099197 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F2B7CAD517209EE000099197 /* WithNSURLConnectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WithNSURLConnectionTest.m; sourceTree = "<group>"; };
+		F2B7CAD71720A4AF00099197 /* fake.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fake.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				210F55F714FC164D00E90D38 /* InfoPlist.strings */,
 				210F55FA14FC164D00E90D38 /* main.m */,
 				210F55FC14FC164D00E90D38 /* NLTHTTPStubServerTests-Prefix.pch */,
+				F2B7CAD71720A4AF00099197 /* fake.json */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				210F55F914FC164D00E90D38 /* InfoPlist.strings in Resources */,
+				F2B7CAD81720A4AF00099197 /* fake.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

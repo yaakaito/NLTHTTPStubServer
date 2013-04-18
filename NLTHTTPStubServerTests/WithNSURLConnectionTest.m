@@ -54,24 +54,47 @@
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
+- (id)toJSON:(NSData *)data {
+    return [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+}
+
+- (void)sendAsynchronusWithCompletionHandler:(void (^)(NSURLResponse*, NSData*, NSError*))handler {
+    
+    [self prepare];
+    __weak id that = self;
+    
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[[NSOperationQueue alloc] init]
+                           completionHandler:^(NSURLResponse *res, NSData *data, NSError *err) {
+                               handler(res, data, err);
+                               [that notify:kGHUnitWaitStatusSuccess];
+                           }];
+    
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10];
+}
+
 - (void)testMostSimply {
     
     NSData *data = [@"HelloWorld" dataUsingEncoding:NSUTF8StringEncoding];
     [[[server stub] forPath:@"/stub"] andPlainResponse:data];
     
-    [self prepare];
+    __weak id that = self;
+    [self sendAsynchronusWithCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        GHAssertNil(error, @"");
+        GHAssertEqualStrings([that toString:data], @"HelloWorld", @"");
+    }];
+}
+
+- (void)testWithFile {
+    
+    [[[server stub] forPath:@"/stub"] andJSONResponseResource:@"fake" ofType:@"json"];
     
     __weak id that = self;
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[[NSOperationQueue alloc] init]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               GHAssertNil(error, @"");
-                               GHAssertEqualStrings([that toString:data], @"HelloWorld", @"");
-                               [that notify:kGHUnitWaitStatusSuccess];
-                           }];
-    
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10];
-    
+    [self sendAsynchronusWithCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        GHAssertNil(error, @"");
+        NSDictionary *JSON = [that toJSON:data];
+        GHAssertEqualStrings(JSON[@"fake"], @"dummy", @"");
+    }];
 }
 
 @end
