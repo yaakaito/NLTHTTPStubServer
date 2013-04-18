@@ -18,7 +18,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     for (NSString *component in queryConmponents) {
         NSArray *keyValueComponents = [component componentsSeparatedByString:@"="];
-        [parameters setObject:[keyValueComponents objectAtIndex:1] forKey:[keyValueComponents objectAtIndex:0]];
+        parameters[keyValueComponents[0]] = keyValueComponents[1];
     }
     
     return parameters;
@@ -89,8 +89,8 @@
             return NO;
         }
         
-        if(![[self.parameters objectForKey:key] isKindOfClass:[NLTWildcard class]] &&
-           ![[self.parameters objectForKey:key] isEqualToString:[otherParameters objectForKey:key]]) {
+        if(![(self.parameters)[key] isKindOfClass:[NLTWildcard class]] &&
+           ![(self.parameters)[key] isEqualToString:otherParameters[key]]) {
             return NO;
         }
         

@@ -79,7 +79,7 @@
 
     NSURL *url = [NSURL URLWithString:encodedPathString];
     for (NSUInteger i = 0; i < [self.stubResponses count]; i++) {
-        NLTHTTPStubResponse *response = [self.stubResponses objectAtIndex:i];
+        NLTHTTPStubResponse *response = (self.stubResponses)[i];
         if([response.path isMatchURL:url] && [[response httpMethod] isEqualToString:method]){
             [self.stubResponses removeObject:response];
             return (NLTHTTPStubResponse<HTTPResponse>*)response;

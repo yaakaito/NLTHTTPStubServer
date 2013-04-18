@@ -68,7 +68,7 @@
     response.path = [NLTPath pathWithPathString:@"/index"];
     __block BOOL called = NO;
     [response postKeyValueBodyCheckWithBlock:^(NSDictionary *postBody) {
-        GHAssertEqualStrings(@"1", [postBody objectForKey:@"hoge"], @"valueが不一致");
+        GHAssertEqualStrings(@"1", postBody[@"hoge"], @"valueが不一致");
         called = YES;
     }];
     

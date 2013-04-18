@@ -54,7 +54,7 @@
 
 - (void)testPathWithPathStringAndParameters
 {
-    NSDictionary *params = [NSDictionary dictionaryWithObject:@"value" forKey:@"key"];
+    NSDictionary *params = @{@"key": @"value"};
     NLTPath *path = [NLTPath pathWithPathString:@"/index" andParameters:params];
     GHAssertNotNil(path, @"パスが作られる");
     GHAssertEqualStrings(@"/index", path.pathString, @"pathStringがあっている");
@@ -68,7 +68,7 @@
 
 - (void)testPathWithPathStringAndManyParameters
 {
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"value1", @"key1", @"value2", @"key2", nil];
+    NSDictionary *params = @{@"key1": @"value1", @"key2": @"value2"};
     NLTPath *path = [NLTPath pathWithPathString:@"/index" andParameters:params];
     
     GHAssertFalse([self matched:path urlPathString:@"/index"], @"クエリーが存在しないのでマッチしない");
@@ -80,7 +80,7 @@
 }
 
 - (void)testWildcard{
-    NSDictionary *params = [NSDictionary dictionaryWithObject:[NLTPath anyValue] forKey:@"key1"];
+    NSDictionary *params = @{@"key1": [NLTPath anyValue]};
     NLTPath *path = [NLTPath pathWithPathString:@"/index" andParameters:params];
     
     GHAssertTrue([self matched:path urlPathString:@"/index?key1=hoge"], @"ワイルドカードなのでマッチする");
@@ -88,13 +88,13 @@
 }
 
 - (void)testPathWithPath {
-    NLTPath *first = [NLTPath pathWithPathString:@"/index" andParameters:[NSDictionary dictionaryWithObject:@"value1" forKey:@"key1"]];
-    NLTPath *second = [NLTPath pathWithPath:first andParameters:[NSDictionary dictionaryWithObject:@"value2" forKey:@"key2"]];
+    NLTPath *first = [NLTPath pathWithPathString:@"/index" andParameters:@{@"key1": @"value1"}];
+    NLTPath *second = [NLTPath pathWithPath:first andParameters:@{@"key2": @"value2"}];
     GHAssertNotNil(second, @"合成されたパスが作られる");
     GHAssertEqualStrings(first.pathString, second.pathString, @"pathStringが受け継がれる");
     GHAssertEquals(2U, [[second.parameters allKeys] count], @"合成されてパラメーターは2つ");
-    GHAssertEquals(@"value1", [second.parameters objectForKey:@"key1"], @"key1 = value1");
-    GHAssertEquals(@"value2", [second.parameters objectForKey:@"key2"], @"key2 = value2");
+    GHAssertEquals(@"value1", (second.parameters)[@"key1"], @"key1 = value1");
+    GHAssertEquals(@"value2", (second.parameters)[@"key2"], @"key2 = value2");
 }
 
 @end

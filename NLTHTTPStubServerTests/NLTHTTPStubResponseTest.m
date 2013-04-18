@@ -18,15 +18,15 @@
     response.path = [NLTPath pathWithPathString:@"/index"];
     response.data = [NSData data];
     response.shouldTimeout = YES;
-    response.httpHeaders = [NSDictionary dictionaryWithObject:@"text/html; charset=UTF-8" forKey:@"Content-Type"];
+    response.httpHeaders = @{@"Content-Type": @"text/html; charset=UTF-8"};
     response.httpMethod = @"POST";
     response.processingTimeSeconds = 1.0f;
     GHAssertEqualStrings(@"/index", response.path.pathString, @"pathStringちがう");
     GHAssertEquals(200, response.statusCode, @"ステータスコード違う");
     GHAssertNotNil(response.data, @"レスポンス用のデータが存在しない");
     GHAssertNotNil(response.httpHeaders, @"httpHeadersが存在しない");
-    GHAssertNotNil([response.httpHeaders objectForKey:@"Content-Type"], @"Content-Typeが存在しない");
-    GHAssertEqualObjects(@"text/html; charset=UTF-8", [response.httpHeaders objectForKey:@"Content-Type"], @"Content-Type違う");
+    GHAssertNotNil((response.httpHeaders)[@"Content-Type"], @"Content-Typeが存在しない");
+    GHAssertEqualObjects(@"text/html; charset=UTF-8", (response.httpHeaders)[@"Content-Type"], @"Content-Type違う");
     GHAssertEqualStrings(@"POST", response.httpMethod, @"httpMethodちがう");
     GHAssertTrue(1.0f == response.processingTimeSeconds, @"処理時間が違う");
 }
@@ -104,37 +104,37 @@
 - (void)testAndContentType {
     
     NLTHTTPStubResponse *json = [[NLTHTTPStubResponse httpDataResponse] andJSONHeader];
-    GHAssertEqualStrings(@"application/json; charset=utf-8", [json.httpHeaders objectForKey:@"Content-Type"], @"json");
+    GHAssertEqualStrings(@"application/json; charset=utf-8", (json.httpHeaders)[@"Content-Type"], @"json");
     
     NLTHTTPStubResponse *plain = [[NLTHTTPStubResponse httpDataResponse] andPlainHeader];
-    GHAssertEqualStrings(@"text/plain; charset=utf-8", [plain.httpHeaders objectForKey:@"Content-Type"], @"plain text");
+    GHAssertEqualStrings(@"text/plain; charset=utf-8", (plain.httpHeaders)[@"Content-Type"], @"plain text");
     
     NLTHTTPStubResponse *html = [[NLTHTTPStubResponse httpDataResponse] andHTMLHeader];
-    GHAssertEqualStrings(@"text/html; charset=utf-8", [html.httpHeaders objectForKey:@"Content-Type"], @"html");
+    GHAssertEqualStrings(@"text/html; charset=utf-8", (html.httpHeaders)[@"Content-Type"], @"html");
     
     NLTHTTPStubResponse *xml = [[NLTHTTPStubResponse httpDataResponse] andXMLHeader];
-    GHAssertEqualStrings(@"text/xml; charset=utf-8", [xml.httpHeaders objectForKey:@"Content-Type"], @"xml");
+    GHAssertEqualStrings(@"text/xml; charset=utf-8", (xml.httpHeaders)[@"Content-Type"], @"xml");
     
     NLTHTTPStubResponse *binary = [[NLTHTTPStubResponse httpDataResponse] andBinaryHeader];
-    GHAssertEqualStrings(@"application/octet-stream", [binary.httpHeaders objectForKey:@"Content-Type"], @"binary");
+    GHAssertEqualStrings(@"application/octet-stream", (binary.httpHeaders)[@"Content-Type"], @"binary");
     
     NLTHTTPStubResponse *contentType = [[NLTHTTPStubResponse httpDataResponse] andContentTypeHeader:@"image/png"];
-    GHAssertEqualStrings(@"image/png", [contentType.httpHeaders objectForKey:@"Content-Type"], @"content-type");
+    GHAssertEqualStrings(@"image/png", (contentType.httpHeaders)[@"Content-Type"], @"content-type");
     
     NLTHTTPStubResponse *aliveHeader = [NLTHTTPStubResponse httpDataResponse];
-    aliveHeader.httpHeaders = [NSDictionary dictionaryWithObject:@"hoge" forKey:@"fuga"];
+    aliveHeader.httpHeaders = @{@"fuga": @"hoge"};
     [aliveHeader andJSONHeader];
     GHAssertEquals(2U, [[aliveHeader.httpHeaders allKeys] count], @"ヘッダー2つ設定されているはず");
-    GHAssertEqualStrings(@"application/json; charset=utf-8", [aliveHeader.httpHeaders objectForKey:@"Content-Type"], @"json");
-    GHAssertEqualStrings(@"hoge", [aliveHeader.httpHeaders objectForKey:@"fuga"], @"fuga = hoge");
+    GHAssertEqualStrings(@"application/json; charset=utf-8", (aliveHeader.httpHeaders)[@"Content-Type"], @"json");
+    GHAssertEqualStrings(@"hoge", (aliveHeader.httpHeaders)[@"fuga"], @"fuga = hoge");
     
     NLTHTTPStubResponse *overwriteHeader = [NLTHTTPStubResponse httpDataResponse];
-    overwriteHeader.httpHeaders = [NSDictionary dictionaryWithObject:@"hoge" forKey:@"fuga"];
+    overwriteHeader.httpHeaders = @{@"fuga": @"hoge"};
     [overwriteHeader andJSONHeader];
     [overwriteHeader andPlainHeader];
     GHAssertEquals(2U, [[overwriteHeader.httpHeaders allKeys] count], @"ヘッダー2つ設定されているはず");
-    GHAssertEqualStrings(@"text/plain; charset=utf-8", [overwriteHeader.httpHeaders objectForKey:@"Content-Type"], @"plain textがjsonを上書きしているはず");
-    GHAssertEqualStrings(@"hoge", [overwriteHeader.httpHeaders objectForKey:@"fuga"], @"fuga = hoge");
+    GHAssertEqualStrings(@"text/plain; charset=utf-8", (overwriteHeader.httpHeaders)[@"Content-Type"], @"plain textがjsonを上書きしているはず");
+    GHAssertEqualStrings(@"hoge", (overwriteHeader.httpHeaders)[@"fuga"], @"fuga = hoge");
 }
 
 - (void)testAndContentTypeWithData {
@@ -142,43 +142,43 @@
     NSData *data = [@"hello" dataUsingEncoding:NSUTF8StringEncoding];
     
     NLTHTTPStubResponse *json = [[NLTHTTPStubResponse httpDataResponse] andJSONResponse:data];
-    GHAssertEqualStrings(@"application/json; charset=utf-8", [json.httpHeaders objectForKey:@"Content-Type"], @"json");
+    GHAssertEqualStrings(@"application/json; charset=utf-8", (json.httpHeaders)[@"Content-Type"], @"json");
     GHAssertEqualStrings(@"hello", [[NSString alloc] initWithData:json.data encoding:NSUTF8StringEncoding], @"data = hello");
     
     NLTHTTPStubResponse *plain = [[NLTHTTPStubResponse httpDataResponse] andPlainResponse:data];
-    GHAssertEqualStrings(@"text/plain; charset=utf-8", [plain.httpHeaders objectForKey:@"Content-Type"], @"plain text");
+    GHAssertEqualStrings(@"text/plain; charset=utf-8", (plain.httpHeaders)[@"Content-Type"], @"plain text");
     GHAssertEqualStrings(@"hello", [[NSString alloc] initWithData:plain.data encoding:NSUTF8StringEncoding], @"data = hello");
     
     NLTHTTPStubResponse *html = [[NLTHTTPStubResponse httpDataResponse] andHTMLResponse:data];
-    GHAssertEqualStrings(@"text/html; charset=utf-8", [html.httpHeaders objectForKey:@"Content-Type"], @"html");
+    GHAssertEqualStrings(@"text/html; charset=utf-8", (html.httpHeaders)[@"Content-Type"], @"html");
     GHAssertEqualStrings(@"hello", [[NSString alloc] initWithData:html.data encoding:NSUTF8StringEncoding], @"data = hello");
 
     NLTHTTPStubResponse *xml = [[NLTHTTPStubResponse httpDataResponse] andXMLResponse:data];
-    GHAssertEqualStrings(@"text/xml; charset=utf-8", [xml.httpHeaders objectForKey:@"Content-Type"], @"xml");
+    GHAssertEqualStrings(@"text/xml; charset=utf-8", (xml.httpHeaders)[@"Content-Type"], @"xml");
     GHAssertEqualStrings(@"hello", [[NSString alloc] initWithData:xml.data encoding:NSUTF8StringEncoding], @"data = hello");
     
     NLTHTTPStubResponse *binary = [[NLTHTTPStubResponse httpDataResponse] andBinaryResponse:data];
-    GHAssertEqualStrings(@"application/octet-stream", [binary.httpHeaders objectForKey:@"Content-Type"], @"binary");
+    GHAssertEqualStrings(@"application/octet-stream", (binary.httpHeaders)[@"Content-Type"], @"binary");
     GHAssertEqualStrings(@"hello", [[NSString alloc] initWithData:binary.data encoding:NSUTF8StringEncoding], @"data = hello");
     
     NLTHTTPStubResponse *contentType = [[NLTHTTPStubResponse httpDataResponse] andContentType:@"image/png" response:data];
-    GHAssertEqualStrings(@"image/png", [contentType.httpHeaders objectForKey:@"Content-Type"], @"content-type");
+    GHAssertEqualStrings(@"image/png", (contentType.httpHeaders)[@"Content-Type"], @"content-type");
     GHAssertEqualStrings(@"hello", [[NSString alloc] initWithData:contentType.data encoding:NSUTF8StringEncoding], @"data = hello");
 }
 
 - (void)testAndContentTypeAndCharset {
     
     NLTHTTPStubResponse *json = [[NLTHTTPStubResponse httpDataResponse] andJSONHeader:@"shift_jis"];
-    GHAssertEqualStrings(@"application/json; charset=shift_jis", [json.httpHeaders objectForKey:@"Content-Type"], @"json");
+    GHAssertEqualStrings(@"application/json; charset=shift_jis", (json.httpHeaders)[@"Content-Type"], @"json");
     
     NLTHTTPStubResponse *plain = [[NLTHTTPStubResponse httpDataResponse] andPlainHeader:@"shift_jis"];
-    GHAssertEqualStrings(@"text/plain; charset=shift_jis", [plain.httpHeaders objectForKey:@"Content-Type"], @"plain text");
+    GHAssertEqualStrings(@"text/plain; charset=shift_jis", (plain.httpHeaders)[@"Content-Type"], @"plain text");
     
     NLTHTTPStubResponse *html = [[NLTHTTPStubResponse httpDataResponse] andHTMLHeader:@"shift_jis"];
-    GHAssertEqualStrings(@"text/html; charset=shift_jis", [html.httpHeaders objectForKey:@"Content-Type"], @"html");
+    GHAssertEqualStrings(@"text/html; charset=shift_jis", (html.httpHeaders)[@"Content-Type"], @"html");
     
     NLTHTTPStubResponse *xml = [[NLTHTTPStubResponse httpDataResponse] andXMLHeader:@"shift_jis"];
-    GHAssertEqualStrings(@"text/xml; charset=shift_jis", [xml.httpHeaders objectForKey:@"Content-Type"], @"xml");
+    GHAssertEqualStrings(@"text/xml; charset=shift_jis", (xml.httpHeaders)[@"Content-Type"], @"xml");
     
 }
 
@@ -187,19 +187,19 @@
     NSData *data = [@"hello" dataUsingEncoding:NSShiftJISStringEncoding];
     
     NLTHTTPStubResponse *json = [[NLTHTTPStubResponse httpDataResponse] andJSONResponse:data charset:@"shift_jis"];
-    GHAssertEqualStrings(@"application/json; charset=shift_jis", [json.httpHeaders objectForKey:@"Content-Type"], @"json");
+    GHAssertEqualStrings(@"application/json; charset=shift_jis", (json.httpHeaders)[@"Content-Type"], @"json");
     GHAssertEqualStrings(@"hello", [[NSString alloc] initWithData:json.data encoding:NSShiftJISStringEncoding], @"data = hello");
     
     NLTHTTPStubResponse *plain = [[NLTHTTPStubResponse httpDataResponse] andPlainResponse:data charset:@"shift_jis"];
-    GHAssertEqualStrings(@"text/plain; charset=shift_jis", [plain.httpHeaders objectForKey:@"Content-Type"], @"plain text");
+    GHAssertEqualStrings(@"text/plain; charset=shift_jis", (plain.httpHeaders)[@"Content-Type"], @"plain text");
     GHAssertEqualStrings(@"hello", [[NSString alloc] initWithData:plain.data encoding:NSShiftJISStringEncoding], @"data = hello");
     
     NLTHTTPStubResponse *html = [[NLTHTTPStubResponse httpDataResponse] andHTMLResponse:data charset:@"shift_jis"];
-    GHAssertEqualStrings(@"text/html; charset=shift_jis", [html.httpHeaders objectForKey:@"Content-Type"], @"html");
+    GHAssertEqualStrings(@"text/html; charset=shift_jis", (html.httpHeaders)[@"Content-Type"], @"html");
     GHAssertEqualStrings(@"hello", [[NSString alloc] initWithData:html.data encoding:NSShiftJISStringEncoding], @"data = hello");
     
     NLTHTTPStubResponse *xml = [[NLTHTTPStubResponse httpDataResponse] andXMLResponse:data charset:@"shift_jis"];
-    GHAssertEqualStrings(@"text/xml; charset=shift_jis", [xml.httpHeaders objectForKey:@"Content-Type"], @"xml");
+    GHAssertEqualStrings(@"text/xml; charset=shift_jis", (xml.httpHeaders)[@"Content-Type"], @"xml");
     GHAssertEqualStrings(@"hello", [[NSString alloc] initWithData:xml.data encoding:NSShiftJISStringEncoding], @"data = hello");
 }
 
@@ -213,52 +213,52 @@
 - (void)testAndContentTypeWithResource {
     
     NLTHTTPStubResponse *json = [[NLTHTTPStubResponse httpDataResponse] andJSONResponseResource:@"test" ofType:@"txt"];
-    GHAssertEqualStrings(@"application/json; charset=utf-8", [json.httpHeaders objectForKey:@"Content-Type"], @"json");
+    GHAssertEqualStrings(@"application/json; charset=utf-8", (json.httpHeaders)[@"Content-Type"], @"json");
     GHAssertEqualStrings(@"hogehogehogehoge", [[NSString alloc] initWithData:json.data encoding:NSUTF8StringEncoding], @"data = hogehogehogehoge");
     
     NLTHTTPStubResponse *plain = [[NLTHTTPStubResponse httpDataResponse] andPlainResponseResource:@"test" ofType:@"txt"];
-    GHAssertEqualStrings(@"text/plain; charset=utf-8", [plain.httpHeaders objectForKey:@"Content-Type"], @"plain text");
+    GHAssertEqualStrings(@"text/plain; charset=utf-8", (plain.httpHeaders)[@"Content-Type"], @"plain text");
     GHAssertEqualStrings(@"hogehogehogehoge", [[NSString alloc] initWithData:plain.data encoding:NSUTF8StringEncoding], @"data = hogehogehogehoge");
     
     NLTHTTPStubResponse *html = [[NLTHTTPStubResponse httpDataResponse] andHTMLResponseResource:@"test" ofType:@"txt"];
-    GHAssertEqualStrings(@"text/html; charset=utf-8", [html.httpHeaders objectForKey:@"Content-Type"], @"html");
+    GHAssertEqualStrings(@"text/html; charset=utf-8", (html.httpHeaders)[@"Content-Type"], @"html");
     GHAssertEqualStrings(@"hogehogehogehoge", [[NSString alloc] initWithData:html.data encoding:NSUTF8StringEncoding], @"data = hogehogehogehoge");
     
     NLTHTTPStubResponse *xml = [[NLTHTTPStubResponse httpDataResponse] andXMLResponseResource:@"test" ofType:@"txt"];
-    GHAssertEqualStrings(@"text/xml; charset=utf-8", [xml.httpHeaders objectForKey:@"Content-Type"], @"xml");
+    GHAssertEqualStrings(@"text/xml; charset=utf-8", (xml.httpHeaders)[@"Content-Type"], @"xml");
     GHAssertEqualStrings(@"hogehogehogehoge", [[NSString alloc] initWithData:xml.data encoding:NSUTF8StringEncoding], @"data = hogehogehogehoge");
     
     NLTHTTPStubResponse *binary = [[NLTHTTPStubResponse httpDataResponse] andBinaryResponseResource:@"test" ofType:@"txt"];
-    GHAssertEqualStrings(@"application/octet-stream", [binary.httpHeaders objectForKey:@"Content-Type"], @"binary");
+    GHAssertEqualStrings(@"application/octet-stream", (binary.httpHeaders)[@"Content-Type"], @"binary");
     GHAssertEqualStrings(@"hogehogehogehoge", [[NSString alloc] initWithData:binary.data encoding:NSUTF8StringEncoding], @"data = hogehogehogehoge");
     
     NLTHTTPStubResponse *contentType = [[NLTHTTPStubResponse httpDataResponse] andContentType:@"image/png" resource:@"test" ofType:@"txt"];
-    GHAssertEqualStrings(@"image/png", [contentType.httpHeaders objectForKey:@"Content-Type"], @"binary");
+    GHAssertEqualStrings(@"image/png", (contentType.httpHeaders)[@"Content-Type"], @"binary");
     GHAssertEqualStrings(@"hogehogehogehoge", [[NSString alloc] initWithData:contentType.data encoding:NSUTF8StringEncoding], @"data = hogehogehogehoge");
 }
 
 - (void)testAndContentTypeWithResourceAndCharset {
     
     NLTHTTPStubResponse *json = [[NLTHTTPStubResponse httpDataResponse] andJSONResponseResource:@"test" ofType:@"txt" charset:@"shift_jis"];
-    GHAssertEqualStrings(@"application/json; charset=shift_jis", [json.httpHeaders objectForKey:@"Content-Type"], @"json");
+    GHAssertEqualStrings(@"application/json; charset=shift_jis", (json.httpHeaders)[@"Content-Type"], @"json");
     GHAssertEqualStrings(@"hogehogehogehoge", [[NSString alloc] initWithData:json.data encoding:NSUTF8StringEncoding], @"data = hello");
     
     NLTHTTPStubResponse *plain = [[NLTHTTPStubResponse httpDataResponse] andPlainResponseResource:@"test" ofType:@"txt" charset:@"shift_jis"];
-    GHAssertEqualStrings(@"text/plain; charset=shift_jis", [plain.httpHeaders objectForKey:@"Content-Type"], @"plain text");
+    GHAssertEqualStrings(@"text/plain; charset=shift_jis", (plain.httpHeaders)[@"Content-Type"], @"plain text");
     GHAssertEqualStrings(@"hogehogehogehoge", [[NSString alloc] initWithData:plain.data encoding:NSUTF8StringEncoding], @"data = hello");
     
     NLTHTTPStubResponse *html = [[NLTHTTPStubResponse httpDataResponse] andHTMLResponseResource:@"test" ofType:@"txt" charset:@"shift_jis"];
-    GHAssertEqualStrings(@"text/html; charset=shift_jis", [html.httpHeaders objectForKey:@"Content-Type"], @"html");
+    GHAssertEqualStrings(@"text/html; charset=shift_jis", (html.httpHeaders)[@"Content-Type"], @"html");
     GHAssertEqualStrings(@"hogehogehogehoge", [[NSString alloc] initWithData:html.data encoding:NSUTF8StringEncoding], @"data = hello");
     
     NLTHTTPStubResponse *xml = [[NLTHTTPStubResponse httpDataResponse] andXMLResponseResource:@"test" ofType:@"txt" charset:@"shift_jis"];
-    GHAssertEqualStrings(@"text/xml; charset=shift_jis", [xml.httpHeaders objectForKey:@"Content-Type"], @"xml");
+    GHAssertEqualStrings(@"text/xml; charset=shift_jis", (xml.httpHeaders)[@"Content-Type"], @"xml");
     GHAssertEqualStrings(@"hogehogehogehoge", [[NSString alloc] initWithData:xml.data encoding:NSUTF8StringEncoding], @"data = hello");
     
 }
 
 - (void)testInvalidPath {
     NLTHTTPStubResponse *stub = [NLTHTTPStubResponse httpDataResponse];
-    GHAssertThrows([stub forPath:[NSArray array]], @"NLTPathかNSStringしか受け付けない");
+    GHAssertThrows([stub forPath:@[]], @"NLTPathかNSStringしか受け付けない");
 }
 @end

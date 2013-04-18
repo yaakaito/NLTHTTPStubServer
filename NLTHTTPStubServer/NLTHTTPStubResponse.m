@@ -40,7 +40,7 @@
     if(self){
         self.statusCode = 200;
         self.shouldTimeout = NO;
-        self.httpHeaders = [NSDictionary dictionary];
+        self.httpHeaders = @{};
         self.httpMethod = @"GET";
         self.processingTimeSeconds = 0.0f;
     }
@@ -132,7 +132,7 @@
     else {
         base = [NSMutableDictionary dictionary];
     }
-    [base setObject:contentType forKey:kNLTHTTPStubResponseHeaderKeyContentType];
+    base[kNLTHTTPStubResponseHeaderKeyContentType] = contentType;
     self.httpHeaders = base;
 }
 
