@@ -11,7 +11,6 @@
 @interface WithNSURLConnectionTest : GHAsyncTestCase
 {
     NLTHTTPStubServer *server; 
-    NSURLRequest *request;
 }
 @end
 
@@ -38,9 +37,6 @@
 - (void)setUp {
     // Run before each test method
     [server clear];
-    
-    NSURL *url = [NSURL URLWithString:@"http://localhost:12345/stub"];
-    request = [NSURLRequest requestWithURL:url];
 }
 
 - (void)tearDown {
@@ -58,12 +54,11 @@
     return [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
 }
 
-- (void)sendAsynchronusWithCompletionHandler:(void (^)(NSURLResponse*, NSData*, NSError*))handler {
-    
+- (void)testWithURLString:(NSString *)urlString andCompletionHandler:(void (^)(NSURLResponse *response, NSData *data, NSError *error))handler {
     [self prepare];
     __weak id that = self;
     
-    [NSURLConnection sendAsynchronousRequest:request
+    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]
                                        queue:[[NSOperationQueue alloc] init]
                            completionHandler:^(NSURLResponse *res, NSData *data, NSError *err) {
                                handler(res, data, err);
@@ -73,13 +68,18 @@
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10];
 }
 
+- (void)testWithCompletionHandler:(void (^)(NSURLResponse *response, NSData *data, NSError *error))handler {
+    
+    [self testWithURLString:@"http://localhost:12345/stub" andCompletionHandler:handler];
+}
+
 - (void)testMostSimply {
     
     NSData *data = [@"HelloWorld" dataUsingEncoding:NSUTF8StringEncoding];
     [[[server stub] forPath:@"/stub"] andPlainResponse:data];
     
     __weak id that = self;
-    [self sendAsynchronusWithCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+    [self testWithCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         GHAssertNil(error, @"");
         GHAssertEqualStrings([that toString:data], @"HelloWorld", @"");
     }];
@@ -90,11 +90,12 @@
     [[[server stub] forPath:@"/stub"] andJSONResponseResource:@"fake" ofType:@"json"];
     
     __weak id that = self;
-    [self sendAsynchronusWithCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+    [self testWithCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         GHAssertNil(error, @"");
         NSDictionary *JSON = [that toJSON:data];
         GHAssertEqualStrings(JSON[@"fake"], @"dummy", @"");
     }];
 }
+
 
 @end

@@ -20,7 +20,6 @@
         self.statusCode = response.statusCode;
         self.data = [response.data copy];
         self.shouldTimeout = response.shouldTimeout;
-        self.uriCheckBlock = response.uriCheckBlock;
         self.httpHeaders = [response.httpHeaders copy];
     }
     return self;

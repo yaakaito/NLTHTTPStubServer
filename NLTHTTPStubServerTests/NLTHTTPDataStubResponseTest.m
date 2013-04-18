@@ -45,8 +45,6 @@
     response.data = data;
     response.shouldTimeout = YES;
     response.httpHeaders = @{@"Content-Type": @"text/html; charset=UTF-8"};
-    [response URICheckWithBlock:^(NSURL *URI) {
-    }];
     
     NLTHTTPDataStubResponse *copy = [response copy];
 

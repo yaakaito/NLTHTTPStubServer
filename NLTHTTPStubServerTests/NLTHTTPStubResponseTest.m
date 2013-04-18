@@ -32,16 +32,6 @@
     GHAssertTrue(1.0f == response.processingTimeSeconds, @"処理時間が違う");
 }
 
-- (void)testURICheckBlock {
-    NLTHTTPStubResponse *response = [[NLTHTTPDataStubResponse alloc] init];
-    __block BOOL called = NO;
-    [response URICheckWithBlock:^(NSURL *URI) {
-        called = YES;
-    }];
-    [response uriCheckBlock](nil);
-    GHAssertTrue(called, @"YESにならないのは変");
-}
-
 - (void)testPostKeyValueBodyCheckBlock {
     NLTHTTPStubResponse *response = [[NLTHTTPDataStubResponse alloc] init];
     __block BOOL called = NO;
@@ -65,13 +55,10 @@
 - (void)testChaining {
     
     __block BOOL called = NO;
-    NLTHTTPStubResponse *stub = [[[[[[[[NLTHTTPDataStubResponse alloc] init]
+    NLTHTTPStubResponse *stub = [[[[[[[NLTHTTPDataStubResponse alloc] init]
                                         forPath:@"/index"]
                                        andResponse:[@"hoge" dataUsingEncoding:NSUTF8StringEncoding]]
                                       andStatusCode:200]
-                                     andCheckURI:^(NSURL *URI) {
-                                         called = YES;
-                                     }]
                                     andCheckKeyValuePostBody:^(NSDictionary *postBody) {
                                          called = YES;
                                      }]
@@ -84,7 +71,6 @@
     GHAssertEqualStrings(@"GET", stub.httpMethod, @"httpMethodが間違ってる");
     GHAssertEqualStrings(@"hoge", [[NSString alloc] initWithData:stub.data encoding:NSUTF8StringEncoding], @"データが違う");
     GHAssertEquals(200, stub.statusCode, @"ステータスコードが違う");
-    stub.uriCheckBlock(nil);
     GHAssertTrue(called, @"チェックブロックがコールされない");
     called = NO;
     stub.postKeyValueBodyCheckBlock(nil);

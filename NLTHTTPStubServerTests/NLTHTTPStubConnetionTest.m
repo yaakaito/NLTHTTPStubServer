@@ -44,25 +44,6 @@
  
 }
 
-- (void)testCallURICheckBlock {
-    id stubServer = [OCMockObject mockForClass:[NLTHTTPStubServer class]];
-    NLTHTTPStubResponse *response = [[NLTHTTPDataStubResponse alloc] init];
-    response.path = [NLTPath pathWithPathString:@"/index"];
-    __block BOOL called = NO;
-    [response URICheckWithBlock:^(NSURL *URI) {
-        GHAssertEqualStrings(@"hoge=1", [URI query], @"queryが不一致");
-        called = YES;
-    }];
-
-    [[[stubServer stub] andReturn:response] responseForPath:[OCMArg any] HTTPMethod:[OCMArg any]];
-    
-    NLTHTTPStubConnection *connection = [[NLTHTTPStubConnection alloc] init];
-    connection.stubServer = stubServer;
-    
-   [connection httpResponseForMethod:@"GET" URI:@"/index?hoge=1"];
-    GHAssertTrue(called, @"checkblockが呼ばれていない");
-}
-
 - (void)testCallPostBodyCheckBlock {
     id stubServer = [OCMockObject mockForClass:[NLTHTTPStubServer class]];
     NLTHTTPStubResponse *response = [[NLTHTTPDataStubResponse alloc] init];
