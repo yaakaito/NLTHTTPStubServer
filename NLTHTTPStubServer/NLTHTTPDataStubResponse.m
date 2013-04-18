@@ -78,7 +78,7 @@
     return self.statusCode;
 }
 
-- (BOOL)delayResponeHeaders {
+- (BOOL)delayResponseHeaders {
     return self.shouldTimeout;
 }
 
