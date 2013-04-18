@@ -18,16 +18,16 @@
                                                 , NLTResponseHeaderCharsetChaining
                                                 , NLTResponseDataCharsetChaining>
 
-@property(nonatomic,retain) NLTPath   *path;
+@property(nonatomic,strong) NLTPath   *path;
 @property                   NSInteger  statusCode;
-@property(nonatomic,retain) NSData    *data;
-@property(nonatomic,retain) NSString  *filepath;
+@property(nonatomic,strong) NSData    *data;
+@property(nonatomic,strong) NSString  *filepath;
 @property                   BOOL       shouldTimeout;
 @property(nonatomic,copy)   __httpStubResponseURICheck uriCheckBlock;
 @property(nonatomic,copy)   __httpStubResponsePostBodyCheck postBodyCheckBlock;
 @property(nonatomic,copy)   __httpStubResponsePostKeyValueBodyCheck postKeyValueBodyCheckBlock;
-@property(nonatomic,retain) NSDictionary *httpHeaders;
-@property(nonatomic,retain) NSString *httpMethod;
+@property(nonatomic,strong) NSDictionary *httpHeaders;
+@property(nonatomic,strong) NSString *httpMethod;
 @property(nonatomic)        NSTimeInterval processingTimeSeconds;
 
 + (NLTHTTPStubResponse*)stubResponse;

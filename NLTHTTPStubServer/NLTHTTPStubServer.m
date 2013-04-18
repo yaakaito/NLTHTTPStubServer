@@ -36,12 +36,9 @@
 
 - (void)dealloc {
     
-    self.stubResponses = nil;
     
     [self stopServer];
-    [_httpServer release];
     
-    [super dealloc];
 }
 
 + (NLTHTTPStubServer *)currentStubServer {
@@ -55,18 +52,17 @@
 + (NLTHTTPStubServer *)__currentStubServer:(NLTHTTPStubServer *)stubServer {
     __strong static id _sharedObject = nil;
     if(![stubServer isKindOfClass:[NLTHCurrentStubGetter class]]){
-        [_sharedObject release];
-        _sharedObject = [stubServer retain]; 
+        _sharedObject = stubServer; 
     }
     return _sharedObject;
 }
 
 + (NLTHCurrentStubGetter*)__stubGetter {
-    return [[[NLTHCurrentStubGetter alloc] init] autorelease];
+    return [[NLTHCurrentStubGetter alloc] init];
 }
 
 + (NLTHTTPStubServer *)stubServer {
-    return [[[[self class] alloc] init] autorelease];
+    return [[[self class] alloc] init];
 }
 
 + (NLTHGlobalSettings*)globalSettings {
@@ -74,12 +70,12 @@
 }
 
 - (NLTHTTPStubResponse<HTTPResponse>*)responseForPath:(NSString*)path HTTPMethod:(NSString *)method {
-    NSString *encodedPathString = [(NSString *)CFURLCreateStringByAddingPercentEscapes(
+    NSString *encodedPathString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
                                                                                        NULL,
                                                                                        (CFStringRef)path,
                                                                                        NULL,
                                                                                        NULL,
-                                                                                       kCFStringEncodingUTF8 ) autorelease];
+                                                                                       kCFStringEncodingUTF8 ));
 
     NSURL *url = [NSURL URLWithString:encodedPathString];
     for (NSUInteger i = 0; i < [self.stubResponses count]; i++) {

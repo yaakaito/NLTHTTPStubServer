@@ -16,22 +16,22 @@
 - (id)initWithDataStubResponse:(NLTHTTPDataStubResponse*)response {
     self = [super init];
     if (self) {
-        self.path = [[response.path copy] autorelease];
+        self.path = [response.path copy];
         self.statusCode = response.statusCode;
-        self.data = [[response.data copy] autorelease];
+        self.data = [response.data copy];
         self.shouldTimeout = response.shouldTimeout;
         self.uriCheckBlock = response.uriCheckBlock;
-        self.httpHeaders = [[response.httpHeaders copy] autorelease];
+        self.httpHeaders = [response.httpHeaders copy];
     }
     return self;
 }
 
 + (id)dataStubResponse {
-    return [[[NLTHTTPDataStubResponse alloc] init] autorelease];
+    return [[NLTHTTPDataStubResponse alloc] init];
 }
 
 + (id)dataStubResponseWithDataStubResponse:(NLTHTTPDataStubResponse*)response {
-    return [[[NLTHTTPDataStubResponse alloc] initWithDataStubResponse:response] autorelease];
+    return [[NLTHTTPDataStubResponse alloc] initWithDataStubResponse:response];
 }
 
 

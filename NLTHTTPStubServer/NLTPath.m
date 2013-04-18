@@ -32,23 +32,23 @@
 
 + (NLTPath *)pathWithPathString:(NSString *)pathString {
     
-    return [[[self alloc] initWithPathString:pathString andParameters:nil] autorelease];
+    return [[self alloc] initWithPathString:pathString andParameters:nil];
 }
 
 + (NLTPath *)pathWithPathString:(NSString *)pathString andParameters:(NSDictionary *)parameters {
 
-    return [[[self alloc] initWithPathString:pathString andParameters:parameters] autorelease];
+    return [[self alloc] initWithPathString:pathString andParameters:parameters];
 }
 
 + (NLTPath *)pathWithPath:(NLTPath *)path andParameters:(NSDictionary *)parameters {
     
-    NSMutableDictionary *newParameters = [[parameters mutableCopy] autorelease];
+    NSMutableDictionary *newParameters = [parameters mutableCopy];
     [newParameters setValuesForKeysWithDictionary:path.parameters];
-    return [[[self alloc] initWithPathString:path.pathString andParameters:newParameters] autorelease];
+    return [[self alloc] initWithPathString:path.pathString andParameters:newParameters];
 }
 
 + (id)anyValue {
-    return [[[NLTWildcard alloc] init] autorelease];
+    return [[NLTWildcard alloc] init];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
@@ -61,19 +61,12 @@
     
     self = [super init];
     if(self) {
-        _pathString = [pathString retain];
-        _parameters = [parameters retain];
+        _pathString = pathString;
+        _parameters = parameters;
     }
     return self;
 }
 
-- (void)dealloc {
-    
-    [_pathString release];
-    [_parameters release];
-    
-    [super dealloc];
-}
 
 - (BOOL)isMatchURL:(NSURL *)url {
     
@@ -84,7 +77,7 @@
     
     NSDictionary *otherParameters = [url queryParameters];
     
-    NSMutableArray *parameterAllKeys = [[[self.parameters allKeys] mutableCopy] autorelease];
+    NSMutableArray *parameterAllKeys = [[self.parameters allKeys] mutableCopy];
     NSArray *otherParameterAllKeys = [otherParameters allKeys];
     
     if([parameterAllKeys count] != [otherParameterAllKeys count]) {

@@ -18,7 +18,7 @@
 
 @interface NLTHTTPStubServer : NSObject<NLTServerChaining>
 
-@property(nonatomic,retain) NSMutableArray *stubResponses;
+@property(nonatomic,strong) NSMutableArray *stubResponses;
 
 + (NLTHTTPStubServer*)currentStubServer;
 + (void)setCurrentStubServer:(NLTHTTPStubServer*)stubServer;

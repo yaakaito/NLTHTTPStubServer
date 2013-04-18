@@ -413,6 +413,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 803EAECA4F454248913EEB50 /* Pods.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -448,6 +449,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 803EAECA4F454248913EEB50 /* Pods.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -524,6 +526,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 803EAECA4F454248913EEB50 /* Pods.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/NLTHTTPStubServer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NLTHTTPStubServer/NLTHTTPStubServer-Prefix.pch";
@@ -538,6 +541,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 803EAECA4F454248913EEB50 /* Pods.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/NLTHTTPStubServer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NLTHTTPStubServer/NLTHTTPStubServer-Prefix.pch";

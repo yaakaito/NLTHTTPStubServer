@@ -32,7 +32,7 @@
 @synthesize processingTimeSeconds;
 
 + (NLTHTTPStubResponse *)stubResponse {
-    return [[[NLTHTTPStubResponse alloc] init] autorelease];
+    return [[NLTHTTPStubResponse alloc] init];
 }
 
 - (id)init {
@@ -47,16 +47,6 @@
     return self;
 }
 
-- (void)dealloc {
-    
-    self.path = nil;
-    self.data = nil;
-    self.filepath = nil;
-    self.httpHeaders = nil;
-    self.httpMethod = nil;
-    
-    [super dealloc];
-}
 
 - (void)URICheckWithBlock:(__httpStubResponseURICheck)block {
     self.uriCheckBlock = block;

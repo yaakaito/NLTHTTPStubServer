@@ -87,7 +87,7 @@
 		if([response postKeyValueBodyCheckBlock]){
             if (postData)
             {
-                postString = [[[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding] autorelease];
+                postString = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
             }
             
             NSMutableDictionary *postKeyValues = [NSMutableDictionary dictionary];
