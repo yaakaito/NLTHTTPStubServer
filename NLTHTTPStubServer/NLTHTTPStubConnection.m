@@ -58,9 +58,6 @@
 }
 
 - (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
-
-    
-    NSURL *url = [NSURL URLWithString:path];
     
     if(!self.stubServer){
         self.stubServer = [NLTHTTPStubServer currentStubServer];
