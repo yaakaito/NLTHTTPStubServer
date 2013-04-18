@@ -107,12 +107,12 @@
 }
 
 - (void)testResponseForPathForContainsMultibyteText {
-    NSString *encodedString = [(NSString *)CFURLCreateStringByAddingPercentEscapes(
+    NSString *encodedString = (__bridge NSString *)CFURLCreateStringByAddingPercentEscapes(
                                                                                    NULL,
                                                                                    (CFStringRef)@"マルチバイト文字列",
                                                                                    NULL,
                                                                                    (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                                                                   kCFStringEncodingUTF8 ) autorelease];
+                                                                                   kCFStringEncodingUTF8 );
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
     [server addStubResponse:[NLTStubResponse httpDataResponse]];
     NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];

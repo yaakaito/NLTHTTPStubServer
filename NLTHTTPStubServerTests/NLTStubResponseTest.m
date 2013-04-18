@@ -10,7 +10,6 @@
 #import "NLTStubResponse.h"
 #import "NLTHTTPStubResponse.h"
 #import "NLTHTTPDataStubResponse.h"
-#import "NLTHTTPFileStubResponse.h"
 
 @implementation NLTStubResponseTest
 
@@ -18,12 +17,6 @@
     
     GHAssertTrue([[NLTStubResponse httpDataResponse] isKindOfClass:[NLTHTTPStubResponse class]], @"httpstubじゃないよ");
     GHAssertTrue([[NLTStubResponse httpDataResponse] isKindOfClass:[NLTHTTPDataStubResponse class]], @"httpdatastubじゃないよ");
-}
-
-- (void)testFileResponse {
-    
-    GHAssertTrue([[NLTStubResponse httpFileResponse] isKindOfClass:[NLTHTTPStubResponse class]], @"httpstubじゃないよ");
-    GHAssertTrue([[NLTStubResponse httpFileResponse] isKindOfClass:[NLTHTTPFileStubResponse class]], @"httpfilestubじゃないよ");
 }
 
 @end

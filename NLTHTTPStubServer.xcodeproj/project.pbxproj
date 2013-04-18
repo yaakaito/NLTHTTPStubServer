@@ -52,6 +52,7 @@
 		B9BD480A15F27D2500DBAA04 /* NLTPathTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BD480915F27D2400DBAA04 /* NLTPathTest.m */; };
 		B9F3D279154D02F200B87F18 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = B9F3D277154D023E00B87F18 /* test.json */; };
 		BA89A7D320144FD89486A7F6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8710FB411A4046B60DBB67 /* libPods.a */; };
+		F2B7CAD417207CAA00099197 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B7CAD317207CAA00099197 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +104,7 @@
 		B9BD480415F273BD00DBAA04 /* NLTPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTPath.m; sourceTree = "<group>"; };
 		B9BD480915F27D2400DBAA04 /* NLTPathTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTPathTest.m; sourceTree = "<group>"; };
 		B9F3D277154D023E00B87F18 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
+		F2B7CAD317207CAA00099197 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2B7CAD417207CAA00099197 /* QuartzCore.framework in Frameworks */,
 				B93EEF26154E8D6500914A7D /* libxml2.dylib in Frameworks */,
 				B93EEF24154D697400914A7D /* CoreLocation.framework in Frameworks */,
 				B93EEF22154D691A00914A7D /* Security.framework in Frameworks */,
@@ -180,6 +183,7 @@
 		B93943DF14FA1E57008A8D8C = {
 			isa = PBXGroup;
 			children = (
+				F2B7CAD317207CAA00099197 /* QuartzCore.framework */,
 				B93943EF14FA1E57008A8D8C /* NLTHTTPStubServer */,
 				210F55F414FC164D00E90D38 /* NLTHTTPStubServerTests */,
 				B93943EC14FA1E57008A8D8C /* Frameworks */,

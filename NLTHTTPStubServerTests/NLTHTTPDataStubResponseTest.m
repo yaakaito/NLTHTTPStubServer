@@ -54,8 +54,8 @@
     GHAssertNotEqualObjects(response, copy, @"同じ物だったら困る");
     GHAssertEqualStrings(response.path.pathString, copy.path.pathString, @"pathStringはおなじ");
     
-    GHAssertEqualStrings([[[NSString alloc] initWithData:response.data encoding:NSUTF8StringEncoding] autorelease],
-                         [[[NSString alloc] initWithData:copy.data encoding:NSUTF8StringEncoding] autorelease], @"レスポンス内容");
+    GHAssertEqualStrings([[NSString alloc] initWithData:response.data encoding:NSUTF8StringEncoding],
+                         [[NSString alloc] initWithData:copy.data encoding:NSUTF8StringEncoding], @"レスポンス内容");
     GHAssertEquals(response.statusCode, copy.statusCode, @"ステータスコードが同じじゃない");
     GHAssertEquals(response.shouldTimeout, copy.shouldTimeout, @"shouldTimeoutが同じじゃない");
     
