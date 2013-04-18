@@ -101,10 +101,6 @@
         }
 	}
     
-    if([response uriCheckBlock]){
-        [response uriCheckBlock](url);
-    }
-    
     return response;
 }
 @end

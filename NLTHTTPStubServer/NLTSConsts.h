@@ -26,7 +26,6 @@ typedef void(^__httpStubResponsePostKeyValueBodyCheck)(NSDictionary *postBody);
 - (id)andResponse:(NSData*)data;
 - (id)andResponseResource:(NSString*)filename ofType:(NSString*)type;
 - (id)andStatusCode:(NSInteger)statusCode;
-- (id)andCheckURI:(__httpStubResponseURICheck)checkBlock;
 - (id)andCheckPostBody:(__httpStubResponsePostBodyCheck)checkBlock;
 - (id)andCheckKeyValuePostBody:(__httpStubResponsePostKeyValueBodyCheck)checkBlock;
 - (id)andTimeout;

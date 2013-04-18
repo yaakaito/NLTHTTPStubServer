@@ -24,7 +24,6 @@
 @synthesize data;
 @synthesize filepath;
 @synthesize shouldTimeout;
-@synthesize uriCheckBlock;
 @synthesize postBodyCheckBlock;
 @synthesize postKeyValueBodyCheckBlock;
 @synthesize httpHeaders;
@@ -45,11 +44,6 @@
         self.processingTimeSeconds = 0.0f;
     }
     return self;
-}
-
-
-- (void)URICheckWithBlock:(__httpStubResponseURICheck)block {
-    self.uriCheckBlock = block;
 }
 
 - (void)postBodyCheckWithBlock:(__httpStubResponsePostBodyCheck)block {
@@ -96,11 +90,6 @@
 
 - (id)andStatusCode:(NSInteger)statusCode_ {
     self.statusCode = statusCode_;
-    return self;
-}
-
-- (id)andCheckURI:(__httpStubResponseURICheck)checkBlock_ {
-    self.uriCheckBlock = checkBlock_;
     return self;
 }
 
