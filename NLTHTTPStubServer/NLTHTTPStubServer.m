@@ -8,6 +8,7 @@
 
 
 #import "NLTHTTPStubServer.h"
+#import "NLTHTTPDataStubResponse.h"
 #import "NLTPath.h"
 
 @implementation NLTHTTPStubServer {
@@ -115,7 +116,7 @@
 
 - (id)stub {
     
-    NLTHTTPStubResponse *stub = [[NLTHTTPStubResponse alloc] init];
+    NLTHTTPStubResponse *stub = [[NLTHTTPDataStubResponse alloc] init];
     [self addStubResponse:stub];
     return stub;
 }

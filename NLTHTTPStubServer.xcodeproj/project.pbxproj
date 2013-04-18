@@ -47,6 +47,7 @@
 		B9BD480A15F27D2500DBAA04 /* NLTPathTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BD480915F27D2400DBAA04 /* NLTPathTest.m */; };
 		BA89A7D320144FD89486A7F6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8710FB411A4046B60DBB67 /* libPods.a */; };
 		F2B7CAD417207CAA00099197 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B7CAD317207CAA00099197 /* QuartzCore.framework */; };
+		F2B7CAD617209EE000099197 /* WithNSURLConnectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B7CAD517209EE000099197 /* WithNSURLConnectionTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 		B9BD480415F273BD00DBAA04 /* NLTPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTPath.m; sourceTree = "<group>"; };
 		B9BD480915F27D2400DBAA04 /* NLTPathTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTPathTest.m; sourceTree = "<group>"; };
 		F2B7CAD317207CAA00099197 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F2B7CAD517209EE000099197 /* WithNSURLConnectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WithNSURLConnectionTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 				212C893C1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.h */,
 				212C893D1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.m */,
 				B9BD480915F27D2400DBAA04 /* NLTPathTest.m */,
+				F2B7CAD517209EE000099197 /* WithNSURLConnectionTest.m */,
 				210F55F514FC164D00E90D38 /* Supporting Files */,
 			);
 			path = NLTHTTPStubServerTests;
@@ -351,6 +354,7 @@
 				212C893E1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.m in Sources */,
 				B9BD480715F273BD00DBAA04 /* NLTPath.m in Sources */,
 				B9BD480A15F27D2500DBAA04 /* NLTPathTest.m in Sources */,
+				F2B7CAD617209EE000099197 /* WithNSURLConnectionTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
