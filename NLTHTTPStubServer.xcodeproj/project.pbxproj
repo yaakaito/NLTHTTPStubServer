@@ -34,7 +34,6 @@
 		212C893A1508F0E200F2FDBD /* NLTHTTPDataStubResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 212C89381508F0E200F2FDBD /* NLTHTTPDataStubResponse.m */; };
 		212C893B1508F0E200F2FDBD /* NLTHTTPDataStubResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 212C89381508F0E200F2FDBD /* NLTHTTPDataStubResponse.m */; };
 		212C893E1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 212C893D1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.m */; };
-		212C8949150903C400F2FDBD /* test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 212C8948150903C400F2FDBD /* test.txt */; };
 		2190252B1508C72100F3DD6A /* NLTStubResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 219025291508C71B00F3DD6A /* NLTStubResponse.h */; };
 		2190252C1508C72100F3DD6A /* NLTStubResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2190252A1508C71D00F3DD6A /* NLTStubResponse.m */; };
 		2190252D1508C72100F3DD6A /* NLTStubResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2190252A1508C71D00F3DD6A /* NLTStubResponse.m */; };
@@ -50,7 +49,6 @@
 		B9BD480615F273BD00DBAA04 /* NLTPath.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BD480415F273BD00DBAA04 /* NLTPath.m */; };
 		B9BD480715F273BD00DBAA04 /* NLTPath.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BD480415F273BD00DBAA04 /* NLTPath.m */; };
 		B9BD480A15F27D2500DBAA04 /* NLTPathTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BD480915F27D2400DBAA04 /* NLTPathTest.m */; };
-		B9F3D279154D02F200B87F18 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = B9F3D277154D023E00B87F18 /* test.json */; };
 		BA89A7D320144FD89486A7F6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8710FB411A4046B60DBB67 /* libPods.a */; };
 		F2B7CAD417207CAA00099197 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B7CAD317207CAA00099197 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
@@ -83,7 +81,6 @@
 		212C89381508F0E200F2FDBD /* NLTHTTPDataStubResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPDataStubResponse.m; sourceTree = "<group>"; };
 		212C893C1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTHTTPDataStubResponseTest.h; sourceTree = "<group>"; };
 		212C893D1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPDataStubResponseTest.m; sourceTree = "<group>"; };
-		212C8948150903C400F2FDBD /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test.txt; path = Resources/test.txt; sourceTree = "<group>"; };
 		212C894A150916C200F2FDBD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		219025291508C71B00F3DD6A /* NLTStubResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTStubResponse.h; sourceTree = "<group>"; };
 		2190252A1508C71D00F3DD6A /* NLTStubResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTStubResponse.m; sourceTree = "<group>"; };
@@ -103,7 +100,6 @@
 		B9BD480315F273BD00DBAA04 /* NLTPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTPath.h; sourceTree = "<group>"; };
 		B9BD480415F273BD00DBAA04 /* NLTPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTPath.m; sourceTree = "<group>"; };
 		B9BD480915F27D2400DBAA04 /* NLTPathTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTPathTest.m; sourceTree = "<group>"; };
-		B9F3D277154D023E00B87F18 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		F2B7CAD317207CAA00099197 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -154,7 +150,6 @@
 				212C893C1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.h */,
 				212C893D1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.m */,
 				B9BD480915F27D2400DBAA04 /* NLTPathTest.m */,
-				212C8947150903AD00F2FDBD /* Resources */,
 				210F55F514FC164D00E90D38 /* Supporting Files */,
 			);
 			path = NLTHTTPStubServerTests;
@@ -169,15 +164,6 @@
 				210F55FC14FC164D00E90D38 /* NLTHTTPStubServerTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		212C8947150903AD00F2FDBD /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				212C8948150903C400F2FDBD /* test.txt */,
-				B9F3D277154D023E00B87F18 /* test.json */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		B93943DF14FA1E57008A8D8C = {
@@ -339,8 +325,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				210F55F914FC164D00E90D38 /* InfoPlist.strings in Resources */,
-				212C8949150903C400F2FDBD /* test.txt in Resources */,
-				B9F3D279154D02F200B87F18 /* test.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
