@@ -22,13 +22,13 @@
 @property(nonatomic,strong) NSData    *data;
 @property(nonatomic,strong) NSString  *filepath;
 @property                   BOOL       shouldTimeout;
-@property(nonatomic,copy)   __httpStubResponsePostBodyCheck postBodyCheckBlock;
-@property(nonatomic,copy)   __httpStubResponsePostKeyValueBodyCheck postKeyValueBodyCheckBlock;
+@property(nonatomic,copy)   NLTPostBodyCheckBlock postBodyCheckBlock;
+@property(nonatomic,copy)   NLTPostKeyValueBodyCheckBlock postKeyValueBodyCheckBlock;
 @property(nonatomic,strong) NSDictionary *httpHeaders;
 @property(nonatomic,strong) NSString *httpMethod;
 @property(nonatomic)        NSTimeInterval processingTimeSeconds;
 
 + (NLTHTTPStubResponse*)stubResponse;
-- (void)postBodyCheckWithBlock:(__httpStubResponsePostBodyCheck)block;
-- (void)postKeyValueBodyCheckWithBlock:(__httpStubResponsePostKeyValueBodyCheck)block;
+- (void)postBodyCheckWithBlock:(NLTPostBodyCheckBlock)block;
+- (void)postKeyValueBodyCheckWithBlock:(NLTPostKeyValueBodyCheckBlock)block;
 @end

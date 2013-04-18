@@ -46,11 +46,11 @@
     return self;
 }
 
-- (void)postBodyCheckWithBlock:(__httpStubResponsePostBodyCheck)block {
+- (void)postBodyCheckWithBlock:(NLTPostBodyCheckBlock)block {
     self.postBodyCheckBlock = block;
 }
 
-- (void)postKeyValueBodyCheckWithBlock:(__httpStubResponsePostKeyValueBodyCheck)block {
+- (void)postKeyValueBodyCheckWithBlock:(NLTPostKeyValueBodyCheckBlock)block {
     self.postKeyValueBodyCheckBlock = block;
 }
 
@@ -93,12 +93,12 @@
     return self;
 }
 
-- (id)andCheckPostBody:(__httpStubResponsePostBodyCheck)checkBlock_ {
+- (id)andCheckPostBody:(NLTPostBodyCheckBlock)checkBlock_ {
     self.postBodyCheckBlock = checkBlock_;
     return self;
 }
 
-- (id)andCheckKeyValuePostBody:(__httpStubResponsePostKeyValueBodyCheck)checkBlock_ {
+- (id)andCheckKeyValuePostBody:(NLTPostKeyValueBodyCheckBlock)checkBlock_ {
     self.postKeyValueBodyCheckBlock = checkBlock_;
     return self;
 }
