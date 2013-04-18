@@ -98,7 +98,21 @@
 }
 
 - (BOOL)verify {
-    return [self.stubResponses count] == 0;
+    
+    NSUInteger expects = 0;
+    for (NLTHTTPStubResponse *response in self.stubResponses){
+        if (!response.external) {
+            expects += 1;
+        }
+    }
+    
+    if (expects > 0) {
+        [NSException raise:NSInternalInconsistencyException
+                    format:@"%d expected responses were not invoked: %@", expects, self.stubResponses];
+        return NO;
+    }
+    
+    return YES;
 }
 
 - (void)clear {

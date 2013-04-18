@@ -27,6 +27,7 @@
 @property(nonatomic,strong) NSDictionary *httpHeaders;
 @property(nonatomic,strong) NSString *httpMethod;
 @property(nonatomic)        NSTimeInterval processingTimeSeconds;
+@property                   BOOL external;
 
 + (NLTHTTPStubResponse*)stubResponse;
 - (void)postBodyCheckWithBlock:(NLTPostBodyCheckBlock)block;
