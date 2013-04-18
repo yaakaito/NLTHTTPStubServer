@@ -20,6 +20,8 @@
 
 @property(nonatomic,strong) NSMutableArray *stubResponses;
 
++ (id)sharedServer;
+
 + (NLTHTTPStubServer*)currentStubServer;
 + (void)setCurrentStubServer:(NLTHTTPStubServer*)stubServer;
 

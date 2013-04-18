@@ -37,9 +37,17 @@
 
 - (void)dealloc {
     
-    
     [self stopServer];
-    
+}
+
++ (id)sharedServer {
+    static dispatch_once_t pred = 0;
+    __strong static NLTHTTPStubServer *_sharedServer = nil;
+    dispatch_once(&pred, ^{
+        _sharedServer = [self stubServer];
+        [_sharedServer startServer];
+    });
+    return _sharedServer;
 }
 
 + (NLTHTTPStubServer *)currentStubServer {
