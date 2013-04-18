@@ -76,11 +76,11 @@
 
 - (NLTHTTPStubResponse<HTTPResponse>*)responseForPath:(NSString*)path HTTPMethod:(NSString *)method {
     NSString *encodedPathString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
-                                                                                       NULL,
-                                                                                       (CFStringRef)path,
-                                                                                       NULL,
-                                                                                       NULL,
-                                                                                       kCFStringEncodingUTF8 ));
+                                                                NULL,
+                                                                (CFStringRef)path,
+                                                                NULL,
+                                                                NULL,
+                                                                kCFStringEncodingUTF8));
 
     NSURL *url = [NSURL URLWithString:encodedPathString];
     for (NSUInteger i = 0; i < [self.stubResponses count]; i++) {
