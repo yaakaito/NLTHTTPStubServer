@@ -8,12 +8,11 @@
 
 #import "NLTHTTPDataStubResponseTest.h"
 #import "NLTHTTPDataStubResponse.h"
-#import "NLTStubResponse.h"
 
 @implementation NLTHTTPDataStubResponseTest
 - (void)testHttpResponseProtocol {
     NSData *data = [@"hogehogehogehoge" dataUsingEncoding:NSUTF8StringEncoding];
-    NLTHTTPDataStubResponse *response = [NLTStubResponse httpDataResponse];
+    NLTHTTPDataStubResponse *response = [[NLTHTTPDataStubResponse alloc] init];
     response.statusCode = 200;
     response.path = [NLTPath pathWithPathString:@"/index"];
     response.data = data;
@@ -40,7 +39,7 @@
 - (void)testSupportCopy {
     
     NSData *data = [@"hogehogehogehoge" dataUsingEncoding:NSUTF8StringEncoding];
-    NLTHTTPDataStubResponse *response = [NLTStubResponse httpDataResponse];
+    NLTHTTPDataStubResponse *response = [[NLTHTTPDataStubResponse alloc] init];
     response.statusCode = 200;
     response.path = [NLTPath pathWithPathString:@"/index"];
     response.data = data;

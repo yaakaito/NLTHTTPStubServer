@@ -11,13 +11,14 @@
 #import "NLTHTTPStubServer.h"
 #import "NLTHTTPStubConnection.h"
 #import "NLTHTTPStubResponse.h"
+#import "NLTHTTPDataStubResponse.h"
 #import "OCMock.h"
 
 @implementation NLTHTTPStubConnetionTest
 
 - (void)testResponseExists {
     id stubServer = [OCMockObject mockForClass:[NLTHTTPStubServer class]];
-    NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
+    NLTHTTPStubResponse *response = [[NLTHTTPDataStubResponse alloc] init];
     response.statusCode = 200;
     response.path = [NLTPath pathWithPathString:@"/index"];
     response.data = [NSData data];
@@ -45,7 +46,7 @@
 
 - (void)testCallURICheckBlock {
     id stubServer = [OCMockObject mockForClass:[NLTHTTPStubServer class]];
-    NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
+    NLTHTTPStubResponse *response = [[NLTHTTPDataStubResponse alloc] init];
     response.path = [NLTPath pathWithPathString:@"/index"];
     __block BOOL called = NO;
     [response URICheckWithBlock:^(NSURL *URI) {
@@ -64,7 +65,7 @@
 
 - (void)testCallPostBodyCheckBlock {
     id stubServer = [OCMockObject mockForClass:[NLTHTTPStubServer class]];
-    NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
+    NLTHTTPStubResponse *response = [[NLTHTTPDataStubResponse alloc] init];
     response.path = [NLTPath pathWithPathString:@"/index"];
     __block BOOL called = NO;
     [response postKeyValueBodyCheckWithBlock:^(NSDictionary *postBody) {

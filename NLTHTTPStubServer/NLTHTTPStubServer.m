@@ -115,7 +115,7 @@
 
 - (id)stub {
     
-    NLTHTTPStubResponse *stub = [NLTHTTPStubResponse httpDataResponse];
+    NLTHTTPStubResponse *stub = [[NLTHTTPStubResponse alloc] init];
     [self addStubResponse:stub];
     return stub;
 }

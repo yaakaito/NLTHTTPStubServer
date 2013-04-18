@@ -9,6 +9,7 @@
 
 #import "NLTHTTPStubServerTest.h"
 #import "NLTHTTPStubServer.h"
+#import "NLTHTTPDataStubResponse.h"
 
 @implementation NLTHTTPStubServerTest
 
@@ -38,14 +39,14 @@
 - (void)testIsStubEmpty {
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
     GHAssertTrue([server isStubEmpty], @"何もないので空のはずだが");
-    [server addStubResponse: [NLTStubResponse httpDataResponse]];
+    [server addStubResponse: [[NLTHTTPDataStubResponse alloc] init]];
     GHAssertFalse([server isStubEmpty], @"スタブがあるので空ではないはず");
     
 }
 
 - (void)testClear {
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
-    [server addStubResponse:[NLTStubResponse httpDataResponse]];
+    [server addStubResponse:[[NLTHTTPDataStubResponse alloc] init]];
     GHAssertFalse([server isStubEmpty], @"スタブがあるので空ではないはず");
     [server clear];
     GHAssertTrue([server isStubEmpty], @"何もないので空のはずだが");
@@ -72,7 +73,7 @@
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"PUT"], @"まだスタブされてない");
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"DELETE"], @"まだスタブされてない");
     
-    NLTHTTPStubResponse *get_index = [[NLTHTTPStubResponse httpDataResponse] forPath:@"/index" HTTPMethod:@"GET"];
+    NLTHTTPStubResponse *get_index = [[[NLTHTTPDataStubResponse alloc] init] forPath:@"/index" HTTPMethod:@"GET"];
     [server addStubResponse:get_index];
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:nil], @"HTTPMethodがnilだと問答無用で返せない");
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@""], @"HTTPMethodが空文字列だと問答無用で返せない");
@@ -85,7 +86,7 @@
     [server clear];
     GHAssertTrue([server isStubEmpty], @"次のテストの前に状態を空にしておく");
     
-    NLTHTTPStubResponse *post_index = [[NLTHTTPStubResponse httpDataResponse] forPath:@"/index" HTTPMethod:@"POST"];
+    NLTHTTPStubResponse *post_index = [[[NLTHTTPStubResponse alloc] init] forPath:@"/index" HTTPMethod:@"POST"];
     [server addStubResponse:post_index];
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:nil], @"HTTPMethodがnilだと問答無用で返せない");
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@""], @"HTTPMethodが空文字列だと問答無用で返せない");
@@ -101,7 +102,7 @@
 
 - (void)testResponseForPathWithQueryString {
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
-    NLTHTTPStubResponse *get_index_query1 = [[NLTHTTPStubResponse httpDataResponse] forPath:@"/index?foo=bar" HTTPMethod:@"GET"];
+    NLTHTTPStubResponse *get_index_query1 = [[[NLTHTTPStubResponse alloc] init] forPath:@"/index?foo=bar" HTTPMethod:@"GET"];
     [server addStubResponse:get_index_query1];
     GHAssertNil([server responseForPath:@"/index?foo=bar" HTTPMethod:@"GET"], @"クエリストリングを指定しても返ってくる");
 }
@@ -114,8 +115,8 @@
                                                                                    (CFStringRef)@"!*'();:@&=+$,/?%#[]",
                                                                                    kCFStringEncodingUTF8 );
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
-    [server addStubResponse:[NLTStubResponse httpDataResponse]];
-    NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
+    [server addStubResponse:[[NLTHTTPDataStubResponse alloc] init]];
+    NLTHTTPStubResponse *response =[[NLTHTTPDataStubResponse alloc] init];
     response.statusCode = 200;
     response.path = [NLTPath pathWithPathString:[NSString stringWithFormat:@"/index/%@", encodedString]];
     response.data = [NSData data];

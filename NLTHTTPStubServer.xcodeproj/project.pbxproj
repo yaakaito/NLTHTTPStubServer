@@ -34,10 +34,6 @@
 		212C893A1508F0E200F2FDBD /* NLTHTTPDataStubResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 212C89381508F0E200F2FDBD /* NLTHTTPDataStubResponse.m */; };
 		212C893B1508F0E200F2FDBD /* NLTHTTPDataStubResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 212C89381508F0E200F2FDBD /* NLTHTTPDataStubResponse.m */; };
 		212C893E1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 212C893D1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.m */; };
-		2190252B1508C72100F3DD6A /* NLTStubResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 219025291508C71B00F3DD6A /* NLTStubResponse.h */; };
-		2190252C1508C72100F3DD6A /* NLTStubResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2190252A1508C71D00F3DD6A /* NLTStubResponse.m */; };
-		2190252D1508C72100F3DD6A /* NLTStubResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2190252A1508C71D00F3DD6A /* NLTStubResponse.m */; };
-		219025481508CA4800F3DD6A /* NLTStubResponseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 219025471508CA4600F3DD6A /* NLTStubResponseTest.m */; };
 		35BBB69AF42F46A4A77CBCD8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8710FB411A4046B60DBB67 /* libPods.a */; };
 		B93943EE14FA1E57008A8D8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B93943ED14FA1E57008A8D8C /* Foundation.framework */; };
 		B93943F414FA1E57008A8D8C /* NLTHTTPStubServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B93943F314FA1E57008A8D8C /* NLTHTTPStubServer.m */; };
@@ -82,10 +78,6 @@
 		212C893C1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTHTTPDataStubResponseTest.h; sourceTree = "<group>"; };
 		212C893D1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTHTTPDataStubResponseTest.m; sourceTree = "<group>"; };
 		212C894A150916C200F2FDBD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		219025291508C71B00F3DD6A /* NLTStubResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTStubResponse.h; sourceTree = "<group>"; };
-		2190252A1508C71D00F3DD6A /* NLTStubResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTStubResponse.m; sourceTree = "<group>"; };
-		219025461508CA4400F3DD6A /* NLTStubResponseTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTStubResponseTest.h; sourceTree = "<group>"; };
-		219025471508CA4600F3DD6A /* NLTStubResponseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTStubResponseTest.m; sourceTree = "<group>"; };
 		4F8710FB411A4046B60DBB67 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		803EAECA4F454248913EEB50 /* Pods.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		B93943EA14FA1E57008A8D8C /* libNLTHTTPStubServer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNLTHTTPStubServer.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,8 +137,6 @@
 				210F564414FC37A400E90D38 /* NLTHTTPStubResponseTest.m */,
 				210F564814FC3E3C00E90D38 /* NLTHTTPStubConnetionTest.h */,
 				210F564914FC3E3C00E90D38 /* NLTHTTPStubConnetionTest.m */,
-				219025461508CA4400F3DD6A /* NLTStubResponseTest.h */,
-				219025471508CA4600F3DD6A /* NLTStubResponseTest.m */,
 				212C893C1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.h */,
 				212C893D1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.m */,
 				B9BD480915F27D2400DBAA04 /* NLTPathTest.m */,
@@ -218,8 +208,6 @@
 				210F563314FC1C3600E90D38 /* NLTHGlobalSettings.m */,
 				210F563714FC1F5300E90D38 /* NLTHTTPStubConnection.h */,
 				210F563814FC1F5300E90D38 /* NLTHTTPStubConnection.m */,
-				219025291508C71B00F3DD6A /* NLTStubResponse.h */,
-				2190252A1508C71D00F3DD6A /* NLTStubResponse.m */,
 				212C89371508F0E200F2FDBD /* NLTHTTPDataStubResponse.h */,
 				212C89381508F0E200F2FDBD /* NLTHTTPDataStubResponse.m */,
 				B9BD480315F273BD00DBAA04 /* NLTPath.h */,
@@ -247,7 +235,6 @@
 				210F562614FC1A9D00E90D38 /* NLTHTTPStubResponse.h in Headers */,
 				210F563414FC1C3600E90D38 /* NLTHGlobalSettings.h in Headers */,
 				210F563914FC1F5300E90D38 /* NLTHTTPStubConnection.h in Headers */,
-				2190252B1508C72100F3DD6A /* NLTStubResponse.h in Headers */,
 				212C89391508F0E200F2FDBD /* NLTHTTPDataStubResponse.h in Headers */,
 				B955BF1115480A9A004717E5 /* NLTSConsts.h in Headers */,
 				B9BD480515F273BD00DBAA04 /* NLTPath.h in Headers */,
@@ -360,8 +347,6 @@
 				210F563F14FC270000E90D38 /* NLTHTTPStubServer.m in Sources */,
 				210F564514FC37A400E90D38 /* NLTHTTPStubResponseTest.m in Sources */,
 				210F564A14FC3E3D00E90D38 /* NLTHTTPStubConnetionTest.m in Sources */,
-				2190252D1508C72100F3DD6A /* NLTStubResponse.m in Sources */,
-				219025481508CA4800F3DD6A /* NLTStubResponseTest.m in Sources */,
 				212C893B1508F0E200F2FDBD /* NLTHTTPDataStubResponse.m in Sources */,
 				212C893E1508F4CD00F2FDBD /* NLTHTTPDataStubResponseTest.m in Sources */,
 				B9BD480715F273BD00DBAA04 /* NLTPath.m in Sources */,
@@ -377,7 +362,6 @@
 				210F562714FC1A9D00E90D38 /* NLTHTTPStubResponse.m in Sources */,
 				210F563514FC1C3600E90D38 /* NLTHGlobalSettings.m in Sources */,
 				210F563A14FC1F5300E90D38 /* NLTHTTPStubConnection.m in Sources */,
-				2190252C1508C72100F3DD6A /* NLTStubResponse.m in Sources */,
 				212C893A1508F0E200F2FDBD /* NLTHTTPDataStubResponse.m in Sources */,
 				B9BD480615F273BD00DBAA04 /* NLTPath.m in Sources */,
 			);

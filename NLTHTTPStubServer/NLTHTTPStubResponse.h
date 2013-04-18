@@ -9,14 +9,13 @@
 
 #import <Foundation/Foundation.h>
 #import "NLTSConsts.h"
-#import "NLTStubResponse.h"
 #import "NLTPath.h"
 
-@interface NLTHTTPStubResponse : NLTStubResponse <NLTResponseChaining
-                                                , NLTResponseHeaderPresetChaining
-                                                , NLTResponseDataPresetChaining
-                                                , NLTResponseHeaderCharsetChaining
-                                                , NLTResponseDataCharsetChaining>
+@interface NLTHTTPStubResponse : NSObject <NLTResponseChaining
+                                           , NLTResponseHeaderPresetChaining
+                                           , NLTResponseDataPresetChaining
+                                           , NLTResponseHeaderCharsetChaining
+                                           , NLTResponseDataCharsetChaining>
 
 @property(nonatomic,strong) NLTPath   *path;
 @property                   NSInteger  statusCode;
