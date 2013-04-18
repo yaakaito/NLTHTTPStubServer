@@ -71,7 +71,6 @@
     GHAssertEqualStrings(@"GET", stub.httpMethod, @"httpMethodが間違ってる");
     GHAssertEqualStrings(@"hoge", [[NSString alloc] initWithData:stub.data encoding:NSUTF8StringEncoding], @"データが違う");
     GHAssertEquals(200, stub.statusCode, @"ステータスコードが違う");
-    GHAssertTrue(called, @"チェックブロックがコールされない");
     called = NO;
     stub.postKeyValueBodyCheckBlock(nil);
     GHAssertTrue(called, @"チェックブロックがコールされない");
