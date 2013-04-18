@@ -22,8 +22,6 @@
 
 + (NLTHTTPStubServer*)currentStubServer;
 + (void)setCurrentStubServer:(NLTHTTPStubServer*)stubServer;
-+ (NLTHTTPStubServer*)__currentStubServer:(NLTHTTPStubServer*)stubServer;
-+ (NLTHCurrentStubGetter*)__stubGetter;
 
 + (NLTHTTPStubServer*)stubServer;
 

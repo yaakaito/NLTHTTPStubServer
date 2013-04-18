@@ -31,11 +31,6 @@
     GHAssertNotEqualObjects(server1, [NLTHTTPStubServer currentStubServer], @"以前のものが取得されている");
 }
 
-- (void)testStubGetter {
-    NLTHTTPStubServer *getter = [NLTHTTPStubServer __stubGetter];
-    GHAssertTrue([getter isKindOfClass:[NLTHCurrentStubGetter class]], @"このクラスは取得用のクラスじゃない");
-}
-
 - (void)testIsStubEmpty {
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
     GHAssertTrue([server isStubEmpty], @"何もないので空のはずだが");
