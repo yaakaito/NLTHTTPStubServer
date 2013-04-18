@@ -27,9 +27,6 @@
 
 @implementation NLTPath
 
-@synthesize pathString = _pathString;
-@synthesize parameters = _parameters;
-
 + (NLTPath *)pathWithPathString:(NSString *)pathString {
     
     return [[self alloc] initWithPathString:pathString andParameters:nil];

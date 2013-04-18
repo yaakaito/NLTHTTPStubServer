@@ -13,11 +13,7 @@
 
 @implementation NLTHTTPStubServer {
     HTTPServer *_httpServer;
-    NSMutableArray *_stubResponses;
 }
-
-
-@synthesize stubResponses = _stubResponses;
 
 - (id)init
 {

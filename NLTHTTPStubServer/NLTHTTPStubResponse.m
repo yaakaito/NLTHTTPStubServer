@@ -19,17 +19,6 @@
 
 @implementation NLTHTTPStubResponse
 
-@synthesize path;
-@synthesize statusCode;
-@synthesize data;
-@synthesize filepath;
-@synthesize shouldTimeout;
-@synthesize postBodyCheckBlock;
-@synthesize postKeyValueBodyCheckBlock;
-@synthesize httpHeaders;
-@synthesize httpMethod;
-@synthesize processingTimeSeconds;
-
 + (NLTHTTPStubResponse *)stubResponse {
     return [[NLTHTTPStubResponse alloc] init];
 }

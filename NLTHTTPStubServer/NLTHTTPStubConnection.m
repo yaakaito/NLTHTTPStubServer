@@ -11,7 +11,6 @@
 #import "HTTPMessage.h"
 
 @implementation NLTHTTPStubConnection
-@synthesize stubServer;
 
 - (id)init
 {
