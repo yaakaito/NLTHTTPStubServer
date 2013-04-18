@@ -97,7 +97,7 @@
     [self.stubResponses addObject:stubResponse];
 }
 
-- (BOOL)isStubEmpty {
+- (BOOL)verify {
     return [self.stubResponses count] == 0;
 }
 
@@ -118,7 +118,7 @@
     [_httpServer stop];
 }
 
-- (id)stub {
+- (id)expect {
     
     NLTHTTPStubResponse *stub = [[NLTHTTPDataStubResponse alloc] init];
     [self addStubResponse:stub];

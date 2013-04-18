@@ -33,29 +33,29 @@
 
 - (void)testIsStubEmpty {
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
-    GHAssertTrue([server isStubEmpty], @"何もないので空のはずだが");
+    GHAssertTrue([server verify], @"何もないので空のはずだが");
     [server addStubResponse: [[NLTHTTPDataStubResponse alloc] init]];
-    GHAssertFalse([server isStubEmpty], @"スタブがあるので空ではないはず");
+    GHAssertFalse([server verify], @"スタブがあるので空ではないはず");
     
 }
 
 - (void)testClear {
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
     [server addStubResponse:[[NLTHTTPDataStubResponse alloc] init]];
-    GHAssertFalse([server isStubEmpty], @"スタブがあるので空ではないはず");
+    GHAssertFalse([server verify], @"スタブがあるので空ではないはず");
     [server clear];
-    GHAssertTrue([server isStubEmpty], @"何もないので空のはずだが");
+    GHAssertTrue([server verify], @"何もないので空のはずだが");
 
 }
 
 - (void)testChainingStub {
     
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
-    NLTHTTPStubResponse *response = [server stub];
+    NLTHTTPStubResponse *response = [server expect];
     GHAssertEquals(1U, [server.stubResponses count], @"スタブが1つ作られるはず");
     GHAssertEqualObjects(response, (server.stubResponses)[0], @"オブジェクトが一致しない");
     
-    [server stub];
+    [server expect];
     GHAssertEquals(2U, [server.stubResponses count], @"スタブが2つ作られるはず");
 }
 
@@ -79,7 +79,7 @@
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"PUT"], @"メソッドが違うので返せない");
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"DELETE"], @"メソッドが違うので返せない");
     [server clear];
-    GHAssertTrue([server isStubEmpty], @"次のテストの前に状態を空にしておく");
+    GHAssertTrue([server verify], @"次のテストの前に状態を空にしておく");
     
     NLTHTTPStubResponse *post_index = [[[NLTHTTPStubResponse alloc] init] forPath:@"/index" HTTPMethod:@"POST"];
     [server addStubResponse:post_index];
@@ -92,7 +92,7 @@
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"PUT"], @"メソッドが違うので返せない");
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"DELETE"], @"メソッドが違うので返せない");
     [server clear];
-    GHAssertTrue([server isStubEmpty], @"次のテストの前に状態を空にしておく");
+    GHAssertTrue([server verify], @"次のテストの前に状態を空にしておく");
 }
 
 - (void)testResponseForPathWithQueryString {

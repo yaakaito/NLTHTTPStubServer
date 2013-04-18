@@ -12,7 +12,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol NLTServerChaining
-- (id)stub;
+- (id)expect;
 @end
 
 typedef void(^NLTPostBodyCheckBlock)(NSData* postBody);

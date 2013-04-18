@@ -21,7 +21,7 @@
     [[[response forPath:@"/index"] andStatusCode:200] andPlainResponse:[NSData data]];
 
     id stubServer = [OCMockObject mockForClass:[NLTHTTPStubServer class]];
-    [[[stubServer stub] andReturn:response] responseForPath:[OCMArg any] HTTPMethod:[OCMArg any]];
+    [[[stubServer expect] andReturn:response] responseForPath:[OCMArg any] HTTPMethod:[OCMArg any]];
     
     NLTHTTPStubConnection *connection = [[NLTHTTPStubConnection alloc] init];
     connection.stubServer = stubServer;
@@ -34,7 +34,7 @@
 
 - (void)testResponseNothing {
     id stubServer = [OCMockObject mockForClass:[NLTHTTPStubServer class]];
-    [[[stubServer stub] andReturn:nil] responseForPath:[OCMArg any] HTTPMethod:[OCMArg any]];
+    [[[stubServer expect] andReturn:nil] responseForPath:[OCMArg any] HTTPMethod:[OCMArg any]];
     
     NLTHTTPStubConnection *connection = [[NLTHTTPStubConnection alloc] init];
     connection.stubServer = stubServer;
@@ -53,7 +53,7 @@
         called = YES;
     }];
     
-    [[[stubServer stub] andReturn:response] responseForPath:[OCMArg any] HTTPMethod:[OCMArg any]];
+    [[[stubServer expect] andReturn:response] responseForPath:[OCMArg any] HTTPMethod:[OCMArg any]];
     
     NLTHTTPStubConnection *connection = [[NLTHTTPStubConnection alloc] init];
     connection.stubServer = stubServer;

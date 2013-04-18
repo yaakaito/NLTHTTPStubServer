@@ -41,7 +41,7 @@
 
 - (void)tearDown {
     // Run after each test method
-    if(![server isStubEmpty]) {
+    if(![server verify]) {
         GHFail(@"stubs not empty");
     }
 }
@@ -76,7 +76,7 @@
 - (void)testMostSimply {
     
     NSData *data = [@"HelloWorld" dataUsingEncoding:NSUTF8StringEncoding];
-    [[[server stub] forPath:@"/stub"] andPlainResponse:data];
+    [[[server expect] forPath:@"/stub"] andPlainResponse:data];
     
     __weak id that = self;
     [self testWithCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
@@ -87,7 +87,7 @@
 
 - (void)testWithFile {
     
-    [[[server stub] forPath:@"/stub"] andJSONResponseResource:@"fake" ofType:@"json"];
+    [[[server expect] forPath:@"/stub"] andJSONResponseResource:@"fake" ofType:@"json"];
     
     __weak id that = self;
     [self testWithCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {

@@ -30,7 +30,7 @@
 + (NLTHGlobalSettings*)globalSettings;
 
 - (void)addStubResponse:(NLTHTTPStubResponse*)stubResponse;
-- (BOOL)isStubEmpty;
+- (BOOL)verify;
 - (void)clear;
 
 - (void)startServer;
