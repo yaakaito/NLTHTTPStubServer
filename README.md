@@ -56,7 +56,7 @@ Servers URL is `localhost:12345` on default.
     // GHUnit: wait for status...
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10];
 
-    // invoked all expects?
+    // Invoked all expects?
     [server verify];
 }
 ```
@@ -134,6 +134,15 @@ This request can matches `/fake?k1=hogeeeeeeee`, `/fake?k1=fugaaaaaaaaaa` and mo
 [[[server stub] forPath:@"/fake"] andProcessingTime:10.0f];
 ```
 
+## Checking POST body
+
+```objective-c
+[[[server expect] forPath:@"/fake" HTTPMethod:@"POST"] andCheckPostBody:^(NSData *postBody) {
+        NSString *postBodyString = [that toString:postBody];
+        GHAssertEqualStrings(postBodyString, @"POST_BODY", nil);
+    }];
+```
+
 ## Supporting content-types
 
 ```objective-c
@@ -147,7 +156,3 @@ This request can matches `/fake?k1=hogeeeeeeee`, `/fake?k1=fugaaaaaaaaaa` and mo
 * Binary
   * application/octet-stream
 
-
-```
-
-## 
