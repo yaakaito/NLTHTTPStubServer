@@ -123,4 +123,21 @@
     NSString *encodedPath = [NSString stringWithFormat:@"/index/%@", encodedString];
     GHAssertEqualStrings(encodedPath, testedResponse.path.pathString, @"/index/マルチバイト文字列のstubを取得できるはずだが");
 }
+
+- (void)testExternalStub {
+    NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
+    NLTHTTPStubResponse *response = [[NLTHTTPDataStubResponse alloc] init];
+    response.external = YES;
+    [[response forPath:@"/index"] andPlainResponse:[NSData data]];
+    [server addStubResponse:response];
+
+    NSURL *url = [NSURL URLWithString:@"/index"];
+    [server responseForPath:[url relativePath] HTTPMethod:@"GET"];
+    NLTHTTPStubResponse *actual = [server responseForPath:[url relativePath] HTTPMethod:@"GET"];
+
+    GHAssertNotNil(actual, nil);
+    GHAssertEqualObjects(actual, response, nil);
+
+    GHAssertNoThrow([server verify], nil);
+}
 @end

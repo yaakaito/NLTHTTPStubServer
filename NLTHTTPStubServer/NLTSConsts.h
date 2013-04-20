@@ -13,6 +13,7 @@
 
 @protocol NLTServerChaining
 - (id)expect;
+- (id)stub;
 @end
 
 typedef void(^NLTPostBodyCheckBlock)(NSData* postBody);

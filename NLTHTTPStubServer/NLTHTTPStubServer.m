@@ -86,7 +86,9 @@
     for (NSUInteger i = 0; i < [self.stubResponses count]; i++) {
         NLTHTTPStubResponse *response = (self.stubResponses)[i];
         if([response.path isMatchURL:url] && [[response httpMethod] isEqualToString:method]){
-            [self.stubResponses removeObject:response];
+            if (!response.external) {
+                [self.stubResponses removeObject:response];                
+            }
             return (NLTHTTPStubResponse<HTTPResponse>*)response;
         }
     }
@@ -135,6 +137,14 @@
 - (id)expect {
     
     NLTHTTPStubResponse *stub = [[NLTHTTPDataStubResponse alloc] init];
+    [self addStubResponse:stub];
+    return stub;
+}
+
+- (id)stub{
+    
+    NLTHTTPStubResponse *stub = [[NLTHTTPDataStubResponse alloc] init];
+    stub.external = YES;
     [self addStubResponse:stub];
     return stub;
 }
