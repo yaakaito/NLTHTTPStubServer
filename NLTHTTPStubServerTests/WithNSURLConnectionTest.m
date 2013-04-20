@@ -75,13 +75,13 @@
 
 - (void)testMostSimply {
     
-    NSData *data = [@"HelloWorld" dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [@"RESPONSE" dataUsingEncoding:NSUTF8StringEncoding];
     [[[server expect] forPath:@"/stub"] andPlainResponse:data];
     
     __weak id that = self;
     [self testWithCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        GHAssertNil(error, @"");
-        GHAssertEqualStrings([that toString:data], @"HelloWorld", @"");
+        GHAssertNil(error, nil);
+        GHAssertEqualStrings([that toString:data], @"RESPONSE", nil);
     }];
 
     [server verify];
@@ -121,9 +121,9 @@
     
     __weak id that = self;
     [self testWithCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        GHAssertNil(error, @"");
+        GHAssertNil(error, nil);
         NSDictionary *JSON = [that toJSON:data];
-        GHAssertEqualStrings(JSON[@"fake"], @"dummy", @"");
+        GHAssertEqualStrings(JSON[@"fake"], @"dummy", nil);
     }];
 
     [server verify];
@@ -150,12 +150,12 @@
     [self testWithURLString:@"http://localhost:12345/one"
        andCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
            NSDictionary *JSON = [that toJSON:data];
-           GHAssertEqualStrings(JSON[@"fake"], @"dummy", @"");
+           GHAssertEqualStrings(JSON[@"fake"], @"dummy", nil);
        }];
     [self testWithURLString:@"http://localhost:12345/two"
        andCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
            NSDictionary *JSON = [that toJSON:data];
-           GHAssertEqualStrings(JSON[@"fake"], @"dummy", @"");
+           GHAssertEqualStrings(JSON[@"fake"], @"dummy", nil);
        }];
 
     [server verify];
@@ -168,11 +168,11 @@
 
     __weak id that = self;
     [self testWithCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        GHAssertEqualStrings([that toString:data], @"ONE", @"");
+        GHAssertEqualStrings([that toString:data], @"ONE", nil);
     }];
 
     [self testWithCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        GHAssertEqualStrings([that toString:data], @"TWO", @"");
+        GHAssertEqualStrings([that toString:data], @"TWO", nil);
     }];
 
     [server verify];
