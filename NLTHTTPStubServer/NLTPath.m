@@ -66,7 +66,7 @@
 
 
 - (BOOL)isMatchURL:(NSURL *)url {
-    
+
     NSString *otherPath = [url relativePath];
     if(![otherPath isEqualToString:[[NSURL URLWithString:self.pathString] relativePath]]) {
         return NO;
@@ -90,7 +90,7 @@
            ![(self.parameters)[key] isEqualToString:otherParameters[key]]) {
             return NO;
         }
-        
+
         [parameterAllKeys removeObject:key];
     }
     

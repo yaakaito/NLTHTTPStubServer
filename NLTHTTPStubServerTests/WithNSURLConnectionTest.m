@@ -57,7 +57,7 @@
 - (void)testWithURLString:(NSString *)urlString andCompletionHandler:(void (^)(NSURLResponse *response, NSData *data, NSError *error))handler {
     [self prepare];
     __weak id that = self;
-    
+
     [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]
                                        queue:[[NSOperationQueue alloc] init]
                            completionHandler:^(NSURLResponse *res, NSData *data, NSError *err) {
@@ -83,6 +83,22 @@
         GHAssertNil(error, @"");
         GHAssertEqualStrings([that toString:data], @"HelloWorld", @"");
     }];
+
+    [server verify];
+}
+
+- (void)testWithNLTPathAndGavenGetParameters {
+
+    [[server expect] forPath:[NLTPath pathWithPathString:@"/stub" andParameters:@{
+            @"k1" : @"v1",
+            @"k2" : @"v2",
+            @"w" : [NLTPath anyValue]
+    }]];
+
+    [self testWithURLString:@"http://localhost:12345/stub?k1=v1&k2=v2&w=willlllld"
+       andCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {}];
+
+    [server verify];
 }
 
 - (void)testWithFile {
@@ -95,6 +111,8 @@
         NSDictionary *JSON = [that toJSON:data];
         GHAssertEqualStrings(JSON[@"fake"], @"dummy", @"");
     }];
+
+    [server verify];
 }
 
 
