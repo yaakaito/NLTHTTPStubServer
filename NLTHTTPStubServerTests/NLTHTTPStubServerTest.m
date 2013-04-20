@@ -35,14 +35,14 @@
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
     GHAssertTrue([server verify], @"何もないので空のはずだが");
     [server addStubResponse: [[NLTHTTPDataStubResponse alloc] init]];
-    GHAssertFalse([server verify], @"スタブがあるので空ではないはず");
+    GHAssertThrows([server verify], @"スタブがあるので空ではないはず");
     
 }
 
 - (void)testClear {
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
     [server addStubResponse:[[NLTHTTPDataStubResponse alloc] init]];
-    GHAssertFalse([server verify], @"スタブがあるので空ではないはず");
+    GHAssertThrows([server verify], @"スタブがあるので空ではないはず");
     [server clear];
     GHAssertTrue([server verify], @"何もないので空のはずだが");
 
