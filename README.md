@@ -1,78 +1,145 @@
 # NLTHTTPStubServer
-NLTHTTPStubServer is mocking server.
-launch simple HTTPServer on testcodes.
 
-# How to install 
-[CocoaPods](https://github.com/CocoaPods/)
+[Japanese]()
 
-# Usage
+Fake server for iOS testing.
 
-GHUnit and AFNetworking example
+Can register fake response by `expect` or `stub`.
+
+```Objetive-C
+[[[server expect] forPath:@"/api/"] andJSONResponseResource:@"fake-response" ofType:@"json"];
+```
+
+# Getting Ready
+
+* With [CocoaPods](https://github.com/CocoaPods/).
+
+Podfile:
+```ruby
+pod 'NLTHTTPStubServer'
+```
+
+* Import `NLTHTTPStubServer.h` at top of your TestCase.
+
+# First Step
+
+The most simply example with GHUnit async test case.
+Servers URL is `localhost:12345` on default.
 
 ```objective-c
-@implementation NLTHTTPStubServerWithAFNetwrokingTest
-
-- (void)setUpClass {
-    [NLTHTTPStubServer globalSettings].port = 12345;
-    server = [[NLTHTTPStubServer stubServer] retain];
-    [server startServer];
-}
-
-- (void)tearDownClass {
+- (void)testMostSimply {
     
-    [server stopServer];
-    [server release];
-}
+    // Get shared server instance.
+    server = [NLTHTTPStubServer sharedServer];
 
-- (void)setUp {
-    [server clear];
-}
-
-- (void)tearDown {
-    if(![server isStubEmpty]) {
-        GHFail(@"stubs not empty");
-    }
-}
-
-- (void)testJSONResponse {
+    // Register fake response for localhost:12345/fake
+    NSData *data = [@"RESPONSE" dataUsingEncoding:NSUTF8StringEncoding];
+    [[[server expect] forPath:@"/fake"] andPlainResponse:data];
     
-    [[[server stub] forPath:@"/index.json"] andJSONResponseResource:@"test" ofType:@"json"]; // create stub response
-    
+    // GHUnit: Setup async test
     [self prepare];
-    NSURL *url = [NSURL URLWithString:@"http://localhost:12345/index.json"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        GHAssertEqualStrings(@"ok", [JSON objectForKey:@"status"], @"status = ok");
-        GHAssertEqualStrings(@"json", [JSON objectForKey:@"format"], @"format = json");
-        [self notify:kGHUnitWaitStatusSuccess];
-    } failure:nil];
-    [operation start];
-    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0f];
+
+    // Access to localhost:12345/fake
+    __weak id that = self;
+    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/fake"]]
+                                       queue:[[NSOperationQueue alloc] init]
+                           completionHandler:^(NSURLResponse *res, NSData *data, NSError *err) {
+
+                                // Getting a fake response!
+                                GHAssertEqualStrings(toString(data), @"RESPONSE", nil);
+
+                                // GHUnit: notify!
+                               [that notify:kGHUnitWaitStatusSuccess];
+                           
+                           }];
     
+    // GHUnit: wait for status...
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10];
+
+    // invoked all expects?
+    [server verify];
 }
-@end
 ```
 
-## setup server
+# Next Step
+
+## Expecations and verifycation
 
 ```objective-c
-[NLTHTTPStubServer globalSettings].port = 12345;
-server = [[NLTHTTPStubServer stubServer] retain];
-[server startServer];
+[[server expect] forPath:@"/fake"];
 ```
 
-## stop server
+Register fake response. Server will response this fake if requested `/fake`.
+After this setup the functionality under test should be invoked followed by
+
 ```objective-c
-[server stopServer];
-[server release];
+[server verify];
 ```
 
-## create simple response
+When expected response has not been invoked, verify method will raise an exception.
+
+## Stubs
+
 ```objective-c
-[[[server stub] forPath:@"/api.json"] andJSONResponse:json];
+[[server stub] forPath:@"/fake"]
 ```
 
-### support content-types
+`stub` is like `expect`, But `stub` is existing if invoked it. 
+`verify` ignores response that registered by `stub`.
+
+# Features
+
+## NLTPath
+
+`NLTPath` generate complicated path.
+For example, This request has two GET parameters.
+
+```objective-c
+[[server expect] forPath:[NLTPath pathWithPathString:@"/fake" andParameters:@{
+        @"k1" : @"v1",
+        @"k2" : @"v2",
+}]];
+```
+
+This request can matches `/fake?k1=v1&k2=v2` or `/fake?k2=v2&k1=v1`.
+
+### anyValue
+
+Can use `[NLTPath anyValue]` to parameters value.
+
+```objective-c
+[[server expect] forPath:[NLTPath pathWithPathString:@"/fake" andParameters:@{
+        @"k1" : [NLTPAth anyValue]
+}]];
+```
+
+This request can matches `/fake?k1=hogeeeeeeee`, `/fake?k1=fugaaaaaaaaaa` and mores.
+
+
+## HTTP Method
+
+```objective-c
+[[server stub] forPath:@"/fake" HTTPMethodPost];
+```
+
+## Status code
+
+```objective-c
+[[[server stub] forPath:@"/fake"] andStatusCode:200];
+```
+
+## Simulate waiting
+
+```objective-c
+[[[server stub] forPath:@"/fake"] andProcessingTime:10.0f];
+```
+
+## Supporting content-types
+
+```objective-c
+[[[server expect] forPath:@"/fake"] and{ContentType}Response...]
+```
+
 * JSON
 * HTML
 * XML
@@ -80,19 +147,7 @@ server = [[NLTHTTPStubServer stubServer] retain];
 * Binary
   * application/octet-stream
 
-## set status code
-```objective-c
-[[[server stub] forPath:@"/api.json"] andStatusCode:200];
+
 ```
 
-## simulate timeout
-```objective-c
-[[[server stub] forPath:@"/api.json"] andTimeout];
-```
-
-## check query
-```objective-c
-[[[server stub] forPath:@"api.json"] andCheckURI:^(NSURL *URI) {
-    // check URI
-}];
-```
+## 
