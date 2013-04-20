@@ -23,15 +23,7 @@
 
 - (void)setUpClass {
     // Run at start of all tests in the class
-    [NLTHTTPStubServer globalSettings].port = 12345;
-    
-    server = [NLTHTTPStubServer stubServer];
-    [server startServer];
-}
-
-- (void)tearDownClass {
-    // Run at end of all tests in the class
-    [server stopServer];
+    server = [NLTHTTPStubServer sharedServer];
 }
 
 - (void)setUp {
