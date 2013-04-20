@@ -101,6 +101,20 @@
     [server verify];
 }
 
+- (void)testExternalStubResponse {
+
+    [[server stub] forPath:@"/stub"];
+    [[server expect] forPath:@"/expect"];
+    [self testWithURLString:@"http://localhost:12345/stub"
+       andCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {}];
+    [self testWithURLString:@"http://localhost:12345/expect"
+       andCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {}];
+    [self testWithURLString:@"http://localhost:12345/stub"
+       andCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {}];
+
+    [server verify];
+}
+
 - (void)testWithFile {
     
     [[[server expect] forPath:@"/stub"] andJSONResponseResource:@"fake" ofType:@"json"];
@@ -115,5 +129,138 @@
     [server verify];
 }
 
+- (void)testNotFound {
 
+    [[[server expect] forPath:@"/stub"] andStatusCode:404];
+
+    [self testWithCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        NSHTTPURLResponse *URLResponse = (NSHTTPURLResponse *)response;
+        GHAssertEquals([URLResponse statusCode], 404, nil);
+    }];
+
+    [server verify];
+}
+
+- (void)testRequestTwice {
+
+    [[[server expect] forPath:@"/one"] andJSONResponseResource:@"fake" ofType:@"json"];
+    [[[server expect] forPath:@"/two"] andJSONResponseResource:@"fake" ofType:@"json"];
+
+    __weak id that = self;
+    [self testWithURLString:@"http://localhost:12345/one"
+       andCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+           NSDictionary *JSON = [that toJSON:data];
+           GHAssertEqualStrings(JSON[@"fake"], @"dummy", @"");
+       }];
+    [self testWithURLString:@"http://localhost:12345/two"
+       andCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+           NSDictionary *JSON = [that toJSON:data];
+           GHAssertEqualStrings(JSON[@"fake"], @"dummy", @"");
+       }];
+
+    [server verify];
+}
+
+- (void)testDuplicate {
+
+    [[[server expect] forPath:@"/stub"] andPlainResponse:[@"ONE" dataUsingEncoding:NSUTF8StringEncoding]];
+    [[[server expect] forPath:@"/stub"] andPlainResponse:[@"TWO" dataUsingEncoding:NSUTF8StringEncoding]];
+
+    __weak id that = self;
+    [self testWithCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        GHAssertEqualStrings([that toString:data], @"ONE", @"");
+    }];
+
+    [self testWithCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        GHAssertEqualStrings([that toString:data], @"TWO", @"");
+    }];
+
+    [server verify];
+}
+
+- (void)testProcessingTime {
+
+    [[[[server expect] forPath:@"/stub"] andPlainResponse:[@"RESPONSE" dataUsingEncoding:NSUTF8StringEncoding]] andProcessingTime:1.5f];
+
+    NSDate *t = [NSDate date];
+    [self testWithCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {}];
+
+    GHAssertTrue(-[t timeIntervalSinceNow] > 1.4, nil);
+}
+
+- (void)testWithHTTPMethod:(NSString *)method
+            POSTBodyString:(NSString *)bodyString
+      andCompletionHandler:(void (^)(NSURLResponse *response, NSData *data, NSError *error))handler {
+
+    NSURL *url = [NSURL URLWithString:@"http://localhost:12345/stub"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:method];
+    [request setHTTPBody:[bodyString dataUsingEncoding:NSUTF8StringEncoding]];
+
+    [self prepare];
+    __weak id that = self;
+
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[[NSOperationQueue alloc] init]
+                           completionHandler:^(NSURLResponse *res, NSData *data, NSError *err) {
+                               handler(res, data, err);
+                               [that notify:kGHUnitWaitStatusSuccess];
+                           }];
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0f];
+}
+
+- (void)testPOSTRequest {
+
+    __weak id that = self;
+    __block BOOL called = NO;
+    [[[[server expect] forPath:@"/stub" HTTPMethod:@"POST"] andPlainResponse:[@"RESPONSE" dataUsingEncoding:NSUTF8StringEncoding]] andCheckPostBody:^(NSData *postBody) {
+        NSString *postBodyString = [that toString:postBody];
+        GHAssertEqualStrings(postBodyString, @"POST_BODY", nil);
+        called = YES;
+    }];
+
+    [self testWithHTTPMethod:@"POST"
+              POSTBodyString:@"POST_BODY"
+        andCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+            GHAssertEqualStrings([that toString:data], @"RESPONSE", nil);
+        }];
+
+    GHAssertTrue(called, nil);
+    [server verify];
+
+}
+
+- (void)testPUTRequest {
+
+    __weak id that = self;
+    __block BOOL called = NO;
+    [[[[server expect] forPath:@"/stub" HTTPMethod:@"PUT"] andPlainResponse:[@"RESPONSE" dataUsingEncoding:NSUTF8StringEncoding]] andCheckPostBody:^(NSData *postBody) {
+        NSString *postBodyString = [that toString:postBody];
+        GHAssertEqualStrings(postBodyString, @"POST_BODY", nil);
+        called = YES;
+    }];
+
+    [self testWithHTTPMethod:@"PUT"
+              POSTBodyString:@"POST_BODY"
+        andCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+            GHAssertEqualStrings([that toString:data], @"RESPONSE", nil);
+        }];
+
+    GHAssertTrue(called, nil);
+    [server verify];
+
+}
+
+- (void)testDELETERequest {
+    [[[server expect] forPath:@"/stub" HTTPMethod:@"DELETE"] andPlainResponse:[@"RESPONSE" dataUsingEncoding:NSUTF8StringEncoding]];
+
+    __weak id that = self;
+    [self testWithHTTPMethod:@"DELETE"
+              POSTBodyString:nil
+        andCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+            GHAssertEqualStrings([that toString:data], @"RESPONSE", nil);
+        }];
+
+    [server verify];
+}
 @end
