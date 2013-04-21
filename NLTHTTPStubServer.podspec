@@ -10,5 +10,5 @@ Pod::Spec.new do |s|
   s.source_files = 'NLTHTTPStubServer/**/*.{h,m}'
   s.preserve_paths = 'Podfile', 'Podfile.lock', 'NLTHTTPStubServerTests', 'Frameworks', 'NLTHTTPStubServer.xcodeproj', 'NLTHTTPStubServer.xcworkspace'
   s.requires_arc = true
-  s.dependency 'CocoaHTTPServer'
+  s.dependency 'CocoaHTTPServer', '>=2.3'
 end
