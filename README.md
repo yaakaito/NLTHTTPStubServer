@@ -63,6 +63,20 @@ Servers URL is `localhost:12345` on default.
 
 # Next Step
 
+## Get a server instance and clear
+
+Get shared instance.
+
+```objective-c
+NLTHTTPStubServer *server =[NLTHTTPStubServer sharedServer];
+```
+
+Remove all fake responses.
+
+```objective-c
+[server clear];
+```
+
 ## Expecations and verifycation
 
 ```objective-c
