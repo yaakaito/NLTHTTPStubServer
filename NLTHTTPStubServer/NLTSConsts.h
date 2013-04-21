@@ -27,8 +27,8 @@ typedef void(^NLTPostKeyValueBodyCheckBlock)(NSDictionary *postBody);
 - (id)andResponseResource:(NSString*)filename ofType:(NSString*)type;
 - (id)andStatusCode:(NSInteger)statusCode;
 - (id)andCheckPostBody:(NLTPostBodyCheckBlock)checkBlock;
-- (id)andCheckKeyValuePostBody:(NLTPostKeyValueBodyCheckBlock)checkBlock;
-- (id)andTimeout;
+- (id)andCheckKeyValuePostBody:(NLTPostKeyValueBodyCheckBlock)checkBlock __attribute__ ((deprecated));
+- (id)andTimeout __attribute__ ((deprecated));
 - (id)andProcessingTime:(NSTimeInterval)processingTimeSeconds;
 @end
 
