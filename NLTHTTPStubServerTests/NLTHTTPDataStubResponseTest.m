@@ -8,16 +8,15 @@
 
 #import "NLTHTTPDataStubResponseTest.h"
 #import "NLTHTTPDataStubResponse.h"
-#import "NLTStubResponse.h"
 
 @implementation NLTHTTPDataStubResponseTest
 - (void)testHttpResponseProtocol {
     NSData *data = [@"hogehogehogehoge" dataUsingEncoding:NSUTF8StringEncoding];
-    NLTHTTPDataStubResponse *response = [NLTStubResponse httpDataResponse];
+    NLTHTTPDataStubResponse *response = [[NLTHTTPDataStubResponse alloc] init];
     response.statusCode = 200;
     response.path = [NLTPath pathWithPathString:@"/index"];
     response.data = data;
-    response.httpHeaders = [NSDictionary dictionaryWithObject:@"text/html; charset=UTF-8" forKey:@"Content-Type"];
+    response.httpHeaders = @{@"Content-Type": @"text/html; charset=UTF-8"};
     
     GHAssertFalse([response isDone], @"まだ読み込みは完了していないはず");
     GHAssertEquals((UInt64)16, [response contentLength], @"contentLenghtが違う");
@@ -33,34 +32,32 @@
     GHAssertTrue([response isDone], @"読み込みが完了しているはず");
     
     GHAssertEquals(200, [response status], @"ステータスコードが一致しない");
-    GHAssertEqualObjects(@"text/html; charset=UTF-8", [response.httpHeaders objectForKey:@"Content-Type"], @"Content-Type違う");
+    GHAssertEqualObjects(@"text/html; charset=UTF-8", (response.httpHeaders)[@"Content-Type"], @"Content-Type違う");
 }
 
 
 - (void)testSupportCopy {
     
     NSData *data = [@"hogehogehogehoge" dataUsingEncoding:NSUTF8StringEncoding];
-    NLTHTTPDataStubResponse *response = [NLTStubResponse httpDataResponse];
+    NLTHTTPDataStubResponse *response = [[NLTHTTPDataStubResponse alloc] init];
     response.statusCode = 200;
     response.path = [NLTPath pathWithPathString:@"/index"];
     response.data = data;
     response.shouldTimeout = YES;
-    response.httpHeaders = [NSDictionary dictionaryWithObject:@"text/html; charset=UTF-8" forKey:@"Content-Type"];
-    [response URICheckWithBlock:^(NSURL *URI) {
-    }];
+    response.httpHeaders = @{@"Content-Type": @"text/html; charset=UTF-8"};
     
     NLTHTTPDataStubResponse *copy = [response copy];
 
     GHAssertNotEqualObjects(response, copy, @"同じ物だったら困る");
     GHAssertEqualStrings(response.path.pathString, copy.path.pathString, @"pathStringはおなじ");
     
-    GHAssertEqualStrings([[[NSString alloc] initWithData:response.data encoding:NSUTF8StringEncoding] autorelease],
-                         [[[NSString alloc] initWithData:copy.data encoding:NSUTF8StringEncoding] autorelease], @"レスポンス内容");
+    GHAssertEqualStrings([[NSString alloc] initWithData:response.data encoding:NSUTF8StringEncoding],
+                         [[NSString alloc] initWithData:copy.data encoding:NSUTF8StringEncoding], @"レスポンス内容");
     GHAssertEquals(response.statusCode, copy.statusCode, @"ステータスコードが同じじゃない");
     GHAssertEquals(response.shouldTimeout, copy.shouldTimeout, @"shouldTimeoutが同じじゃない");
     
     
-    GHAssertEquals([response.httpHeaders objectForKey:@"Content-Type"], [copy.httpHeaders objectForKey:@"Content-Type"], @"Content-Typeが同じじゃない");
+    GHAssertEquals(response.httpHeaders[@"Content-Type"], copy.httpHeaders[@"Content-Type"], @"Content-Typeが同じじゃない");
 }
 
 

@@ -12,12 +12,12 @@
 #import <Foundation/Foundation.h>
 
 @protocol NLTServerChaining
+- (id)expect;
 - (id)stub;
 @end
 
-typedef void(^__httpStubResponseURICheck)(NSURL *URI);
-typedef void(^__httpStubResponsePostBodyCheck)(NSData* postBody);
-typedef void(^__httpStubResponsePostKeyValueBodyCheck)(NSDictionary *postBody);
+typedef void(^NLTPostBodyCheckBlock)(NSData* postBody);
+typedef void(^NLTPostKeyValueBodyCheckBlock)(NSDictionary *postBody);
 
 @protocol NLTResponseChaining
 // NSString or NLTPath
@@ -26,10 +26,9 @@ typedef void(^__httpStubResponsePostKeyValueBodyCheck)(NSDictionary *postBody);
 - (id)andResponse:(NSData*)data;
 - (id)andResponseResource:(NSString*)filename ofType:(NSString*)type;
 - (id)andStatusCode:(NSInteger)statusCode;
-- (id)andCheckURI:(__httpStubResponseURICheck)checkBlock;
-- (id)andCheckPostBody:(__httpStubResponsePostBodyCheck)checkBlock;
-- (id)andCheckKeyValuePostBody:(__httpStubResponsePostKeyValueBodyCheck)checkBlock;
-- (id)andTimeout;
+- (id)andCheckPostBody:(NLTPostBodyCheckBlock)checkBlock;
+- (id)andCheckKeyValuePostBody:(NLTPostKeyValueBodyCheckBlock)checkBlock __attribute__ ((deprecated));
+- (id)andTimeout __attribute__ ((deprecated));
 - (id)andProcessingTime:(NSTimeInterval)processingTimeSeconds;
 @end
 

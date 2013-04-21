@@ -1,6 +1,4 @@
-platform :ios
+platform :ios, 4.3
 pod 'GHUnitIOS'
 pod 'OCMock'
 pod 'CocoaHTTPServer', '>=2.3'
-pod 'ASIHTTPRequest'
-pod 'AFNetworking'

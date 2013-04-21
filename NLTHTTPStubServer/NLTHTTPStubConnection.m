@@ -11,7 +11,6 @@
 #import "HTTPMessage.h"
 
 @implementation NLTHTTPStubConnection
-@synthesize stubServer;
 
 - (id)init
 {
@@ -58,9 +57,6 @@
 }
 
 - (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
-
-    
-    NSURL *url = [NSURL URLWithString:path];
     
     if(!self.stubServer){
         self.stubServer = [NLTHTTPStubServer currentStubServer];
@@ -87,23 +83,20 @@
 		if([response postKeyValueBodyCheckBlock]){
             if (postData)
             {
-                postString = [[[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding] autorelease];
+                postString = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
             }
             
             NSMutableDictionary *postKeyValues = [NSMutableDictionary dictionary];
             NSArray *keyValues = [postString componentsSeparatedByString:@"&"];
             for (NSString *keyValue in keyValues) {
-                NSString *key = [[keyValue componentsSeparatedByString:@"="] objectAtIndex:0];
-                NSString *value = [[keyValue componentsSeparatedByString:@"="] objectAtIndex:1];
-                [postKeyValues setObject:value forKey:key];
+                NSArray *kv = [keyValue componentsSeparatedByString:@"="];
+                NSString *key = kv[0];
+                NSString *value = kv[1];
+                postKeyValues[key] = value;
             }
             [response postKeyValueBodyCheckBlock](postKeyValues);		
         }
 	}
-    
-    if([response uriCheckBlock]){
-        [response uriCheckBlock](url);
-    }
     
     return response;
 }

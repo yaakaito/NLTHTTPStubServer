@@ -9,6 +9,7 @@
 
 #import "NLTHTTPStubServerTest.h"
 #import "NLTHTTPStubServer.h"
+#import "NLTHTTPDataStubResponse.h"
 
 @implementation NLTHTTPStubServerTest
 
@@ -30,36 +31,31 @@
     GHAssertNotEqualObjects(server1, [NLTHTTPStubServer currentStubServer], @"以前のものが取得されている");
 }
 
-- (void)testStubGetter {
-    NLTHTTPStubServer *getter = [NLTHTTPStubServer __stubGetter];
-    GHAssertTrue([getter isKindOfClass:[NLTHCurrentStubGetter class]], @"このクラスは取得用のクラスじゃない");
-}
-
 - (void)testIsStubEmpty {
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
-    GHAssertTrue([server isStubEmpty], @"何もないので空のはずだが");
-    [server addStubResponse: [NLTStubResponse httpDataResponse]];
-    GHAssertFalse([server isStubEmpty], @"スタブがあるので空ではないはず");
+    GHAssertTrue([server verify], @"何もないので空のはずだが");
+    [server addStubResponse: [[NLTHTTPDataStubResponse alloc] init]];
+    GHAssertThrows([server verify], @"スタブがあるので空ではないはず");
     
 }
 
 - (void)testClear {
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
-    [server addStubResponse:[NLTStubResponse httpDataResponse]];
-    GHAssertFalse([server isStubEmpty], @"スタブがあるので空ではないはず");
+    [server addStubResponse:[[NLTHTTPDataStubResponse alloc] init]];
+    GHAssertThrows([server verify], @"スタブがあるので空ではないはず");
     [server clear];
-    GHAssertTrue([server isStubEmpty], @"何もないので空のはずだが");
+    GHAssertTrue([server verify], @"何もないので空のはずだが");
 
 }
 
 - (void)testChainingStub {
     
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
-    NLTHTTPStubResponse *response = [server stub];
+    NLTHTTPStubResponse *response = [server expect];
     GHAssertEquals(1U, [server.stubResponses count], @"スタブが1つ作られるはず");
-    GHAssertEqualObjects(response, [server.stubResponses objectAtIndex:0], @"オブジェクトが一致しない");
+    GHAssertEqualObjects(response, (server.stubResponses)[0], @"オブジェクトが一致しない");
     
-    [server stub];
+    [server expect];
     GHAssertEquals(2U, [server.stubResponses count], @"スタブが2つ作られるはず");
 }
 
@@ -72,7 +68,7 @@
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"PUT"], @"まだスタブされてない");
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"DELETE"], @"まだスタブされてない");
     
-    NLTHTTPStubResponse *get_index = [[NLTHTTPStubResponse httpDataResponse] forPath:@"/index" HTTPMethod:@"GET"];
+    NLTHTTPStubResponse *get_index = [[[NLTHTTPDataStubResponse alloc] init] forPath:@"/index" HTTPMethod:@"GET"];
     [server addStubResponse:get_index];
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:nil], @"HTTPMethodがnilだと問答無用で返せない");
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@""], @"HTTPMethodが空文字列だと問答無用で返せない");
@@ -83,9 +79,9 @@
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"PUT"], @"メソッドが違うので返せない");
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"DELETE"], @"メソッドが違うので返せない");
     [server clear];
-    GHAssertTrue([server isStubEmpty], @"次のテストの前に状態を空にしておく");
+    GHAssertTrue([server verify], @"次のテストの前に状態を空にしておく");
     
-    NLTHTTPStubResponse *post_index = [[NLTHTTPStubResponse httpDataResponse] forPath:@"/index" HTTPMethod:@"POST"];
+    NLTHTTPStubResponse *post_index = [[[NLTHTTPStubResponse alloc] init] forPath:@"/index" HTTPMethod:@"POST"];
     [server addStubResponse:post_index];
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:nil], @"HTTPMethodがnilだと問答無用で返せない");
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@""], @"HTTPMethodが空文字列だと問答無用で返せない");
@@ -96,26 +92,26 @@
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"PUT"], @"メソッドが違うので返せない");
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"DELETE"], @"メソッドが違うので返せない");
     [server clear];
-    GHAssertTrue([server isStubEmpty], @"次のテストの前に状態を空にしておく");
+    GHAssertTrue([server verify], @"次のテストの前に状態を空にしておく");
 }
 
 - (void)testResponseForPathWithQueryString {
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
-    NLTHTTPStubResponse *get_index_query1 = [[NLTHTTPStubResponse httpDataResponse] forPath:@"/index?foo=bar" HTTPMethod:@"GET"];
+    NLTHTTPStubResponse *get_index_query1 = [[[NLTHTTPStubResponse alloc] init] forPath:@"/index?foo=bar" HTTPMethod:@"GET"];
     [server addStubResponse:get_index_query1];
     GHAssertNil([server responseForPath:@"/index?foo=bar" HTTPMethod:@"GET"], @"クエリストリングを指定しても返ってくる");
 }
 
 - (void)testResponseForPathForContainsMultibyteText {
-    NSString *encodedString = [(NSString *)CFURLCreateStringByAddingPercentEscapes(
+    NSString *encodedString = (__bridge NSString *)CFURLCreateStringByAddingPercentEscapes(
                                                                                    NULL,
                                                                                    (CFStringRef)@"マルチバイト文字列",
                                                                                    NULL,
                                                                                    (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                                                                   kCFStringEncodingUTF8 ) autorelease];
+                                                                                   kCFStringEncodingUTF8 );
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
-    [server addStubResponse:[NLTStubResponse httpDataResponse]];
-    NLTHTTPStubResponse *response = [NLTStubResponse httpDataResponse];
+    [server addStubResponse:[[NLTHTTPDataStubResponse alloc] init]];
+    NLTHTTPStubResponse *response =[[NLTHTTPDataStubResponse alloc] init];
     response.statusCode = 200;
     response.path = [NLTPath pathWithPathString:[NSString stringWithFormat:@"/index/%@", encodedString]];
     response.data = [NSData data];
@@ -126,5 +122,22 @@
     GHAssertNotNil(testedResponse, @"responseはあるはず");
     NSString *encodedPath = [NSString stringWithFormat:@"/index/%@", encodedString];
     GHAssertEqualStrings(encodedPath, testedResponse.path.pathString, @"/index/マルチバイト文字列のstubを取得できるはずだが");
+}
+
+- (void)testExternalStub {
+    NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
+    NLTHTTPStubResponse *response = [[NLTHTTPDataStubResponse alloc] init];
+    response.external = YES;
+    [[response forPath:@"/index"] andPlainResponse:[NSData data]];
+    [server addStubResponse:response];
+
+    NSURL *url = [NSURL URLWithString:@"/index"];
+    [server responseForPath:[url relativePath] HTTPMethod:@"GET"];
+    NLTHTTPStubResponse *actual = [server responseForPath:[url relativePath] HTTPMethod:@"GET"];
+
+    GHAssertNotNil(actual, nil);
+    GHAssertEqualObjects(actual, response, nil);
+
+    GHAssertNoThrow([server verify], nil);
 }
 @end

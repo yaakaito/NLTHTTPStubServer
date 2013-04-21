@@ -18,19 +18,19 @@
 
 @interface NLTHTTPStubServer : NSObject<NLTServerChaining>
 
-@property(nonatomic,retain) NSMutableArray *stubResponses;
+@property(nonatomic,strong) NSMutableArray *stubResponses;
+
++ (id)sharedServer;
 
 + (NLTHTTPStubServer*)currentStubServer;
 + (void)setCurrentStubServer:(NLTHTTPStubServer*)stubServer;
-+ (NLTHTTPStubServer*)__currentStubServer:(NLTHTTPStubServer*)stubServer;
-+ (NLTHCurrentStubGetter*)__stubGetter;
 
 + (NLTHTTPStubServer*)stubServer;
 
 + (NLTHGlobalSettings*)globalSettings;
 
 - (void)addStubResponse:(NLTHTTPStubResponse*)stubResponse;
-- (BOOL)isStubEmpty;
+- (BOOL)verify;
 - (void)clear;
 
 - (void)startServer;

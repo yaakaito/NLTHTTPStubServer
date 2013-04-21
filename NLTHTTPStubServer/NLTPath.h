@@ -13,8 +13,8 @@
 
 @interface NLTPath : NSObject<NSCopying>
 
-@property (nonatomic, retain, readonly) NSString *pathString;
-@property (nonatomic, retain, readonly) NSDictionary *parameters;
+@property (nonatomic, strong, readonly) NSString *pathString;
+@property (nonatomic, strong, readonly) NSDictionary *parameters;
 
 + (NLTPath*)pathWithPathString:(NSString*)pathString;
 + (NLTPath*)pathWithPathString:(NSString*)pathString andParameters:(NSDictionary*)parameters;

@@ -1,0 +1,22 @@
+PODS:
+  - CocoaAsyncSocket (0.0.1)
+  - CocoaHTTPServer (2.3):
+    - CocoaAsyncSocket (~> 0.0.1)
+    - CocoaLumberjack
+  - CocoaLumberjack (1.6.2)
+  - GHUnitIOS (0.5.6)
+  - OCMock (2.1.1)
+
+DEPENDENCIES:
+  - CocoaHTTPServer (>= 2.3)
+  - GHUnitIOS
+  - OCMock
+
+SPEC CHECKSUMS:
+  CocoaAsyncSocket: 73c96a4225998adad0c94142010f65e5d12077de
+  CocoaHTTPServer: fae57be1739ba20b8b3e106d088e3dd55b12beb5
+  CocoaLumberjack: d73e1e317ced14ab930797dda6c17156ff17aaa1
+  GHUnitIOS: bf149b2c44084eee2785ce4ac3675c3a699e509d
+  OCMock: 79212e5e328378af5cfd6edb5feacfd6c49cd8a3
+
+COCOAPODS: 0.18.1

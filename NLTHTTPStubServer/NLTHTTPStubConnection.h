@@ -14,5 +14,5 @@
 @class NLTHTTPStubServer;
 
 @interface NLTHTTPStubConnection : HTTPConnection
-@property(nonatomic,assign) NLTHTTPStubServer *stubServer; 
+@property(nonatomic,strong) NLTHTTPStubServer *stubServer;
 @end
