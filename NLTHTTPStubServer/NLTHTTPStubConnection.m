@@ -89,8 +89,9 @@
             NSMutableDictionary *postKeyValues = [NSMutableDictionary dictionary];
             NSArray *keyValues = [postString componentsSeparatedByString:@"&"];
             for (NSString *keyValue in keyValues) {
-                NSString *key = [keyValue componentsSeparatedByString:@"="][0];
-                NSString *value = [keyValue componentsSeparatedByString:@"="][1];
+                NSArray *kv = [keyValue componentsSeparatedByString:@"="];
+                NSString *key = kv[0];
+                NSString *value = kv[1];
                 postKeyValues[key] = value;
             }
             [response postKeyValueBodyCheckBlock](postKeyValues);		
