@@ -1,6 +1,6 @@
 # NLTHTTPStubServer
 
-[Japanese]()
+[Japanese](http://yaakaito.org/blog/2013/04/22/release-nlt-http-stub-server-0-4-0/)
 
 Fake server for iOS testing.
 
