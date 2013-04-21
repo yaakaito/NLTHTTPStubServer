@@ -8,15 +8,12 @@
 
 
 #import "NLTHTTPStubServer.h"
+#import "NLTHTTPDataStubResponse.h"
 #import "NLTPath.h"
 
 @implementation NLTHTTPStubServer {
     HTTPServer *_httpServer;
-    NSMutableArray *_stubResponses;
 }
-
-
-@synthesize stubResponses = _stubResponses;
 
 - (id)init
 {
@@ -36,12 +33,17 @@
 
 - (void)dealloc {
     
-    self.stubResponses = nil;
-    
     [self stopServer];
-    [_httpServer release];
-    
-    [super dealloc];
+}
+
++ (id)sharedServer {
+    static dispatch_once_t pred = 0;
+    __strong static NLTHTTPStubServer *_sharedServer = nil;
+    dispatch_once(&pred, ^{
+        _sharedServer = [self stubServer];
+        [_sharedServer startServer];
+    });
+    return _sharedServer;
 }
 
 + (NLTHTTPStubServer *)currentStubServer {
@@ -55,18 +57,17 @@
 + (NLTHTTPStubServer *)__currentStubServer:(NLTHTTPStubServer *)stubServer {
     __strong static id _sharedObject = nil;
     if(![stubServer isKindOfClass:[NLTHCurrentStubGetter class]]){
-        [_sharedObject release];
-        _sharedObject = [stubServer retain]; 
+        _sharedObject = stubServer; 
     }
     return _sharedObject;
 }
 
 + (NLTHCurrentStubGetter*)__stubGetter {
-    return [[[NLTHCurrentStubGetter alloc] init] autorelease];
+    return [[NLTHCurrentStubGetter alloc] init];
 }
 
 + (NLTHTTPStubServer *)stubServer {
-    return [[[[self class] alloc] init] autorelease];
+    return [[[self class] alloc] init];
 }
 
 + (NLTHGlobalSettings*)globalSettings {
@@ -74,18 +75,20 @@
 }
 
 - (NLTHTTPStubResponse<HTTPResponse>*)responseForPath:(NSString*)path HTTPMethod:(NSString *)method {
-    NSString *encodedPathString = [(NSString *)CFURLCreateStringByAddingPercentEscapes(
-                                                                                       NULL,
-                                                                                       (CFStringRef)path,
-                                                                                       NULL,
-                                                                                       NULL,
-                                                                                       kCFStringEncodingUTF8 ) autorelease];
+    NSString *encodedPathString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                NULL,
+                                                                (CFStringRef)path,
+                                                                NULL,
+                                                                NULL,
+                                                                kCFStringEncodingUTF8));
 
     NSURL *url = [NSURL URLWithString:encodedPathString];
     for (NSUInteger i = 0; i < [self.stubResponses count]; i++) {
-        NLTHTTPStubResponse *response = [self.stubResponses objectAtIndex:i];
+        NLTHTTPStubResponse *response = (self.stubResponses)[i];
         if([response.path isMatchURL:url] && [[response httpMethod] isEqualToString:method]){
-            [self.stubResponses removeObject:response];
+            if (!response.external) {
+                [self.stubResponses removeObject:response];                
+            }
             return (NLTHTTPStubResponse<HTTPResponse>*)response;
         }
     }
@@ -96,8 +99,22 @@
     [self.stubResponses addObject:stubResponse];
 }
 
-- (BOOL)isStubEmpty {
-    return [self.stubResponses count] == 0;
+- (BOOL)verify {
+    
+    NSUInteger expects = 0;
+    for (NLTHTTPStubResponse *response in self.stubResponses){
+        if (!response.external) {
+            expects += 1;
+        }
+    }
+    
+    if (expects > 0) {
+        [NSException raise:NSInternalInconsistencyException
+                    format:@"%d expected responses were not invoked: %@", expects, self.stubResponses];
+        return NO;
+    }
+    
+    return YES;
 }
 
 - (void)clear {
@@ -117,9 +134,17 @@
     [_httpServer stop];
 }
 
-- (id)stub {
+- (id)expect {
     
-    NLTHTTPStubResponse *stub = [NLTHTTPStubResponse httpDataResponse];
+    NLTHTTPStubResponse *stub = [[NLTHTTPDataStubResponse alloc] init];
+    [self addStubResponse:stub];
+    return stub;
+}
+
+- (id)stub{
+    
+    NLTHTTPStubResponse *stub = [[NLTHTTPDataStubResponse alloc] init];
+    stub.external = YES;
     [self addStubResponse:stub];
     return stub;
 }

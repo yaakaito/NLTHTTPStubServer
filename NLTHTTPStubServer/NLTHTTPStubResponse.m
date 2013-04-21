@@ -19,20 +19,8 @@
 
 @implementation NLTHTTPStubResponse
 
-@synthesize path;
-@synthesize statusCode;
-@synthesize data;
-@synthesize filepath;
-@synthesize shouldTimeout;
-@synthesize uriCheckBlock;
-@synthesize postBodyCheckBlock;
-@synthesize postKeyValueBodyCheckBlock;
-@synthesize httpHeaders;
-@synthesize httpMethod;
-@synthesize processingTimeSeconds;
-
 + (NLTHTTPStubResponse *)stubResponse {
-    return [[[NLTHTTPStubResponse alloc] init] autorelease];
+    return [[NLTHTTPStubResponse alloc] init];
 }
 
 - (id)init {
@@ -40,33 +28,18 @@
     if(self){
         self.statusCode = 200;
         self.shouldTimeout = NO;
-        self.httpHeaders = [NSDictionary dictionary];
+        self.httpHeaders = @{};
         self.httpMethod = @"GET";
         self.processingTimeSeconds = 0.0f;
     }
     return self;
 }
 
-- (void)dealloc {
-    
-    self.path = nil;
-    self.data = nil;
-    self.filepath = nil;
-    self.httpHeaders = nil;
-    self.httpMethod = nil;
-    
-    [super dealloc];
-}
-
-- (void)URICheckWithBlock:(__httpStubResponseURICheck)block {
-    self.uriCheckBlock = block;
-}
-
-- (void)postBodyCheckWithBlock:(__httpStubResponsePostBodyCheck)block {
+- (void)postBodyCheckWithBlock:(NLTPostBodyCheckBlock)block {
     self.postBodyCheckBlock = block;
 }
 
-- (void)postKeyValueBodyCheckWithBlock:(__httpStubResponsePostKeyValueBodyCheck)block {
+- (void)postKeyValueBodyCheckWithBlock:(NLTPostKeyValueBodyCheckBlock)block {
     self.postKeyValueBodyCheckBlock = block;
 }
 
@@ -109,17 +82,12 @@
     return self;
 }
 
-- (id)andCheckURI:(__httpStubResponseURICheck)checkBlock_ {
-    self.uriCheckBlock = checkBlock_;
-    return self;
-}
-
-- (id)andCheckPostBody:(__httpStubResponsePostBodyCheck)checkBlock_ {
+- (id)andCheckPostBody:(NLTPostBodyCheckBlock)checkBlock_ {
     self.postBodyCheckBlock = checkBlock_;
     return self;
 }
 
-- (id)andCheckKeyValuePostBody:(__httpStubResponsePostKeyValueBodyCheck)checkBlock_ {
+- (id)andCheckKeyValuePostBody:(NLTPostKeyValueBodyCheckBlock)checkBlock_ {
     self.postKeyValueBodyCheckBlock = checkBlock_;
     return self;
 }
@@ -142,7 +110,7 @@
     else {
         base = [NSMutableDictionary dictionary];
     }
-    [base setObject:contentType forKey:kNLTHTTPStubResponseHeaderKeyContentType];
+    base[kNLTHTTPStubResponseHeaderKeyContentType] = contentType;
     self.httpHeaders = base;
 }
 

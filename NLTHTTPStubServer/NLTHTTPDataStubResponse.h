@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NLTSConsts.h"
+#import <CocoaHTTPServer/HTTPResponse.h>
 #import "NLTHTTPStubResponse.h"
-
+#import "NLTSConsts.h"
 
 @interface NLTHTTPDataStubResponse : NLTHTTPStubResponse <HTTPResponse, NSCopying> 
 + (id)dataStubResponse;

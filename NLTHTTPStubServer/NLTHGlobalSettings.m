@@ -10,8 +10,6 @@
 #import "NLTHGlobalSettings.h"
 
 @implementation NLTHGlobalSettings
-@synthesize port;
-@synthesize autoStart;
 
 + (NLTHGlobalSettings*)globalSettings {
     static dispatch_once_t pred = 0;
