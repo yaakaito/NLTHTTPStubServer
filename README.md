@@ -133,7 +133,7 @@ This request can matches `/fake?k1=hogeeeeeeee`, `/fake?k1=fugaaaaaaaaaa` and mo
 ## HTTP Method
 
 ```objective-c
-[[server stub] forPath:@"/fake" HTTPMethodPost];
+[[server stub] forPath:@"/fake" HTTPMethod:@"POST"];
 ```
 
 ## Status code
