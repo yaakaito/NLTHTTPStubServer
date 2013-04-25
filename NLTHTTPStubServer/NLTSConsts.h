@@ -43,6 +43,7 @@ typedef void(^NLTPostKeyValueBodyCheckBlock)(NSDictionary *postBody);
 
 @protocol NLTResponseDataPresetChaining
 - (id)andJSONResponse:(NSData*)data;
+- (id)andJSONResponseObject:(id)JSONObject;
 - (id)andPlainResponse:(NSData*)data;
 - (id)andHTMLResponse:(NSData*)data;
 - (id)andXMLResponse:(NSData*)data;
@@ -73,4 +74,5 @@ typedef void(^NLTPostKeyValueBodyCheckBlock)(NSDictionary *postBody);
 - (id)andHTMLResponseResource:(NSString*)filename ofType:(NSString*)type charset:(NSString*)charset;
 - (id)andXMLResponseResource:(NSString*)filename ofType:(NSString*)type charset:(NSString*)charset;
 @end
+
 #endif

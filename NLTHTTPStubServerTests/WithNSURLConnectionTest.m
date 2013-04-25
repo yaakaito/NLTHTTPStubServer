@@ -79,6 +79,21 @@
     [server verify];
 }
 
+- (void)testJSONObject {
+
+    [[[server expect] forPath:@"/stub"] andJSONResponseObject:@{ @"RESPONSE" : @"BODY" }];
+
+    __weak id that = self;
+    [self testWithCompletionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        GHAssertNil(error, nil);
+        NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        GHAssertEqualStrings(JSON[@"RESPONSE"], @"BODY", nil);
+    }];
+
+    [server verify];
+}
+
+
 - (void)testWithNLTPathAndGavenGetParameters {
 
     [[server expect] forPath:[NLTPath pathWithPathString:@"/stub" andParameters:@{

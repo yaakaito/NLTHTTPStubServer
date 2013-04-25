@@ -164,6 +164,13 @@
     return [[self andResponse:data_] andJSONHeader];
 }
 
+- (id)andJSONResponseObject:(id)JSONObject_ {
+    NSData *JSONData = [NSJSONSerialization dataWithJSONObject:JSONObject_
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:nil];
+    return [self andJSONResponse:JSONData];
+}
+
 - (id)andPlainResponse:(NSData *)data_ {
     return [[self andResponse:data_] andPlainHeader];
 }

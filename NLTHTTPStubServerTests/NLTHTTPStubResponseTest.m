@@ -123,6 +123,16 @@
     GHAssertEqualStrings(@"hoge", (overwriteHeader.httpHeaders)[@"fuga"], @"fuga = hoge");
 }
 
+- (void)testAndJSONObject {
+
+    NLTHTTPStubResponse *jsonObject = [[[NLTHTTPDataStubResponse alloc] init] andJSONResponseObject:@{ @"HOGE" : @"FUGA"}];
+    GHAssertEqualStrings(@"application/json; charset=utf-8", jsonObject.httpHeaders[@"Content-Type"], @"json");
+
+    NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:jsonObject.data options:NSJSONReadingAllowFragments error:nil];
+    GHAssertEqualStrings(@"FUGA",  JSON[@"HOGE"], nil);
+
+}
+
 - (void)testAndContentTypeWithData {
     
     NSData *data = [@"hello" dataUsingEncoding:NSUTF8StringEncoding];
@@ -130,7 +140,7 @@
     NLTHTTPStubResponse *json = [[[NLTHTTPDataStubResponse alloc] init] andJSONResponse:data];
     GHAssertEqualStrings(@"application/json; charset=utf-8", (json.httpHeaders)[@"Content-Type"], @"json");
     GHAssertEqualStrings(@"hello", [[NSString alloc] initWithData:json.data encoding:NSUTF8StringEncoding], @"data = hello");
-    
+
     NLTHTTPStubResponse *plain = [[[NLTHTTPDataStubResponse alloc] init] andPlainResponse:data];
     GHAssertEqualStrings(@"text/plain; charset=utf-8", (plain.httpHeaders)[@"Content-Type"], @"plain text");
     GHAssertEqualStrings(@"hello", [[NSString alloc] initWithData:plain.data encoding:NSUTF8StringEncoding], @"data = hello");
