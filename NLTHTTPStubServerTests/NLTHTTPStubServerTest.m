@@ -33,7 +33,7 @@
 
 - (void)testIsStubEmpty {
     NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
-    GHAssertTrue([server verify], @"何もないので空のはずだが");
+    GHAssertNoThrow([server verify], @"何もないので空のはずだが");
     [server addStubResponse: [[NLTHTTPDataStubResponse alloc] init]];
     GHAssertThrows([server verify], @"スタブがあるので空ではないはず");
     
@@ -44,7 +44,7 @@
     [server addStubResponse:[[NLTHTTPDataStubResponse alloc] init]];
     GHAssertThrows([server verify], @"スタブがあるので空ではないはず");
     [server clear];
-    GHAssertTrue([server verify], @"何もないので空のはずだが");
+    GHAssertNoThrow([server verify], @"何もないので空のはずだが");
 
 }
 
@@ -79,7 +79,7 @@
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"PUT"], @"メソッドが違うので返せない");
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"DELETE"], @"メソッドが違うので返せない");
     [server clear];
-    GHAssertTrue([server verify], @"次のテストの前に状態を空にしておく");
+    GHAssertNoThrow([server verify], @"次のテストの前に状態を空にしておく");
     
     NLTHTTPStubResponse *post_index = [[[NLTHTTPStubResponse alloc] init] forPath:@"/index" HTTPMethod:@"POST"];
     [server addStubResponse:post_index];
@@ -92,7 +92,7 @@
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"PUT"], @"メソッドが違うので返せない");
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"DELETE"], @"メソッドが違うので返せない");
     [server clear];
-    GHAssertTrue([server verify], @"次のテストの前に状態を空にしておく");
+    GHAssertNoThrow([server verify], @"次のテストの前に状態を空にしておく");
 }
 
 - (void)testResponseForPathWithQueryString {

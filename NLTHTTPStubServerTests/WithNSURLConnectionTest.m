@@ -33,9 +33,7 @@
 
 - (void)tearDown {
     // Run after each test method
-    if(![server verify]) {
-        GHFail(@"stubs not empty");
-    }
+    GHAssertNoThrow([server verify], @"stubs not empty");
 }
 
 - (NSString *)toString:(NSData *)data {
