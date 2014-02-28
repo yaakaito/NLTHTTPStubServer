@@ -15,7 +15,8 @@
                                            , NLTResponseHeaderPresetChaining
                                            , NLTResponseDataPresetChaining
                                            , NLTResponseHeaderCharsetChaining
-                                           , NLTResponseDataCharsetChaining>
+                                           , NLTResponseDataCharsetChaining
+                                           , NSCopying>
 
 @property(nonatomic,strong) NLTPath   *path;
 @property                   NSInteger  statusCode;
@@ -32,4 +33,6 @@
 + (NLTHTTPStubResponse*)stubResponse;
 - (void)postBodyCheckWithBlock:(NLTPostBodyCheckBlock)block;
 - (void)postKeyValueBodyCheckWithBlock:(NLTPostKeyValueBodyCheckBlock)block;
+
+- (id)initWithHTTPStubResponse:(NLTHTTPStubResponse*)response;
 @end

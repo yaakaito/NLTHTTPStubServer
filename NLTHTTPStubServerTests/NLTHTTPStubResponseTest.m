@@ -257,4 +257,39 @@
     NLTHTTPStubResponse *stub = [[NLTHTTPDataStubResponse alloc] init];
     GHAssertThrows([stub forPath:@[]], @"NLTPathかNSStringしか受け付けない");
 }
+
+- (void)testInitWithHTTPStubResponse {
+    NLTHTTPStubResponse *stub = [[NLTHTTPStubResponse alloc] init];
+    __block BOOL postBodyCheckBlockCalledFlag = NO;
+    __block BOOL postKeyValueBodyCheckBlockCalledFlag = NO;
+    stub.path = [NLTPath pathWithPathString:@"/test"];
+    stub.statusCode = 404;
+    stub.data = [NSData dataWithBytes:"abc" length:3];
+    stub.shouldTimeout = YES;
+    stub.postBodyCheckBlock = ^(NSData *data) {
+        postBodyCheckBlockCalledFlag = YES;
+    };
+    stub.postKeyValueBodyCheckBlock = ^(NSDictionary *keyValues) {
+        postKeyValueBodyCheckBlockCalledFlag = YES;
+    };
+    stub.httpHeaders = @{@"Content-Type":@"text/html"};
+    stub.httpMethod = @"POST";
+    stub.processingTimeSeconds = 100;
+    stub.external = YES;
+    
+    NLTHTTPStubResponse *copiedStub = [[NLTHTTPStubResponse alloc] initWithHTTPStubResponse:stub];
+    
+    GHAssertEqualStrings(@"/test", copiedStub.path.pathString, @"");
+    GHAssertEquals(404, copiedStub.statusCode, @"");
+    GHAssertEqualObjects([NSData dataWithBytes:"abc" length:3], copiedStub.data, @"");
+    GHAssertEquals(YES, copiedStub.shouldTimeout, @"");
+    copiedStub.postBodyCheckBlock(nil);
+    GHAssertEquals(YES, postBodyCheckBlockCalledFlag, @"");
+    copiedStub.postKeyValueBodyCheckBlock(nil);
+    GHAssertEquals(YES, postKeyValueBodyCheckBlockCalledFlag, @"");
+    GHAssertEqualObjects(@{@"Content-Type":@"text/html"}, copiedStub.httpHeaders, @"");
+    GHAssertEqualStrings(@"POST", stub.httpMethod, @"");
+    GHAssertEquals((NSTimeInterval)100, copiedStub.processingTimeSeconds, @"");
+    GHAssertEquals(YES, copiedStub.external, @"");
+}
 @end

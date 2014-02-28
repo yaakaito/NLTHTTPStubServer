@@ -35,6 +35,29 @@
     return self;
 }
 
+- (id)initWithHTTPStubResponse:(NLTHTTPStubResponse*)response {
+    self = [super init];
+    if (self) {
+        self.path = [response.path copy];
+        self.statusCode = response.statusCode;
+        self.shouldTimeout = response.shouldTimeout;
+        self.httpHeaders = [response.httpHeaders copy];
+        self.httpMethod = [response.httpMethod copy];
+        self.processingTimeSeconds = response.processingTimeSeconds;
+        self.data = response.data;
+        self.filepath = response.filepath;
+        self.postBodyCheckBlock = response.postBodyCheckBlock;
+        self.postKeyValueBodyCheckBlock = response.postKeyValueBodyCheckBlock;
+        self.external = response.external;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    id copiedObject = [[[self class] allocWithZone:zone] initWithHTTPStubResponse:self];
+    return copiedObject;
+}
+
 - (void)postBodyCheckWithBlock:(NLTPostBodyCheckBlock)block {
     self.postBodyCheckBlock = block;
 }
