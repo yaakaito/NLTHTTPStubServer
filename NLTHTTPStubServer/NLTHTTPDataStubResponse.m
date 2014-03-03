@@ -13,32 +13,12 @@
     NSInteger _offset;
 }
 
-- (id)initWithDataStubResponse:(NLTHTTPDataStubResponse*)response {
-    self = [super init];
-    if (self) {
-        self.path = [response.path copy];
-        self.statusCode = response.statusCode;
-        self.data = [response.data copy];
-        self.shouldTimeout = response.shouldTimeout;
-        self.httpHeaders = [response.httpHeaders copy];
-    }
-    return self;
-}
-
 + (id)dataStubResponse {
     return [[NLTHTTPDataStubResponse alloc] init];
 }
 
 + (id)dataStubResponseWithDataStubResponse:(NLTHTTPDataStubResponse*)response {
-    return [[NLTHTTPDataStubResponse alloc] initWithDataStubResponse:response];
-}
-
-
-
-- (id)copyWithZone:(NSZone *)zone {
-    id copiedObject = [[[self class] allocWithZone:zone] initWithDataStubResponse:self];
-    
-    return copiedObject;
+    return [[NLTHTTPDataStubResponse alloc] initWithHTTPStubResponse:response];
 }
 
 - (UInt64)contentLength

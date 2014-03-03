@@ -89,7 +89,7 @@
             if (!response.external) {
                 [self.stubResponses removeObject:response];                
             }
-            return (NLTHTTPStubResponse<HTTPResponse>*)response;
+            return [[[response class] alloc] initWithHTTPStubResponse:response];
         }
     }
     return nil;
