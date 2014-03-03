@@ -99,7 +99,7 @@
     [self.stubResponses addObject:stubResponse];
 }
 
-- (BOOL)verify {
+- (void)verify {
     
     NSUInteger expects = 0;
     for (NLTHTTPStubResponse *response in self.stubResponses){
@@ -111,10 +111,8 @@
     if (expects > 0) {
         [NSException raise:NSInternalInconsistencyException
                     format:@"%d expected responses were not invoked: %@", expects, self.stubResponses];
-        return NO;
     }
     
-    return YES;
 }
 
 - (void)clear {
