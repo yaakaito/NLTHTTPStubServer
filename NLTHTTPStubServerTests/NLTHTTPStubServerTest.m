@@ -72,7 +72,7 @@
     [server addStubResponse:get_index];
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:nil], @"HTTPMethodがnilだと問答無用で返せない");
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@""], @"HTTPMethodが空文字列だと問答無用で返せない");
-    GHAssertEqualObjects(get_index, [server responseForPath:@"/index" HTTPMethod:@"GET"], @"スタブされているので返せるはず");
+    GHAssertEqualObjects([get_index.path pathString], [[[server responseForPath:@"/index" HTTPMethod:@"GET"] path] pathString], @"スタブされているので返せるはず");
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"GET"], @"スタブは一度返すと消費されてしまうので次はもう返ってこない");
     [server addStubResponse:get_index];
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"POST"], @"メソッドが違うので返せない");
@@ -86,7 +86,7 @@
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:nil], @"HTTPMethodがnilだと問答無用で返せない");
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@""], @"HTTPMethodが空文字列だと問答無用で返せない");
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"GET"], @"メソッドが違うので返せない");
-    GHAssertEqualObjects(post_index, [server responseForPath:@"/index" HTTPMethod:@"POST"], @"スタブされているので返せるはず");
+    GHAssertEqualObjects([post_index.path pathString], [[[server responseForPath:@"/index" HTTPMethod:@"POST"] path] pathString], @"スタブされているので返せるはず");
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"POST"], @"スタブは一度返すと消費されてしまうので次はもう返ってこない");
     [server addStubResponse:post_index];
     GHAssertNil([server responseForPath:@"/index" HTTPMethod:@"PUT"], @"メソッドが違うので返せない");
@@ -136,8 +136,26 @@
     NLTHTTPStubResponse *actual = [server responseForPath:[url relativePath] HTTPMethod:@"GET"];
 
     GHAssertNotNil(actual, nil);
-    GHAssertEqualObjects(actual, response, nil);
+    GHAssertEqualObjects([actual.path pathString], [response.path pathString], nil);
 
     GHAssertNoThrow([server verify], nil);
 }
+
+- (void)testExternalDataStubOffsetShouldBeZero {
+    NLTHTTPStubServer *server = [NLTHTTPStubServer stubServer];
+    NLTHTTPDataStubResponse *response = [[NLTHTTPDataStubResponse alloc] init];
+    response.external = YES;
+    [[response forPath:@"/index"] andPlainResponse:[NSData dataWithBytes:@"abc" length:3]];
+    [server addStubResponse:response];
+
+    NSURL *url = [NSURL URLWithString:@"/index"];
+    [server responseForPath:[url relativePath] HTTPMethod:@"GET"];
+    NLTHTTPDataStubResponse *actual = (NLTHTTPDataStubResponse*)[server responseForPath:[url relativePath] HTTPMethod:@"GET"];
+    GHAssertEquals((UInt64)0U, actual.offset, @"");
+    [actual readDataOfLength:100];
+    
+    actual = (NLTHTTPDataStubResponse*)[server responseForPath:[url relativePath] HTTPMethod:@"GET"];
+    GHAssertEquals((UInt64)0, actual.offset, @"");
+}
+
 @end

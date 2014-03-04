@@ -11,8 +11,7 @@
 #import "NLTHTTPStubResponse.h"
 #import "NLTSConsts.h"
 
-@interface NLTHTTPDataStubResponse : NLTHTTPStubResponse <HTTPResponse, NSCopying> 
+@interface NLTHTTPDataStubResponse : NLTHTTPStubResponse <HTTPResponse> 
 + (id)dataStubResponse;
 + (id)dataStubResponseWithDataStubResponse:(NLTHTTPDataStubResponse*)response;
-- (id)initWithDataStubResponse:(NLTHTTPDataStubResponse*)response;
 @end
